@@ -1,7 +1,13 @@
-# 고양이 연금술 공방 - BM 설계 문서
+﻿# 고양이 연금술 공방 - BM 설계 문서
 
 > game_id: game_0002
 > repo: mg-game-0002
+> title_kr: 고양이 연금술 공방
+> title_en: Cat Alchemy Workshop
+> genre_tags: puzzle, crafting, idle
+> doc_type: bm_design
+> source_of_truth: docs/design/gdd_game_0002.json
+> last_updated: 2025-12-19
 
 ---
 

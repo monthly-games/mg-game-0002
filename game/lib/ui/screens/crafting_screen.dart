@@ -6,6 +6,8 @@ import 'package:mg_common_game/features/crafting/logic/recipe.dart';
 import 'package:mg_common_game/core/ui/layouts/game_scaffold.dart';
 import 'package:mg_common_game/core/economy/gold_manager.dart'; // Import
 import 'package:mg_common_game/core/ui/widgets/inventory_grid.dart'; // Ensure exported or use direct path
+import 'package:mg_common_game/core/ui/theme/app_colors.dart';
+import 'package:mg_common_game/core/audio/audio_manager.dart';
 import 'package:flame/game.dart';
 import '../../game/workshop_game.dart';
 
@@ -51,9 +53,9 @@ class _CraftingScreenState extends State<CraftingScreen> {
                 Container(
                   margin: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: Colors.black45,
+                    color: AppColors.background.withOpacity(0.5),
                     borderRadius: BorderRadius.circular(16),
-                    border: Border.all(color: Colors.purpleAccent),
+                    border: Border.all(color: AppColors.primary),
                   ),
                   child: Center(child: _buildCauldronArea()),
                 ),
@@ -80,7 +82,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
             flex: 3,
             child: Container(
               padding: const EdgeInsets.all(16),
-              color: Colors.black26,
+              color: AppColors.surface,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
@@ -198,6 +200,10 @@ class _CraftingScreenState extends State<CraftingScreen> {
       currentJob = crafting.startCraft(recipe);
     });
 
+    try {
+      GetIt.I<AudioManager>().playSfx('craft_start.wav');
+    } catch (_) {}
+
     // Simple timer to update UI when done
     if (currentJob != null) {
       Future.delayed(Duration(seconds: recipe.durationSeconds), () {
@@ -242,6 +248,10 @@ class _CraftingScreenState extends State<CraftingScreen> {
     if (currentJob != null) {
       final success = crafting.claim(currentJob!);
       if (success) {
+        try {
+          GetIt.I<AudioManager>().playSfx('craft_success.wav');
+        } catch (_) {}
+
         // Bonus: Add Gold on claim? Or sell later?
         // For prototype loop, let's say crafting GIVES gold (commission model) or we just crafted an item.
         // Let's keep it simple: Crafted Item goes to Inventory.

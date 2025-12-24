@@ -1,53 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:get_it/get_it.dart';
-import 'package:mg_common_game/core/systems/rpg/inventory_system.dart';
-import 'package:mg_common_game/core/systems/rpg/item_data.dart';
-import 'package:mg_common_game/core/ui/theme/game_theme.dart';
-import 'package:mg_common_game/core/economy/gold_manager.dart';
-import 'package:mg_common_game/features/crafting/logic/crafting_manager.dart';
-import 'package:mg_common_game/core/systems/save_system.dart';
-import 'game/logic/idle_manager.dart';
-import 'game/logic/persistence_manager.dart';
-import 'game/data/item_registry.dart';
-
-import 'ui/screens/crafting_screen.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:flame/game.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'core/models/game_state.dart';
+import 'game/cat_alchemy_game.dart';
+import 'providers/game_providers.dart';
+import 'ui/hud/mg_idle_hud.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-  await setupDependencies();
-  runApp(const CatAlchemyApp());
-}
 
-Future<void> setupDependencies() async {
-  final getIt = GetIt.instance;
+  // Initialize Hive for data persistence
+  await Hive.initFlutter();
 
-  // 1. Core Systems
-  final inventory = InventorySystem(capacity: 20);
-  getIt.registerSingleton<InventorySystem>(inventory);
+  // Register Hive adapters
+  Hive.registerAdapter(GameStateAdapter());
 
-  final crafting = CraftingManager(inventory);
-  getIt.registerSingleton<CraftingManager>(crafting);
+  // Open game state box
+  await Hive.openBox<GameState>('gameState');
 
-  final goldManager = GoldManager();
-  getIt.registerSingleton<GoldManager>(goldManager);
-
-  // 2. Persistence
-  final saveSystem = LocalSaveSystem();
-  final persistence = PersistenceManager(saveSystem, inventory, goldManager);
-  await persistence.init(); // Loads data
-  getIt.registerSingleton<PersistenceManager>(persistence);
-
-  // 3. Game Logic
-  final idleManager = IdleManager(inventory);
-  getIt.registerSingleton<IdleManager>(idleManager);
-  idleManager.start();
-
-  // 4. Mock Data (Only if empty inv?)
-  // For prototype simplicity, we always add some defaults if inventory is empty.
-  if (inventory.slots.isEmpty) {
-    inventory.addItem(ItemRegistry.getItem('herb'), 5);
-    inventory.addItem(ItemRegistry.getItem('water'), 5);
-  }
+  runApp(
+    const ProviderScope(
+      child: CatAlchemyApp(),
+    ),
+  );
 }
 
 class CatAlchemyApp extends StatelessWidget {
@@ -56,10 +32,58 @@ class CatAlchemyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Cat Alchemy',
-      theme: GameTheme.darkTheme, // Use common theme
-      home: const CraftingScreen(),
+      title: '고양이 연금술 공방',
+      theme: ThemeData(
+        primarySwatch: Colors.brown,
+        scaffoldBackgroundColor: const Color(0xFFF5E6D3), // Warm cream
+        fontFamily: 'Pretendard', // TODO: Add font to pubspec
+      ),
+      home: const GameScreen(),
       debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+/// Main game screen with Flame game widget
+class GameScreen extends ConsumerStatefulWidget {
+  const GameScreen({super.key});
+
+  @override
+  ConsumerState<GameScreen> createState() => _GameScreenState();
+}
+
+class _GameScreenState extends ConsumerState<GameScreen> {
+  late CatAlchemyGame _game;
+
+  @override
+  void initState() {
+    super.initState();
+    _game = CatAlchemyGame(ref);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final gameState = ref.watch(gameStateProvider);
+
+    return Scaffold(
+      body: GameWidget<CatAlchemyGame>(
+        game: _game,
+        overlayBuilderMap: {
+          'HUD': (BuildContext context, CatAlchemyGame game) {
+            return MGIdleHud(
+              gold: gameState.gold,
+              gems: gameState.gems,
+              workshopLevel: gameState.workshopLevel,
+              onSettings: () => game.navigateTo('settings'),
+              onTutorial: () => game.navigateTo('tutorial'),
+              onCollection: () => game.navigateTo('collection'),
+              onPrestige: () => game.navigateTo('prestige'),
+              onEvents: () => game.navigateTo('events'),
+            );
+          },
+        },
+        initialActiveOverlays: const ['HUD'],
+      ),
     );
   }
 }
