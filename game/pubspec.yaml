@@ -28,6 +28,7 @@ environment:
 # the latest version available on pub.dev. To see which dependencies have newer
 # versions available, run `flutter pub outdated`.
 dependencies:
+  google_mobile_ads: ^5.2.0
   flutter:
     sdk: flutter
 
@@ -53,10 +54,11 @@ dependencies:
   cached_network_image: ^3.3.0
 
   # Analytics (optional)
-  # firebase_core: ^2.24.0
-  # firebase_analytics: ^10.7.0
+  firebase_core: ^2.24.0
+  firebase_analytics: ^10.7.0
 
 dev_dependencies:
+  google_mobile_ads: ^5.2.0
   flutter_test:
     sdk: flutter
   image: ^4.2.0
