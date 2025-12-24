@@ -1,0 +1,123 @@
+{
+  "cat": {
+    "id": "moca",
+    "name": "모카",
+    "description": "당신의 연금술 공방을 함께 운영하는 갈색 태비 고양이입니다.",
+    "appearance": "갈색 태비 고양이, 작은 연금술사 모자 착용",
+    "maxLevel": 10,
+    "skills": [
+      {
+        "level": 1,
+        "type": "passive",
+        "name": "재료 수집 가속",
+        "description": "재료 수집 속도 +10%",
+        "effect": {
+          "type": "production_rate",
+          "value": 0.1
+        }
+      },
+      {
+        "level": 2,
+        "type": "passive",
+        "name": "제작 시간 단축",
+        "description": "제작 시간 -5%",
+        "effect": {
+          "type": "craft_time",
+          "value": -0.05
+        }
+      },
+      {
+        "level": 3,
+        "type": "passive",
+        "name": "판매가 증가",
+        "description": "주문 보상 골드 +5%",
+        "effect": {
+          "type": "sell_price",
+          "value": 0.05
+        }
+      },
+      {
+        "level": 5,
+        "type": "active",
+        "name": "제작 대기열 확장",
+        "description": "제작 대기열 +1 슬롯 (3→4)",
+        "effect": {
+          "type": "queue_size",
+          "value": 1
+        }
+      },
+      {
+        "level": 7,
+        "type": "passive",
+        "name": "평판 보너스",
+        "description": "주문 완료 시 평판 +10%",
+        "effect": {
+          "type": "reputation",
+          "value": 0.1
+        }
+      },
+      {
+        "level": 10,
+        "type": "active",
+        "name": "행운의 발",
+        "description": "5% 확률로 제작 시 2배 생산",
+        "effect": {
+          "type": "lucky_craft",
+          "value": 0.05
+        }
+      }
+    ],
+    "trustLevels": [
+      {"level": 1, "requiredTrust": 0},
+      {"level": 2, "requiredTrust": 100},
+      {"level": 3, "requiredTrust": 300},
+      {"level": 4, "requiredTrust": 600},
+      {"level": 5, "requiredTrust": 1000},
+      {"level": 6, "requiredTrust": 1500},
+      {"level": 7, "requiredTrust": 2100},
+      {"level": 8, "requiredTrust": 2800},
+      {"level": 9, "requiredTrust": 3600},
+      {"level": 10, "requiredTrust": 4500}
+    ],
+    "interactions": {
+      "pet": {
+        "trustGain": 1,
+        "dailyLimit": 10,
+        "cooldown": 0,
+        "messages": [
+          "냐옹~ ♥",
+          "기분이 좋아요!",
+          "쓰다듬어 주셔서 고마워요~",
+          "오늘도 열심히 도와드릴게요!"
+        ]
+      },
+      "treat": {
+        "trustGain": 5,
+        "cost": "ad_watch",
+        "messages": [
+          "맛있어요! 감사합니다~",
+          "이 간식 정말 좋아해요!",
+          "더 열심히 일할 힘이 생겼어요!"
+        ]
+      },
+      "play": {
+        "trustGain": 10,
+        "dailyLimit": 3,
+        "duration": 30,
+        "minigame": "yarn_ball",
+        "messages": [
+          "재미있었어요!",
+          "함께 노니까 즐거워요~",
+          "또 놀아요!"
+        ]
+      }
+    },
+    "idleAnimations": [
+      "sitting",
+      "grooming",
+      "sleeping",
+      "stretching",
+      "watching_cauldron"
+    ]
+  }
+}

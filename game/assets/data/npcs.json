@@ -1,0 +1,185 @@
+{
+  "npcs": [
+    {
+      "id": "tom",
+      "name": "농부 톰",
+      "icon": "👨‍🌾",
+      "description": "마을 근처에서 농사를 짓는 친절한 농부입니다.",
+      "unlockLevel": 1,
+      "orderPatterns": {
+        "tier": [1],
+        "preferredCategories": ["potion"],
+        "frequency": "high",
+        "rewardMultiplier": 1.0
+      },
+      "dialogue": [
+        "안녕하세요! 농장에서 다쳤는데 물약 좀 구할 수 있을까요?",
+        "당신의 물약 덕분에 농사일이 훨씬 수월해졌어요!",
+        "오늘도 좋은 물약 있나요?"
+      ]
+    },
+    {
+      "id": "lina",
+      "name": "마법사 리나",
+      "icon": "🧙‍♀️",
+      "description": "마을의 마법 연구소에서 일하는 젊은 마법사입니다.",
+      "unlockLevel": 3,
+      "orderPatterns": {
+        "tier": [1, 2],
+        "preferredCategories": ["potion"],
+        "frequency": "medium",
+        "rewardMultiplier": 1.2,
+        "bonusReward": "special_materials"
+      },
+      "dialogue": [
+        "마나 물약이 필요해요. 연구에 꼭 필요하거든요.",
+        "당신의 연금술 실력은 정말 놀라워요!",
+        "이번 실험에 성공하면 당신께 보답하겠어요."
+      ]
+    },
+    {
+      "id": "kyle",
+      "name": "기사 카일",
+      "icon": "⚔️",
+      "description": "왕국을 지키는 용감한 기사입니다.",
+      "unlockLevel": 5,
+      "orderPatterns": {
+        "tier": [2],
+        "preferredCategories": ["potion", "bomb"],
+        "frequency": "medium",
+        "rewardMultiplier": 1.5
+      },
+      "dialogue": [
+        "전투 준비를 위해 물약이 필요합니다.",
+        "당신의 물약 덕분에 많은 전투에서 승리했습니다!",
+        "강력한 물약을 구할 수 있을까요?"
+      ]
+    },
+    {
+      "id": "eli",
+      "name": "연금술 학생 엘리",
+      "icon": "👩‍🎓",
+      "description": "연금술을 배우고 있는 열정적인 학생입니다.",
+      "unlockLevel": 2,
+      "orderPatterns": {
+        "tier": [1, 2],
+        "preferredCategories": ["potion", "special"],
+        "frequency": "high",
+        "rewardMultiplier": 0.8,
+        "bonusReward": "reputation"
+      },
+      "dialogue": [
+        "선생님! 제가 만든 레시피대로 만들 수 있을까요?",
+        "많이 배우고 있어요. 감사합니다!",
+        "언젠가 저도 당신처럼 훌륭한 연금술사가 되고 싶어요."
+      ]
+    },
+    {
+      "id": "oliver",
+      "name": "상인 올리버",
+      "icon": "🧑‍💼",
+      "description": "여행하는 상인으로, 다양한 물품을 거래합니다.",
+      "unlockLevel": 7,
+      "orderPatterns": {
+        "tier": [2, 3],
+        "preferredCategories": ["bomb", "special"],
+        "frequency": "low",
+        "rewardMultiplier": 2.0
+      },
+      "dialogue": [
+        "좋은 물건이 있으면 비싸게 사드리겠습니다.",
+        "당신의 물약은 다른 마을에서도 유명해요!",
+        "특별한 주문이 있는데, 도와주실 수 있나요?"
+      ]
+    },
+    {
+      "id": "rose",
+      "name": "약초학자 로즈",
+      "icon": "🌿",
+      "description": "식물과 약초를 연구하는 학자입니다.",
+      "unlockLevel": 10,
+      "orderPatterns": {
+        "tier": [3],
+        "preferredCategories": ["potion", "special"],
+        "frequency": "low",
+        "rewardMultiplier": 1.8,
+        "bonusReward": "rare_materials"
+      },
+      "dialogue": [
+        "희귀한 허브로 만든 물약을 연구하고 있어요.",
+        "당신의 지식은 정말 대단해요!",
+        "함께 연구하면 좋을 것 같아요."
+      ]
+    },
+    {
+      "id": "jake",
+      "name": "모험가 제이크",
+      "icon": "🗡️",
+      "description": "위험한 던전을 탐험하는 모험가입니다.",
+      "unlockLevel": 8,
+      "orderPatterns": {
+        "tier": [2, 3],
+        "preferredCategories": ["bomb", "potion"],
+        "frequency": "medium",
+        "rewardMultiplier": 1.6,
+        "bonusReward": "special_materials"
+      },
+      "dialogue": [
+        "던전 탐험에 필요한 물약을 준비해주세요!",
+        "당신의 물약 덕분에 살아남았습니다!",
+        "다음 탐험도 부탁드려요."
+      ]
+    },
+    {
+      "id": "mysterious",
+      "name": "??? (신비한 손님)",
+      "icon": "🎭",
+      "description": "정체를 알 수 없는 신비한 방문객입니다.",
+      "unlockLevel": 15,
+      "orderPatterns": {
+        "tier": [4],
+        "preferredCategories": ["potion", "special"],
+        "frequency": "rare",
+        "rewardMultiplier": 5.0,
+        "bonusReward": "legendary_materials"
+      },
+      "dialogue": [
+        "...전설의 물약을 구합니다.",
+        "...흥미롭군요.",
+        "...다음에 또 찾아오겠습니다."
+      ],
+      "special": true
+    }
+  ],
+  "orderTemplates": [
+    {
+      "tier": 1,
+      "timeLimit": 3600,
+      "itemCount": {"min": 1, "max": 3},
+      "goldReward": {"min": 50, "max": 200},
+      "reputationReward": {"min": 3, "max": 10}
+    },
+    {
+      "tier": 2,
+      "timeLimit": 7200,
+      "itemCount": {"min": 2, "max": 5},
+      "goldReward": {"min": 200, "max": 600},
+      "reputationReward": {"min": 10, "max": 20}
+    },
+    {
+      "tier": 3,
+      "timeLimit": 14400,
+      "itemCount": {"min": 3, "max": 7},
+      "goldReward": {"min": 600, "max": 2000},
+      "reputationReward": {"min": 20, "max": 40}
+    },
+    {
+      "tier": 4,
+      "timeLimit": 43200,
+      "itemCount": {"min": 1, "max": 2},
+      "goldReward": {"min": 3000, "max": 10000},
+      "reputationReward": {"min": 50, "max": 100},
+      "gemsReward": {"min": 10, "max": 50}
+    }
+  ]
+}

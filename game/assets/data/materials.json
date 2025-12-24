@@ -1,0 +1,176 @@
+{
+  "materials": [
+    {
+      "id": "grass",
+      "name": "들풀",
+      "tier": 1,
+      "icon": "🌿",
+      "description": "흔한 풀. 기본 물약 재료로 사용됩니다.",
+      "productionRate": 6.0,
+      "maxStorage": 99,
+      "category": "plant"
+    },
+    {
+      "id": "water_clear",
+      "name": "맑은 물",
+      "tier": 1,
+      "icon": "💧",
+      "description": "샘에서 길어온 물. 모든 물약의 기본 재료입니다.",
+      "productionRate": 5.0,
+      "maxStorage": 99,
+      "category": "liquid"
+    },
+    {
+      "id": "stone",
+      "name": "돌멩이",
+      "tier": 1,
+      "icon": "🪨",
+      "description": "작은 돌. 연마하면 유용하게 쓸 수 있습니다.",
+      "productionRate": 4.0,
+      "maxStorage": 99,
+      "category": "mineral"
+    },
+    {
+      "id": "branch",
+      "name": "나뭇가지",
+      "tier": 1,
+      "icon": "🪵",
+      "description": "나무 조각. 불쏘시개나 막대로 사용됩니다.",
+      "productionRate": 3.0,
+      "maxStorage": 99,
+      "category": "wood"
+    },
+    {
+      "id": "wildflower",
+      "name": "야생화",
+      "tier": 2,
+      "icon": "🌸",
+      "description": "향기로운 꽃. 마나 물약의 주재료입니다.",
+      "productionRate": 2.0,
+      "maxStorage": 50,
+      "category": "plant",
+      "unlockLevel": 5
+    },
+    {
+      "id": "water_spring",
+      "name": "샘물",
+      "tier": 2,
+      "icon": "💦",
+      "description": "맑고 차가운 샘물. 상급 물약에 사용됩니다.",
+      "productionRate": 1.5,
+      "maxStorage": 50,
+      "category": "liquid",
+      "unlockLevel": 5
+    },
+    {
+      "id": "ore",
+      "name": "광석",
+      "tier": 2,
+      "icon": "⛏️",
+      "description": "작은 금속 덩어리. 힘을 증폭시킵니다.",
+      "productionRate": 1.0,
+      "maxStorage": 50,
+      "category": "mineral",
+      "unlockLevel": 5
+    },
+    {
+      "id": "oak",
+      "name": "참나무",
+      "tier": 2,
+      "icon": "🌳",
+      "description": "단단한 목재. 고급 제작에 필요합니다.",
+      "productionRate": 1.0,
+      "maxStorage": 50,
+      "category": "wood",
+      "unlockLevel": 5
+    },
+    {
+      "id": "herb_rare",
+      "name": "희귀 허브",
+      "tier": 3,
+      "icon": "🍀",
+      "description": "마법 성분이 깃든 식물. 매우 귀합니다.",
+      "productionRate": 0.5,
+      "maxStorage": 30,
+      "category": "plant",
+      "unlockLevel": 10
+    },
+    {
+      "id": "water_holy",
+      "name": "성수",
+      "tier": 3,
+      "icon": "✨",
+      "description": "신성한 힘이 담긴 물. 정화 능력이 있습니다.",
+      "productionRate": 0.3,
+      "maxStorage": 30,
+      "category": "liquid",
+      "unlockLevel": 10
+    },
+    {
+      "id": "gemstone",
+      "name": "보석",
+      "tier": 3,
+      "icon": "💎",
+      "description": "작은 마법 보석. 마력을 증폭시킵니다.",
+      "productionRate": 0.2,
+      "maxStorage": 30,
+      "category": "mineral",
+      "unlockLevel": 10
+    },
+    {
+      "id": "wood_magic",
+      "name": "마법 목재",
+      "tier": 3,
+      "icon": "🪄",
+      "description": "마력이 스며든 나무. 전설의 재료입니다.",
+      "productionRate": 0.2,
+      "maxStorage": 30,
+      "category": "wood",
+      "unlockLevel": 10
+    },
+    {
+      "id": "moonflower",
+      "name": "달빛 꽃",
+      "tier": 4,
+      "icon": "🌙",
+      "description": "달빛을 먹고 자란 꽃. 밤에만 빛을 발합니다.",
+      "productionRate": 0,
+      "maxStorage": 10,
+      "category": "plant",
+      "obtainMethod": "special_order"
+    },
+    {
+      "id": "phoenix_feather",
+      "name": "불사조 깃털",
+      "tier": 4,
+      "icon": "🔥",
+      "description": "환생의 힘을 가진 깃털. 전설 속에서만 존재합니다.",
+      "productionRate": 0,
+      "maxStorage": 10,
+      "category": "special",
+      "obtainMethod": "legendary_order"
+    },
+    {
+      "id": "stardust",
+      "name": "별가루",
+      "tier": 4,
+      "icon": "⭐",
+      "description": "떨어진 별의 조각. 우주의 신비를 담고 있습니다.",
+      "productionRate": 0,
+      "maxStorage": 10,
+      "category": "special",
+      "obtainMethod": "cat_level_10"
+    },
+    {
+      "id": "void_essence",
+      "name": "공허의 정수",
+      "tier": 4,
+      "icon": "🌑",
+      "description": "어둠의 힘이 응축된 액체. 위험하지만 강력합니다.",
+      "productionRate": 0,
+      "maxStorage": 10,
+      "category": "special",
+      "obtainMethod": "secret_recipe"
+    }
+  ]
+}

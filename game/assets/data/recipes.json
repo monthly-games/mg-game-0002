@@ -1,0 +1,569 @@
+{
+  "recipes": [
+    {
+      "id": "potion_healing_minor",
+      "name": "하급 치유 물약",
+      "tier": 1,
+      "category": "potion",
+      "icon": "💚",
+      "description": "기본적인 상처를 치유하는 물약. 연금술의 시작입니다.",
+      "ingredients": [
+        {
+          "id": "grass",
+          "amount": 2
+        },
+        {
+          "id": "water_clear",
+          "amount": 1
+        }
+      ],
+      "craftTime": 30,
+      "result": {
+        "id": "potion_healing_minor",
+        "amount": 1
+      },
+      "sellPrice": 50,
+      "discoveryBonus": {
+        "gold": 100,
+        "exp": 10
+      },
+      "pattern": [
+        "010"
+      ]
+    },
+    {
+      "id": "potion_mana_minor",
+      "name": "하급 마나 물약",
+      "tier": 1,
+      "category": "potion",
+      "icon": "💙",
+      "description": "마법의 힘을 회복시키는 물약입니다.",
+      "ingredients": [
+        {
+          "id": "wildflower",
+          "amount": 1
+        },
+        {
+          "id": "water_clear",
+          "amount": 1
+        },
+        {
+          "id": "stone",
+          "amount": 1
+        }
+      ],
+      "craftTime": 45,
+      "result": {
+        "id": "potion_mana_minor",
+        "amount": 1
+      },
+      "sellPrice": 80,
+      "discoveryBonus": {
+        "gold": 150,
+        "exp": 15
+      },
+      "pattern": [
+        "01",
+        "2-"
+      ]
+    },
+    {
+      "id": "potion_stamina",
+      "name": "활력 물약",
+      "tier": 1,
+      "category": "potion",
+      "icon": "⚡",
+      "description": "피로를 회복시켜 활력을 되찾게 합니다.",
+      "ingredients": [
+        {
+          "id": "branch",
+          "amount": 2
+        },
+        {
+          "id": "water_clear",
+          "amount": 1
+        }
+      ],
+      "craftTime": 60,
+      "result": {
+        "id": "potion_stamina",
+        "amount": 1
+      },
+      "sellPrice": 60,
+      "discoveryBonus": {
+        "gold": 120,
+        "exp": 12
+      }
+    },
+    {
+      "id": "potion_speed",
+      "name": "신속 물약",
+      "tier": 2,
+      "category": "potion",
+      "icon": "🏃",
+      "description": "순간적으로 움직임이 빨라집니다.",
+      "ingredients": [
+        {
+          "id": "wildflower",
+          "amount": 2
+        },
+        {
+          "id": "water_spring",
+          "amount": 1
+        }
+      ],
+      "craftTime": 120,
+      "result": {
+        "id": "potion_speed",
+        "amount": 1
+      },
+      "sellPrice": 150,
+      "discoveryBonus": {
+        "gold": 250,
+        "exp": 20
+      }
+    },
+    {
+      "id": "potion_healing_major",
+      "name": "상급 치유 물약",
+      "tier": 2,
+      "category": "potion",
+      "icon": "💚",
+      "description": "심각한 부상도 치유할 수 있는 강력한 물약입니다.",
+      "ingredients": [
+        {
+          "id": "herb_rare",
+          "amount": 2
+        },
+        {
+          "id": "water_holy",
+          "amount": 1
+        },
+        {
+          "id": "stone",
+          "amount": 1
+        }
+      ],
+      "craftTime": 300,
+      "result": {
+        "id": "potion_healing_major",
+        "amount": 1
+      },
+      "sellPrice": 300,
+      "discoveryBonus": {
+        "gold": 400,
+        "exp": 30
+      }
+    },
+    {
+      "id": "potion_mana_major",
+      "name": "상급 마나 물약",
+      "tier": 2,
+      "category": "potion",
+      "icon": "💙",
+      "description": "강력한 마법의 힘을 회복시킵니다.",
+      "ingredients": [
+        {
+          "id": "wildflower",
+          "amount": 3
+        },
+        {
+          "id": "water_spring",
+          "amount": 2
+        },
+        {
+          "id": "gemstone",
+          "amount": 1
+        }
+      ],
+      "craftTime": 300,
+      "result": {
+        "id": "potion_mana_major",
+        "amount": 1
+      },
+      "sellPrice": 350,
+      "discoveryBonus": {
+        "gold": 450,
+        "exp": 35
+      }
+    },
+    {
+      "id": "potion_strength",
+      "name": "힘 물약",
+      "tier": 2,
+      "category": "potion",
+      "icon": "💪",
+      "description": "일시적으로 힘이 증가합니다.",
+      "ingredients": [
+        {
+          "id": "ore",
+          "amount": 2
+        },
+        {
+          "id": "water_spring",
+          "amount": 1
+        },
+        {
+          "id": "oak",
+          "amount": 1
+        }
+      ],
+      "craftTime": 180,
+      "result": {
+        "id": "potion_strength",
+        "amount": 1
+      },
+      "sellPrice": 200,
+      "discoveryBonus": {
+        "gold": 300,
+        "exp": 25
+      }
+    },
+    {
+      "id": "potion_invisibility",
+      "name": "투명 물약",
+      "tier": 3,
+      "category": "potion",
+      "icon": "👻",
+      "description": "짧은 시간 동안 투명해집니다.",
+      "ingredients": [
+        {
+          "id": "moonflower",
+          "amount": 1
+        },
+        {
+          "id": "water_holy",
+          "amount": 2
+        },
+        {
+          "id": "gemstone",
+          "amount": 1
+        }
+      ],
+      "craftTime": 600,
+      "result": {
+        "id": "potion_invisibility",
+        "amount": 1
+      },
+      "sellPrice": 800,
+      "discoveryBonus": {
+        "gold": 1000,
+        "exp": 50
+      }
+    },
+    {
+      "id": "potion_wisdom",
+      "name": "지혜 물약",
+      "tier": 3,
+      "category": "potion",
+      "icon": "📚",
+      "description": "지혜와 통찰력을 얻습니다.",
+      "ingredients": [
+        {
+          "id": "herb_rare",
+          "amount": 2
+        },
+        {
+          "id": "gemstone",
+          "amount": 1
+        },
+        {
+          "id": "water_holy",
+          "amount": 1
+        }
+      ],
+      "craftTime": 480,
+      "result": {
+        "id": "potion_wisdom",
+        "amount": 1
+      },
+      "sellPrice": 600,
+      "discoveryBonus": {
+        "gold": 800,
+        "exp": 45
+      }
+    },
+    {
+      "id": "potion_flight",
+      "name": "비행 물약",
+      "tier": 3,
+      "category": "potion",
+      "icon": "🦅",
+      "description": "하늘을 날 수 있게 해주는 신비한 물약입니다.",
+      "ingredients": [
+        {
+          "id": "phoenix_feather",
+          "amount": 1
+        },
+        {
+          "id": "stardust",
+          "amount": 1
+        },
+        {
+          "id": "water_holy",
+          "amount": 1
+        }
+      ],
+      "craftTime": 900,
+      "result": {
+        "id": "potion_flight",
+        "amount": 1
+      },
+      "sellPrice": 1500,
+      "discoveryBonus": {
+        "gold": 2000,
+        "exp": 80
+      }
+    },
+    {
+      "id": "elixir_life",
+      "name": "생명의 영약",
+      "tier": 4,
+      "category": "potion",
+      "icon": "🌟",
+      "description": "전설 속의 영약. 모든 상처를 치유하고 생명을 연장합니다.",
+      "ingredients": [
+        {
+          "id": "phoenix_feather",
+          "amount": 2
+        },
+        {
+          "id": "water_holy",
+          "amount": 3
+        },
+        {
+          "id": "herb_rare",
+          "amount": 5
+        }
+      ],
+      "craftTime": 1800,
+      "result": {
+        "id": "elixir_life",
+        "amount": 1
+      },
+      "sellPrice": 5000,
+      "discoveryBonus": {
+        "gold": 10000,
+        "exp": 200
+      },
+      "isLegendary": true
+    },
+    {
+      "id": "bomb_smoke",
+      "name": "연막탄",
+      "tier": 1,
+      "category": "bomb",
+      "icon": "💨",
+      "description": "연기를 퍼뜨려 시야를 차단합니다.",
+      "ingredients": [
+        {
+          "id": "grass",
+          "amount": 3
+        },
+        {
+          "id": "branch",
+          "amount": 2
+        }
+      ],
+      "craftTime": 60,
+      "result": {
+        "id": "bomb_smoke",
+        "amount": 1
+      },
+      "sellPrice": 70,
+      "discoveryBonus": {
+        "gold": 140,
+        "exp": 15
+      }
+    },
+    {
+      "id": "bomb_flash",
+      "name": "섬광탄",
+      "tier": 2,
+      "category": "bomb",
+      "icon": "💥",
+      "description": "강력한 빛으로 적을 눈멀게 합니다.",
+      "ingredients": [
+        {
+          "id": "stardust",
+          "amount": 1
+        },
+        {
+          "id": "ore",
+          "amount": 2
+        }
+      ],
+      "craftTime": 180,
+      "result": {
+        "id": "bomb_flash",
+        "amount": 1
+      },
+      "sellPrice": 250,
+      "discoveryBonus": {
+        "gold": 350,
+        "exp": 30
+      }
+    },
+    {
+      "id": "bomb_fire",
+      "name": "화염병",
+      "tier": 2,
+      "category": "bomb",
+      "icon": "🔥",
+      "description": "불길을 퍼뜨리는 위험한 폭탄입니다.",
+      "ingredients": [
+        {
+          "id": "branch",
+          "amount": 3
+        },
+        {
+          "id": "water_spring",
+          "amount": 1
+        },
+        {
+          "id": "ore",
+          "amount": 1
+        }
+      ],
+      "craftTime": 240,
+      "result": {
+        "id": "bomb_fire",
+        "amount": 1
+      },
+      "sellPrice": 300,
+      "discoveryBonus": {
+        "gold": 400,
+        "exp": 35
+      }
+    },
+    {
+      "id": "bomb_freeze",
+      "name": "냉동 폭탄",
+      "tier": 3,
+      "category": "bomb",
+      "icon": "❄️",
+      "description": "주변을 얼려버리는 강력한 폭탄입니다.",
+      "ingredients": [
+        {
+          "id": "water_holy",
+          "amount": 2
+        },
+        {
+          "id": "gemstone",
+          "amount": 1
+        },
+        {
+          "id": "wildflower",
+          "amount": 2
+        }
+      ],
+      "craftTime": 480,
+      "result": {
+        "id": "bomb_freeze",
+        "amount": 1
+      },
+      "sellPrice": 700,
+      "discoveryBonus": {
+        "gold": 900,
+        "exp": 50
+      }
+    },
+    {
+      "id": "fertilizer_magic",
+      "name": "마법 비료",
+      "tier": 2,
+      "category": "special",
+      "icon": "🌱",
+      "description": "식물이 빠르게 자라게 하는 신비한 비료입니다.",
+      "ingredients": [
+        {
+          "id": "grass",
+          "amount": 5
+        },
+        {
+          "id": "water_spring",
+          "amount": 2
+        },
+        {
+          "id": "ore",
+          "amount": 1
+        }
+      ],
+      "craftTime": 120,
+      "result": {
+        "id": "fertilizer_magic",
+        "amount": 1
+      },
+      "sellPrice": 180,
+      "discoveryBonus": {
+        "gold": 250,
+        "exp": 20
+      }
+    },
+    {
+      "id": "charm_luck",
+      "name": "행운의 부적",
+      "tier": 3,
+      "category": "special",
+      "icon": "🍀",
+      "description": "행운을 가져다주는 마법의 부적입니다.",
+      "ingredients": [
+        {
+          "id": "gemstone",
+          "amount": 1
+        },
+        {
+          "id": "stardust",
+          "amount": 1
+        },
+        {
+          "id": "wildflower",
+          "amount": 3
+        }
+      ],
+      "craftTime": 720,
+      "result": {
+        "id": "charm_luck",
+        "amount": 1
+      },
+      "sellPrice": 1000,
+      "discoveryBonus": {
+        "gold": 1500,
+        "exp": 60
+      }
+    },
+    {
+      "id": "essence_time",
+      "name": "시간의 정수",
+      "tier": 4,
+      "category": "special",
+      "icon": "⏰",
+      "description": "시간을 조작할 수 있는 전설의 아이템입니다.",
+      "ingredients": [
+        {
+          "id": "stardust",
+          "amount": 2
+        },
+        {
+          "id": "void_essence",
+          "amount": 1
+        },
+        {
+          "id": "water_holy",
+          "amount": 3
+        }
+      ],
+      "craftTime": 3600,
+      "result": {
+        "id": "essence_time",
+        "amount": 1
+      },
+      "sellPrice": 10000,
+      "discoveryBonus": {
+        "gold": 20000,
+        "exp": 300
+      },
+      "isLegendary": true
+    }
+  ]
+}
