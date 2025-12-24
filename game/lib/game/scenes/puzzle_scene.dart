@@ -34,9 +34,9 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
 
   void _initGrid() {
     int size = 3;
-    if (recipe.tier >= 5)
+    if (recipe.tier >= 5) {
       size = 5;
-    else if (recipe.tier >= 3)
+    } else if (recipe.tier >= 3)
       size = 4;
 
     _rows = size;

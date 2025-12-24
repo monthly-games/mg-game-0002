@@ -1,6 +1,5 @@
 import 'dart:math';
 import 'package:mg_common_game/mg_common_game.dart';
-import 'package:mg_common_game/systems/progression/prestige_manager.dart';
 import '../models/recipe.dart';
 import '../models/game_state.dart';
 

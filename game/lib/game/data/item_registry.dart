@@ -1,31 +1,563 @@
-import 'package:mg_common_game/core/systems/rpg/item_data.dart';
+import 'game_item_data.dart';
 
 class ItemRegistry {
-  static final Map<String, ItemData> _items = {
-    'herb': ItemData(
+  static final Map<String, GameItemData> _items = {
+    'herb': GameItemData(
       id: 'herb',
       name: 'Herb',
       description: 'A common medicinal herb.',
+      iconPath: 'materials/item_herb.png',
+      tier: 1,
     ),
-    'water': ItemData(id: 'water', name: 'Water', description: 'Fresh water.'),
-    'fire_stone': ItemData(
+    'grass': GameItemData(
+      id: 'grass',
+      name: 'Wild Grass',
+      description: 'Used for basic weaving.',
+      iconPath: 'materials/item_grass.png',
+      tier: 1,
+    ),
+    'branch': GameItemData(
+      id: 'branch',
+      name: 'Dry Branch',
+      description: 'Good for kindling.',
+      iconPath: 'materials/item_branch.png',
+      tier: 1,
+    ),
+    'water': GameItemData(
+      id: 'water',
+      name: 'Clear Water',
+      description: 'Fresh water.',
+      iconPath: 'materials/item_water.png',
+      tier: 1,
+    ),
+    'stone': GameItemData(
+      id: 'stone',
+      name: 'Pebble',
+      description: 'Small smooth stone.',
+      iconPath: 'materials/item_stone.png',
+      tier: 1,
+    ),
+    'fire_stone': GameItemData(
       id: 'fire_stone',
       name: 'Fire Stone',
       description: 'Warm to the touch.',
+      iconPath: 'materials/item_fire_stone.png',
+      tier: 1,
     ),
-    'potion_health': ItemData(
+    'mushroom': GameItemData(
+      id: 'mushroom',
+      name: 'Mushroom Cap',
+      description: 'Spotted and cute.',
+      iconPath: 'materials/item_mushroom_cap.png',
+      tier: 1,
+    ),
+    'slime': GameItemData(
+      id: 'slime',
+      name: 'Slime Goo',
+      description: 'Sticky green ooze.',
+      iconPath: 'materials/item_slime_goo.png',
+      tier: 1,
+    ),
+    'flint': GameItemData(
+      id: 'flint',
+      name: 'Flint',
+      description: 'Sparks fire.',
+      iconPath: 'materials/item_flint.png',
+      tier: 1,
+    ),
+    'feather': GameItemData(
+      id: 'feather',
+      name: 'Feather',
+      description: 'Light as air.',
+      iconPath: 'materials/item_feather.png',
+      tier: 1,
+    ),
+
+    // Tier 2
+    'dew': GameItemData(
+      id: 'dew',
+      name: 'Morning Dew',
+      description: 'Captured at dawn.',
+      iconPath: 'materials/item_dew.png',
+      tier: 2,
+    ),
+    'pollen': GameItemData(
+      id: 'pollen',
+      name: 'Golden Pollen',
+      description: 'Sneezey but magical.',
+      iconPath: 'materials/item_pollen.png',
+      tier: 2,
+    ),
+    'ember': GameItemData(
+      id: 'ember',
+      name: 'Magic Ember',
+      description: 'Never burns out.',
+      iconPath: 'materials/item_ember.png',
+      tier: 2,
+    ),
+    'crystal_shard': GameItemData(
+      id: 'crystal_shard',
+      name: 'Crystal Shard',
+      description: 'Faintly flowing.',
+      iconPath: 'materials/item_crystal_shard.png',
+      tier: 2,
+    ),
+    'charcoal': GameItemData(
+      id: 'charcoal',
+      name: 'Charcoal',
+      description: 'Burnt wood.',
+      iconPath: 'materials/item_charcoal.png',
+      tier: 2,
+    ),
+    'vial': GameItemData(
+      id: 'vial',
+      name: 'Glass Vial',
+      description: 'Empty container.',
+      iconPath: 'materials/item_glass_vial.png',
+      tier: 2,
+    ),
+    'silk': GameItemData(
+      id: 'silk',
+      name: 'Spider Silk',
+      description: 'Strong and sticky.',
+      iconPath: 'materials/item_spider_silk.png',
+      tier: 2,
+    ),
+    'magic_dust': GameItemData(
+      id: 'magic_dust',
+      name: 'Magic Dust',
+      description: 'Glowing powder.',
+      iconPath: 'materials/item_magic_dust.png',
+      tier: 2,
+    ),
+
+    // Tier 3
+    'moonlight': GameItemData(
+      id: 'moonlight',
+      name: 'Bottled Moonlight',
+      description: 'Cold light.',
+      iconPath: 'materials/item_moonlight.png',
+      tier: 3,
+    ),
+    'stardust': GameItemData(
+      id: 'stardust',
+      name: 'Stardust',
+      description: 'Fell from the sky.',
+      iconPath: 'materials/item_stardust.png',
+      tier: 3,
+    ),
+    'spirit_breath': GameItemData(
+      id: 'spirit_breath',
+      name: 'Spirit Breath',
+      description: 'Ethereal vapor.',
+      iconPath: 'materials/item_spirit_breath.png',
+      tier: 3,
+    ),
+    'dragon_scale': GameItemData(
+      id: 'dragon_scale',
+      name: 'Dragon Scale',
+      description: 'Harder than steel.',
+      iconPath: 'materials/item_dragon_scale.png',
+      tier: 3,
+    ),
+    'fairy_wing': GameItemData(
+      id: 'fairy_wing',
+      name: 'Fairy Wing',
+      description: 'Delicate and iridescent.',
+      iconPath: 'materials/item_fairy_wing.png',
+      tier: 3,
+    ),
+    'golem_core': GameItemData(
+      id: 'golem_core',
+      name: 'Golem Core',
+      description: 'Pulsing with energy.',
+      iconPath: 'materials/item_golem_core.png',
+      tier: 3,
+    ),
+    'thunder_stone': GameItemData(
+      id: 'thunder_stone',
+      name: 'Thunder Stone',
+      description: 'Sparks fly from it.',
+      iconPath: 'materials/item_thunder_stone.png',
+      tier: 3,
+    ),
+    'ice_crystal': GameItemData(
+      id: 'ice_crystal',
+      name: 'Ice Crystal',
+      description: 'Frozen solid.',
+      iconPath: 'materials/item_ice_crystal.png',
+      tier: 3,
+    ),
+
+    // Tier 4
+    'phoenix_feather': GameItemData(
+      id: 'phoenix_feather',
+      name: 'Phoenix Feather',
+      description: 'Warm and reviving.',
+      iconPath: 'materials/item_phoenix_feather.png',
+      tier: 4,
+    ),
+    'time_sand': GameItemData(
+      id: 'time_sand',
+      name: 'Sands of Time',
+      description: 'Flows backwards.',
+      iconPath: 'materials/item_time_sand.png',
+      tier: 4,
+    ),
+    'world_leaf': GameItemData(
+      id: 'world_leaf',
+      name: 'World Tree Leaf',
+      description: 'Humming with life.',
+      iconPath: 'materials/item_world_tree_leaf.png',
+      tier: 4,
+    ),
+    'pure_mana': GameItemData(
+      id: 'pure_mana',
+      name: 'Pure Mana',
+      description: 'Concentrated magic.',
+      iconPath: 'materials/item_pure_mana.png',
+      tier: 4,
+    ),
+    'unicorn_horn': GameItemData(
+      id: 'unicorn_horn',
+      name: 'Unicorn Horn',
+      description: 'Pure magic.',
+      iconPath: 'materials/item_unicorn_horn.png',
+      tier: 4,
+    ),
+    'void_essence': GameItemData(
+      id: 'void_essence',
+      name: 'Void Essence',
+      description: 'Dark and swirling.',
+      iconPath: 'materials/item_void_essence.png',
+      tier: 4,
+    ),
+    'sun_stone': GameItemData(
+      id: 'sun_stone',
+      name: 'Sun Stone',
+      description: 'Radiant heat.',
+      iconPath: 'materials/item_sun_stone.png',
+      tier: 4,
+    ),
+    'mermaid_scale': GameItemData(
+      id: 'mermaid_scale',
+      name: 'Mermaid Scale',
+      description: 'Shimmers like the ocean.',
+      iconPath: 'materials/item_mermaid_scale.png',
+      tier: 4,
+    ),
+
+    // Tier 5
+    'angel_feather': GameItemData(
+      id: 'angel_feather',
+      name: 'Angel Feather',
+      description: 'Holy light.',
+      iconPath: 'materials/item_angel_feather.png',
+      tier: 5,
+    ),
+    'demon_blood': GameItemData(
+      id: 'demon_blood',
+      name: 'Demon Blood',
+      description: 'Boiling with malice.',
+      iconPath: 'materials/item_demon_blood.png',
+      tier: 5,
+    ),
+    'star_fragment': GameItemData(
+      id: 'star_fragment',
+      name: 'Star Fragment',
+      description: 'Piece of the cosmos.',
+      iconPath: 'materials/item_star_fragment.png',
+      tier: 5,
+    ),
+    'ancient_bone': GameItemData(
+      id: 'ancient_bone',
+      name: 'Ancient Bone',
+      description: 'Fossilized power.',
+      iconPath: 'materials/item_ancient_bone.png',
+      tier: 5,
+    ),
+
+    // Tier 6
+    'nebula_drop': GameItemData(
+      id: 'nebula_drop',
+      name: 'Nebula Drop',
+      description: 'Liquid galaxy.',
+      iconPath: 'materials/item_nebula_drop.png',
+      tier: 6,
+    ),
+    'time_gear': GameItemData(
+      id: 'time_gear',
+      name: 'Time Gear',
+      description: 'Ticks forever.',
+      iconPath: 'materials/item_time_gear.png',
+      tier: 6,
+    ),
+    'soul_gem': GameItemData(
+      id: 'soul_gem',
+      name: 'Soul Gem',
+      description: 'Trapped essence.',
+      iconPath: 'materials/item_soul_gem.png',
+      tier: 6,
+    ),
+    'chaos_orb': GameItemData(
+      id: 'chaos_orb',
+      name: 'Chaos Orb',
+      description: 'Unstable energy.',
+      iconPath: 'materials/item_chaos_orb.png',
+      tier: 6,
+    ),
+
+    // Tier 7
+    'god_tears': GameItemData(
+      id: 'god_tears',
+      name: 'God Tears',
+      description: 'Divine sorrow.',
+      iconPath: 'materials/item_god_tears.png',
+      tier: 7,
+    ),
+    'creation_spark': GameItemData(
+      id: 'creation_spark',
+      name: 'Creation Spark',
+      description: 'The beginning of everything.',
+      iconPath: 'materials/item_creation_spark.png',
+      tier: 7,
+    ),
+    'eternity_crystal': GameItemData(
+      id: 'eternity_crystal',
+      name: 'Eternity Crystal',
+      description: 'Infinite loops.',
+      iconPath: 'materials/item_eternity_crystal.png',
+      tier: 7,
+    ),
+    'void_heart': GameItemData(
+      id: 'void_heart',
+      name: 'Void Heart',
+      description: 'The end of everything.',
+      iconPath: 'materials/item_void_heart.png',
+      tier: 7,
+    ),
+
+    // Variations
+    'copper_ore': GameItemData(
+      id: 'copper_ore',
+      name: 'Copper Ore',
+      description: 'Conductive metal.',
+      iconPath: 'materials/item_copper_ore.png',
+      tier: 1,
+    ),
+    'iron_ore': GameItemData(
+      id: 'iron_ore',
+      name: 'Iron Ore',
+      description: 'Strong and widely used.',
+      iconPath: 'materials/item_iron_ore.png',
+      tier: 2,
+    ),
+    'gold_ore': GameItemData(
+      id: 'gold_ore',
+      name: 'Gold Ore',
+      description: 'Shiny and precious.',
+      iconPath: 'materials/item_gold_ore.png',
+      tier: 3,
+    ),
+    'mithril_ore': GameItemData(
+      id: 'mithril_ore',
+      name: 'Mithril Ore',
+      description: 'Lightweight and magical.',
+      iconPath: 'materials/item_mithril_ore.png',
+      tier: 4,
+    ),
+    'ruby': GameItemData(
+      id: 'ruby',
+      name: 'Ruby',
+      description: 'Precious red gem.',
+      iconPath: 'materials/item_ruby_gem.png',
+      tier: 4,
+    ),
+    'sapphire': GameItemData(
+      id: 'sapphire',
+      name: 'Sapphire',
+      description: 'Precious blue gem.',
+      iconPath: 'materials/item_sapphire_gem.png',
+      tier: 4,
+    ),
+
+    'potion_health': GameItemData(
       id: 'potion_health',
       name: 'Health Potion',
       description: 'Restores vitality.',
+      iconPath: 'potions/item_potion_health.png',
     ),
-    'bomb_fire': ItemData(
+    'bomb_fire': GameItemData(
       id: 'bomb_fire',
       name: 'Fire Bomb',
       description: 'Explosive.',
+      iconPath: 'potions/item_bomb_fire.png',
+    ),
+    'potion_speed': GameItemData(
+      id: 'potion_speed',
+      name: 'Speed Potion',
+      description: 'Increases movement speed.',
+      iconPath: 'potions/item_potion_speed.png',
+      tier: 2,
+    ),
+    'potion_healing_major': GameItemData(
+      id: 'potion_healing_major',
+      name: 'Major Healing Potion',
+      description: 'Restores a large amount of health.',
+      iconPath: 'potions/item_potion_healing_major.png',
+      tier: 2,
+    ),
+    'potion_mana_major': GameItemData(
+      id: 'potion_mana_major',
+      name: 'Major Mana Potion',
+      description: 'Restores a large amount of mana.',
+      iconPath: 'potions/item_potion_mana_major.png',
+      tier: 2,
+    ),
+    'potion_strength': GameItemData(
+      id: 'potion_strength',
+      name: 'Strength Potion',
+      description: 'Increases physical strength.',
+      iconPath: 'potions/item_potion_strength.png',
+      tier: 2,
+    ),
+    'potion_invisibility': GameItemData(
+      id: 'potion_invisibility',
+      name: 'Invisibility Potion',
+      description: 'Makes the drinker invisible.',
+      iconPath: 'potions/item_potion_invisibility.png',
+      tier: 3,
+    ),
+    'potion_wisdom': GameItemData(
+      id: 'potion_wisdom',
+      name: 'Wisdom Potion',
+      description: 'Increases magical insight.',
+      iconPath: 'potions/item_potion_wisdom.png',
+      tier: 3,
+    ),
+    'potion_flight': GameItemData(
+      id: 'potion_flight',
+      name: 'Flight Potion',
+      description: 'Grants the ability to fly.',
+      iconPath: 'potions/item_potion_flight.png',
+      tier: 3,
+    ),
+    'elixir_life': GameItemData(
+      id: 'elixir_life',
+      name: 'Elixir of Life',
+      description: 'Fully restores health and grants immortality.',
+      iconPath: 'potions/item_elixir_life.png',
+      tier: 4,
+    ),
+    'bomb_smoke': GameItemData(
+      id: 'bomb_smoke',
+      name: 'Smoke Bomb',
+      description: 'Creates a cloud of smoke.',
+      iconPath: 'potions/item_bomb_smoke.png',
+      tier: 1,
+    ),
+    'bomb_flash': GameItemData(
+      id: 'bomb_flash',
+      name: 'Flash Bomb',
+      description: 'Blinds enemies with light.',
+      iconPath: 'potions/item_bomb_flash.png',
+      tier: 2,
+    ),
+    'bomb_freeze': GameItemData(
+      id: 'bomb_freeze',
+      name: 'Freeze Bomb',
+      description: 'Freezes enemies in place.',
+      iconPath: 'potions/item_bomb_freeze.png',
+      tier: 3,
+    ),
+    'fertilizer_magic': GameItemData(
+      id: 'fertilizer_magic',
+      name: 'Magic Fertilizer',
+      description: 'Instantly grows plants.',
+      iconPath: 'items/item_fertilizer_magic.png',
+      tier: 2,
+    ),
+    'charm_luck': GameItemData(
+      id: 'charm_luck',
+      name: 'Luck Charm',
+      description: 'Increases luck.',
+      iconPath: 'items/item_charm_luck.png',
+      tier: 3,
+    ),
+    'essence_time': GameItemData(
+      id: 'essence_time',
+      name: 'Time Essence',
+      description: 'Used to manipulate time.',
+      iconPath: 'items/item_essence_time.png',
+      tier: 4,
+    ),
+    // Missing Ingredients
+    'wildflower': GameItemData(
+      id: 'wildflower',
+      name: 'Wildflower',
+      description: 'A beautiful meadow flower.',
+      iconPath: 'materials/item_wildflower.png',
+      tier: 1,
+    ),
+    'water_spring': GameItemData(
+      id: 'water_spring',
+      name: 'Spring Water',
+      description: 'Fresh and pure.',
+      iconPath: 'materials/item_water_spring.png',
+      tier: 1,
+    ),
+    'herb_rare': GameItemData(
+      id: 'herb_rare',
+      name: 'Rare Herb',
+      description: 'Hard to find medicinal herb.',
+      iconPath: 'materials/item_herb_rare.png',
+      tier: 2,
+    ),
+    'water_holy': GameItemData(
+      id: 'water_holy',
+      name: 'Holy Water',
+      description: 'Blessed water.',
+      iconPath: 'materials/item_water_holy.png',
+      tier: 3,
+    ),
+    'gemstone': GameItemData(
+      id: 'gemstone',
+      name: 'Gemstone',
+      description: 'A shiny gem.',
+      iconPath: 'materials/item_gemstone.png',
+      tier: 3,
+    ),
+    'oak': GameItemData(
+      id: 'oak',
+      name: 'Oak Log',
+      description: 'Sturdy wood.',
+      iconPath: 'materials/item_oak_log.png',
+      tier: 2, // Oak is stronger than branch
+    ),
+    'ore': GameItemData(
+      id: 'ore',
+      name: 'Iron Ore',
+      description: 'Common iron ore.',
+      iconPath: 'materials/item_iron_ore.png', // Mapping generic ore to iron
+      tier: 2,
+    ),
+    'moonflower': GameItemData(
+      id: 'moonflower',
+      name: 'Moonflower',
+      description: 'Blooms only at night.',
+      iconPath: 'materials/item_moonflower.png',
+      tier: 3,
     ),
   };
 
-  static ItemData getItem(String id) {
-    return _items[id] ?? ItemData(id: id, name: 'Unknown Item');
+  static GameItemData getItem(String id) {
+    return _items[id] ??
+        GameItemData(
+          id: 'unknown',
+          name: 'Unknown Item',
+          description: 'Unknown Item',
+          iconPath: 'materials/item_stone.png',
+          tier: 0,
+        );
   }
 }

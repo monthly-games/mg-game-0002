@@ -8,6 +8,7 @@ class ProgressBar extends PositionComponent {
   final Color backgroundColor;
   final Color borderColor;
   final bool showPercentage;
+  @override
   final double height;
 
   ProgressBar({
@@ -98,6 +99,7 @@ class TimerProgressBar extends PositionComponent {
   final Color fillColor;
   final Color backgroundColor;
   final Color borderColor;
+  @override
   final double height;
 
   TimerProgressBar({

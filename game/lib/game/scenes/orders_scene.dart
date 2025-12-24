@@ -15,7 +15,7 @@ class OrdersScene extends Component with HasGameRef {
 
   // Order data
   final OrderService _orderService = OrderService();
-  List<ActiveOrder> _activeOrders = [];
+  final List<ActiveOrder> _activeOrders = [];
   List<NPC> _availableNPCs = [];
   List<Recipe> _discoveredRecipes = [];
 

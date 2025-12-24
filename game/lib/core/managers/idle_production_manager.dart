@@ -18,7 +18,7 @@ class IdleProductionManager {
             id: material.id,
             name: material.name,
             tier: material.tier,
-            baseProductionRate: material.productionRate!,
+            baseProductionRate: material.productionRate,
             maxStorage: material.maxStorage,
           ),
         );

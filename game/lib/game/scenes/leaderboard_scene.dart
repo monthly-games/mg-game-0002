@@ -20,7 +20,7 @@ class LeaderboardScene extends Component with HasGameRef {
   late GameButton _craftsCategoryButton;
 
   // Leaderboard data
-  List<LeaderboardEntry> _currentLeaderboard = [];
+  final List<LeaderboardEntry> _currentLeaderboard = [];
   LeaderboardEntry? _playerEntry;
 
   LeaderboardScene(this.ref);

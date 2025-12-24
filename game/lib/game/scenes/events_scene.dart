@@ -1,7 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
@@ -10,7 +9,7 @@ class EventsScene extends Component with HasGameRef {
   final WidgetRef ref;
 
   // UI state
-  String _selectedEventId = '';
+  final String _selectedEventId = '';
 
   // UI Components
   late GameButton _backButton;

@@ -6,7 +6,7 @@
 // tree, read text, and verify that the values of widget properties are correct.
 
 import 'package:flutter_test/flutter_test.dart';
-import 'package:cat_alchemy/main.dart'; // Ensure correct package name
+// Ensure correct package name
 
 void main() {
   testWidgets('Smoke test', (WidgetTester tester) async {

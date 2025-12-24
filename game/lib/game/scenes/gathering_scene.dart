@@ -7,7 +7,6 @@ import '../../core/models/material.dart' as game_material;
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
 import '../components/progress_bar.dart';
-import '../components/resource_display.dart';
 import '../cat_alchemy_game.dart';
 
 /// Gathering scene - material collection with mini-game

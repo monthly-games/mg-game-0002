@@ -2,7 +2,6 @@ import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/services/game_initialization_service.dart';
-import '../../providers/game_providers.dart';
 import '../cat_alchemy_game.dart';
 
 /// Splash screen scene - shows logo and loads game data

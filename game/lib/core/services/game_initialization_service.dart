@@ -1,9 +1,4 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../models/material.dart';
-import '../managers/idle_production_manager.dart';
-import '../managers/crafting_game_manager.dart';
-import '../managers/inventory_game_manager.dart';
-import '../../data/repositories/game_repository.dart';
 import '../../providers/game_providers.dart';
 
 /// Service for initializing game systems on startup

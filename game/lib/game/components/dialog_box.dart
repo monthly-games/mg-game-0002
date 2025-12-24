@@ -1,5 +1,4 @@
 import 'package:flame/components.dart';
-import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import 'game_button.dart';
 
@@ -176,15 +175,13 @@ class DialogButton {
 /// Confirmation dialog
 class ConfirmDialog extends DialogBox {
   ConfirmDialog({
-    required String title,
-    required String message,
+    required super.title,
+    required super.message,
     required VoidCallback onConfirm,
     VoidCallback? onCancel,
-    VoidCallback? onClose,
-    required Vector2 position,
+    super.onClose,
+    required super.position,
   }) : super(
-         title: title,
-         message: message,
          buttons: [
            DialogButton(
              text: 'Cancel',
@@ -197,8 +194,6 @@ class ConfirmDialog extends DialogBox {
              color: const Color(0xFF228B22), // Forest green
            ),
          ],
-         onClose: onClose,
-         position: position,
          size: Vector2(500, 300),
        );
 }
@@ -206,14 +201,12 @@ class ConfirmDialog extends DialogBox {
 /// Info dialog (single OK button)
 class InfoDialog extends DialogBox {
   InfoDialog({
-    required String title,
-    required String message,
+    required super.title,
+    required super.message,
     VoidCallback? onOk,
-    VoidCallback? onClose,
-    required Vector2 position,
+    super.onClose,
+    required super.position,
   }) : super(
-         title: title,
-         message: message,
          buttons: [
            DialogButton(
              text: 'OK',
@@ -221,8 +214,6 @@ class InfoDialog extends DialogBox {
              color: const Color(0xFF8B6914),
            ),
          ],
-         onClose: onClose,
-         position: position,
          size: Vector2(450, 250),
        );
 }
@@ -232,13 +223,12 @@ class RewardDialog extends DialogBox {
   final Map<String, int> rewards;
 
   RewardDialog({
-    required String title,
+    required super.title,
     required this.rewards,
     VoidCallback? onCollect,
-    VoidCallback? onClose,
-    required Vector2 position,
+    super.onClose,
+    required super.position,
   }) : super(
-         title: title,
          message: _buildRewardMessage(rewards),
          buttons: [
            DialogButton(
@@ -247,8 +237,6 @@ class RewardDialog extends DialogBox {
              color: const Color(0xFFFFD700), // Gold
            ),
          ],
-         onClose: onClose,
-         position: position,
          size: Vector2(500, 400),
        );
 

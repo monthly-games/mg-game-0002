@@ -329,13 +329,6 @@ class CraftingScene extends Component with HasGameRef {
     }
   }
 
-  @override
-  void update(double dt) {
-    super.update(dt);
-
-    // Update crafting queue timers
-    // TODO: Optimize - only update when needed
-  }
 
   @override
   void render(Canvas canvas) {

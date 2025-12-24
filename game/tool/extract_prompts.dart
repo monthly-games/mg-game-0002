@@ -1,5 +1,4 @@
 import 'dart:io';
-import 'dart:convert';
 
 void main() async {
   final file = File('../../docs/resource_generation_prompts.md');
@@ -39,7 +38,7 @@ void main() async {
           if (promptText.contains('VFX Prompt:') ||
               promptText.contains('Prompt:')) {
             prompts.add({
-              'name': currentName!,
+              'name': currentName,
               'prompt': promptText
                   .replaceAll('Prompt:', '')
                   .replaceAll('VFX Prompt:', '')
