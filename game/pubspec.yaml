@@ -46,7 +46,7 @@ dependencies:
 
   # Common Game Module
   mg_common_game:
-    path: ../../mg-common-game
+    path: ../libs/mg_common_game
 
   # UI & Utilities
   cupertino_icons: ^1.0.8
