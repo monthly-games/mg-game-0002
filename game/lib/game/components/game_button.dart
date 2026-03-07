@@ -37,8 +37,8 @@ class GameButton extends PositionComponent with TapCallbacks {
     // Button background
     final rect = size.toRect();
     final bgColor = enabled
-        ? (_isPressed ? backgroundColor.withOpacity(0.8) : backgroundColor)
-        : backgroundColor.withOpacity(0.5);
+        ? (_isPressed ? backgroundColor.withValues(alpha: 0.8) : backgroundColor)
+        : backgroundColor.withValues(alpha: 0.5);
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(10)),
@@ -60,7 +60,7 @@ class GameButton extends PositionComponent with TapCallbacks {
       style: TextStyle(
         fontSize: fontSize,
         fontWeight: FontWeight.bold,
-        color: enabled ? textColor : textColor.withOpacity(0.5),
+        color: enabled ? textColor : textColor.withValues(alpha: 0.5),
       ),
     );
 
@@ -124,8 +124,8 @@ class GameIconButton extends PositionComponent with TapCallbacks {
     final radius = size.x / 2;
     final center = Offset(radius, radius);
     final bgColor = enabled
-        ? (_isPressed ? backgroundColor.withOpacity(0.8) : backgroundColor)
-        : backgroundColor.withOpacity(0.5);
+        ? (_isPressed ? backgroundColor.withValues(alpha: 0.8) : backgroundColor)
+        : backgroundColor.withValues(alpha: 0.5);
 
     canvas.drawCircle(center, radius, Paint()..color = bgColor);
 
@@ -145,7 +145,7 @@ class GameIconButton extends PositionComponent with TapCallbacks {
         fontSize: size.x * 0.5,
         color: enabled
             ? const Color(0xFFFFF8DC)
-            : const Color(0xFFFFF8DC).withOpacity(0.5),
+            : const Color(0xFFFFF8DC).withValues(alpha: 0.5),
       ),
     );
 

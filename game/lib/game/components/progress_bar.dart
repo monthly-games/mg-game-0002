@@ -1,7 +1,28 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
 
-/// Progress bar component for crafting, gathering, etc.
+// ============================================================
+// Color Constants
+// ============================================================
+// Default colors for progress bars (game-specific palette)
+const Color _defaultFillColor = Color(0xFF8B6914); // Dark goldenrod
+const Color _defaultBackgroundColor = Color(0xFFD4B896); // Light tan
+const Color _defaultBorderColor = Color(0xFF5D4E37); // Dark brown
+const Color _defaultTextColor = Color(0xFF2F4F4F); // Dark slate gray
+
+const Color _timerFillColor = Color(0xFF4169E1); // Royal blue
+const Color _timerTextColor = Color(0xFFFFF8DC); // Cornsilk
+
+/// Progress bar component for Flame game scenes
+/// 
+/// Uses Flame's PositionComponent for game engine integration.
+/// Cannot be replaced with MGLinearProgress (Flutter widget) due to:
+/// - Flame's canvas-based rendering pipeline
+/// - Game loop integration (update/render cycle)
+/// - Border/stroke styling not available in MGLinearProgress
+/// 
+/// For Flutter-based UI, use MGLinearProgress from mg_common_game.
+/// See: ANALYSIS_MG_GAME_0002_PROGRESSBAR_REFACTOR.md
 class ProgressBar extends PositionComponent {
   double _progress; // 0.0 to 1.0
   final Color fillColor;
@@ -15,9 +36,9 @@ class ProgressBar extends PositionComponent {
     required Vector2 position,
     required Vector2 size,
     double progress = 0.0,
-    this.fillColor = const Color(0xFF8B6914), // Dark goldenrod
-    this.backgroundColor = const Color(0xFFD4B896), // Light tan
-    this.borderColor = const Color(0xFF5D4E37), // Dark brown
+    this.fillColor = _defaultFillColor,
+    this.backgroundColor = _defaultBackgroundColor,
+    this.borderColor = _defaultBorderColor,
     this.showPercentage = true,
     this.height = 20,
   })  : _progress = progress.clamp(0.0, 1.0),
@@ -71,7 +92,7 @@ class ProgressBar extends PositionComponent {
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF2F4F4F), // Dark slate gray
+          color: _defaultTextColor,
           shadows: [
             Shadow(
               color: Colors.white,
@@ -93,6 +114,13 @@ class ProgressBar extends PositionComponent {
 }
 
 /// Timer progress bar with countdown text
+/// 
+/// Extends ProgressBar with duration-based countdown logic.
+/// Automatically decrements remaining time via game loop (update method).
+/// 
+/// Note: Cannot be replaced with MGLinearProgress due to:
+/// - Requires game loop integration for countdown
+/// - Uses canvas rendering for Flame compatibility
 class TimerProgressBar extends PositionComponent {
   Duration _remaining;
   final Duration total;
@@ -107,9 +135,9 @@ class TimerProgressBar extends PositionComponent {
     required Vector2 size,
     required Duration remaining,
     required this.total,
-    this.fillColor = const Color(0xFF4169E1), // Royal blue
-    this.backgroundColor = const Color(0xFFD4B896),
-    this.borderColor = const Color(0xFF5D4E37),
+    this.fillColor = _timerFillColor,
+    this.backgroundColor = _defaultBackgroundColor,
+    this.borderColor = _defaultBorderColor,
     this.height = 24,
   })  : _remaining = remaining,
         super(
@@ -181,10 +209,10 @@ class TimerProgressBar extends PositionComponent {
       style: const TextStyle(
         fontSize: 16,
         fontWeight: FontWeight.bold,
-        color: Color(0xFFFFF8DC), // Cornsilk
+        color: _timerTextColor,
         shadows: [
           Shadow(
-            color: Color(0xFF2F4F4F),
+            color: _defaultTextColor,
             offset: Offset(1, 1),
             blurRadius: 2,
           ),

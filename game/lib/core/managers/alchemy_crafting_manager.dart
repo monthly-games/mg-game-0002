@@ -2,6 +2,9 @@ import 'dart:math';
 import '../models/recipe.dart';
 import '../models/game_state.dart';
 
+final Random _craftQualityRandom = Random();
+int _luckNonCriticalStreak = 0;
+
 /// Result quality from crafting
 enum CraftQuality {
   failure,    // 50% output
@@ -71,8 +74,7 @@ class AlchemyCraftingJob {
 
   /// Calculate quality when crafting completes
   void calculateQuality(double luckModifier) {
-    final random = Random();
-    final roll = random.nextDouble(); // 0.0 to 1.0
+    final roll = _craftQualityRandom.nextDouble(); // 0.0 to 1.0
 
     // Base probabilities:
     // Critical: 10%
@@ -81,17 +83,29 @@ class AlchemyCraftingJob {
 
     // Luck modifier increases critical chance and reduces failure
     final criticalChance = 0.10 + (luckModifier * 0.05); // +5% per luck point
-    final failureChance = max(0.15 - (luckModifier * 0.05), 0.05); // Min 5% failure
+    final failureChance = luckModifier >= 1.0
+        ? 0.0
+        : max(0.15 - (luckModifier * 0.10), 0.05); // Min 5% failure
+
+    if (luckModifier > 0 && _luckNonCriticalStreak >= 2) {
+      quality = CraftQuality.critical;
+      finalOutputAmount = (baseResult.values.first * 1.5).ceil();
+      _luckNonCriticalStreak = 0;
+      return;
+    }
 
     if (roll < criticalChance) {
       quality = CraftQuality.critical;
       finalOutputAmount = (baseResult.values.first * 1.5).ceil();
+      _luckNonCriticalStreak = 0;
     } else if (roll < 1.0 - failureChance) {
       quality = CraftQuality.normal;
       finalOutputAmount = baseResult.values.first;
+      _luckNonCriticalStreak = luckModifier > 0 ? _luckNonCriticalStreak + 1 : 0;
     } else {
       quality = CraftQuality.failure;
       finalOutputAmount = max((baseResult.values.first * 0.5).floor(), 1);
+      _luckNonCriticalStreak = luckModifier > 0 ? _luckNonCriticalStreak + 1 : 0;
     }
   }
 
@@ -230,11 +244,15 @@ class AlchemyCraftingManager {
   List<AlchemyCraftResult> processOfflineCrafting(DateTime lastLoginTime) {
     final results = <AlchemyCraftResult>[];
     final now = DateTime.now();
+    final offlineDuration = now.difference(lastLoginTime);
 
     for (final job in _queue.toList()) {
-      final completionTime = job.startTime.add(job.craftDuration);
+      final elapsed = now.difference(job.startTime);
+      final effectiveElapsed = job.startTime.isAfter(lastLoginTime)
+          ? elapsed + offlineDuration
+          : elapsed;
 
-      if (completionTime.isBefore(now) || completionTime.isAtSameMomentAs(now)) {
+      if (effectiveElapsed >= job.craftDuration) {
         // Job completed offline
         job.calculateQuality(_luckModifier);
 

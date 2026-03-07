@@ -316,7 +316,7 @@ class UpgradeScene extends Component with HasGameRef {
     final cardBg = RectangleComponent(
       position: position,
       size: cardSize,
-      paint: Paint()..color = const Color(0xFFE8D5B7).withOpacity(0.9),
+      paint: Paint()..color = const Color(0xFFE8D5B7).withValues(alpha: 0.9),
     );
     add(cardBg);
 
@@ -441,7 +441,7 @@ class UpgradeScene extends Component with HasGameRef {
     final cost = upgrade.getCostForNextLevel();
 
     // Check if can afford
-    if (!gameStateNotifier.spendGold(cost)) {
+    if (!gameStateNotifier.trySpendGold(cost)) {
       _showMessage('Not enough gold!');
       return;
     }
@@ -617,7 +617,7 @@ class UpgradeScene extends Component with HasGameRef {
     final panelRect = Rect.fromLTWH(30, 160, size.x - 60, size.y - 190);
     canvas.drawRRect(
       RRect.fromRectAndRadius(panelRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withOpacity(0.1),
+      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
     );
   }
 }

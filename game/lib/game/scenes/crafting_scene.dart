@@ -149,7 +149,7 @@ class CraftingScene extends Component with HasGameRef {
     final slotBg = RectangleComponent(
       position: position,
       size: Vector2(300, 90),
-      paint: Paint()..color = const Color(0xFFD4B896).withOpacity(0.8),
+      paint: Paint()..color = const Color(0xFFD4B896).withValues(alpha: 0.8),
     );
     add(slotBg);
 
@@ -196,7 +196,7 @@ class CraftingScene extends Component with HasGameRef {
       position: position,
       size: Vector2(300, 90),
       paint: Paint()
-        ..color = const Color(0xFFD4B896).withOpacity(0.3)
+        ..color = const Color(0xFFD4B896).withValues(alpha: 0.3)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2,
     );
@@ -345,14 +345,14 @@ class CraftingScene extends Component with HasGameRef {
     final recipeAreaRect = Rect.fromLTWH(30, 100, 440, 400);
     canvas.drawRRect(
       RRect.fromRectAndRadius(recipeAreaRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFFE8D5B7).withOpacity(0.6),
+      Paint()..color = const Color(0xFFE8D5B7).withValues(alpha: 0.6),
     );
 
     // Queue area background
     final queueAreaRect = Rect.fromLTWH(size.x - 370, 100, 340, 500);
     canvas.drawRRect(
       RRect.fromRectAndRadius(queueAreaRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFFE8D5B7).withOpacity(0.6),
+      Paint()..color = const Color(0xFFE8D5B7).withValues(alpha: 0.6),
     );
   }
 }

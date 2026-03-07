@@ -232,7 +232,7 @@ class CatScene extends Component with HasGameRef {
     final gameStateNotifier = ref.read(gameStateProvider.notifier);
 
     // Cost: 10 gold
-    if (!gameStateNotifier.spendGold(10)) {
+    if (!gameStateNotifier.trySpendGold(10)) {
       _showMessage('Not enough gold! (Need 10g)');
       return;
     }
@@ -327,7 +327,7 @@ class CatScene extends Component with HasGameRef {
     canvas.drawCircle(
       catArea.center,
       100,
-      Paint()..color = const Color(0xFFFFE4B5).withOpacity(0.5), // Moccasin
+      Paint()..color = const Color(0xFFFFE4B5).withValues(alpha: 0.5), // Moccasin
     );
   }
 }

@@ -477,7 +477,7 @@ class SettingsScene extends Component with HasGameRef {
     final overlay = RectangleComponent(
       position: Vector2.zero(),
       size: size,
-      paint: Paint()..color = Colors.black.withOpacity(0.5),
+      paint: Paint()..color = Colors.black.withValues(alpha: 0.5),
     );
     add(overlay);
 
@@ -577,7 +577,7 @@ class SettingsScene extends Component with HasGameRef {
     final overlay = RectangleComponent(
       position: Vector2.zero(),
       size: size,
-      paint: Paint()..color = Colors.black.withOpacity(0.5),
+      paint: Paint()..color = Colors.black.withValues(alpha: 0.5),
     );
     add(overlay);
 
@@ -705,7 +705,7 @@ class SettingsScene extends Component with HasGameRef {
     final panelRect = Rect.fromLTWH(30, 100, size.x - 60, size.y - 130);
     canvas.drawRRect(
       RRect.fromRectAndRadius(panelRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withOpacity(0.1),
+      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
     );
   }
 }

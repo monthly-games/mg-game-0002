@@ -209,8 +209,8 @@ class RecipesScene extends Component with HasGameRef {
       size: cardSize,
       paint: Paint()
         ..color = isDiscovered
-            ? const Color(0xFFE8D5B7).withOpacity(0.95)
-            : const Color(0xFF8B7355).withOpacity(0.6),
+            ? const Color(0xFFE8D5B7).withValues(alpha: 0.95)
+            : const Color(0xFF8B7355).withValues(alpha: 0.6),
     );
     add(cardBg);
 
@@ -641,14 +641,14 @@ class RecipesScene extends Component with HasGameRef {
     final bookRect = Rect.fromLTWH(30, 160, size.x - 60, size.y - 190);
     canvas.drawRRect(
       RRect.fromRectAndRadius(bookRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withOpacity(0.1),
+      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
     );
 
     // Book spine decoration (left side)
     final spineRect = Rect.fromLTWH(30, 160, 20, size.y - 190);
     canvas.drawRect(
       spineRect,
-      Paint()..color = const Color(0xFF8B4513).withOpacity(0.3),
+      Paint()..color = const Color(0xFF8B4513).withValues(alpha: 0.3),
     );
   }
 }

@@ -159,7 +159,7 @@ class OrdersScene extends Component with HasGameRef {
     final cardBg = RectangleComponent(
       position: position,
       size: size,
-      paint: Paint()..color = const Color(0xFFE8D5B7).withOpacity(0.9),
+      paint: Paint()..color = const Color(0xFFE8D5B7).withValues(alpha: 0.9),
     );
     add(cardBg);
 
@@ -417,7 +417,7 @@ class OrdersScene extends Component with HasGameRef {
     final boardRect = Rect.fromLTWH(30, 100, size.x - 60, size.y - 150);
     canvas.drawRRect(
       RRect.fromRectAndRadius(boardRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withOpacity(0.2),
+      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.2),
     );
   }
 }

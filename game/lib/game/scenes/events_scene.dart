@@ -275,7 +275,7 @@ class EventsScene extends Component with HasGameRef {
     // Background color based on status
     Color bgColor;
     if (event.status == EventStatus.active) {
-      bgColor = event.color.withOpacity(0.15);
+      bgColor = event.color.withValues(alpha: 0.15);
     } else if (event.status == EventStatus.upcoming) {
       bgColor = const Color(0xFFF5F5F5); // White smoke
     } else {

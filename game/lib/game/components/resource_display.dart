@@ -39,7 +39,7 @@ class ResourceDisplay extends PositionComponent {
     final rect = size.toRect();
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(20)),
-      Paint()..color = const Color(0xFFD4B896).withOpacity(0.8), // Light tan
+      Paint()..color = const Color(0xFFD4B896).withValues(alpha: 0.8), // Light tan
     );
 
     // Border

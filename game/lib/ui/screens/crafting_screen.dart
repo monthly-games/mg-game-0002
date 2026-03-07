@@ -53,7 +53,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
                 Container(
                   margin: const EdgeInsets.all(16),
                   decoration: BoxDecoration(
-                    color: AppColors.background.withOpacity(0.5),
+                    color: AppColors.background.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(16),
                     border: Border.all(color: AppColors.primary),
                   ),

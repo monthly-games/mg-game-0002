@@ -1,5 +1,5 @@
 import 'dart:math';
-import 'package:mg_common_game/mg_common_game.dart';
+import 'package:mg_common_game/mg_common_game.dart' hide GameState;
 import '../models/recipe.dart';
 import '../models/game_state.dart';
 
@@ -10,6 +10,8 @@ class CraftingGameManager {
   final PrestigeManager _prestigeManager;
 
   CraftingGameManager(this._gameState, this._prestigeManager) {
+    _craftingManager.clear();
+
     // Set initial queue size from game state
     final maxSize = _gameState.getMaxCraftingQueueSize();
     _craftingManager.setMaxQueueSize(maxSize);

@@ -447,7 +447,7 @@ class InventoryScene extends Component with HasGameRef {
         Rect.fromLTWH(gridStartX, gridStartY, gridWidth, gridHeight),
         const Radius.circular(10),
       ),
-      Paint()..color = const Color(0xFF8B6914).withOpacity(0.1),
+      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
     );
   }
 }

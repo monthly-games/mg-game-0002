@@ -302,7 +302,7 @@ class ShopScene extends Component with HasGameRef {
     final buyPrice = _calculateBuyPrice(material) * amount;
 
     // Spend gold
-    if (!gameStateNotifier.spendGold(buyPrice)) {
+    if (!gameStateNotifier.trySpendGold(buyPrice)) {
       return; // Not enough gold
     }
 
@@ -468,7 +468,7 @@ class ShopScene extends Component with HasGameRef {
     final counterRect = Rect.fromLTWH(30, 180, size.x - 60, size.y - 250);
     canvas.drawRRect(
       RRect.fromRectAndRadius(counterRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFFD2B48C).withOpacity(0.4), // Tan
+      Paint()..color = const Color(0xFFD2B48C).withValues(alpha: 0.4), // Tan
     );
   }
 }

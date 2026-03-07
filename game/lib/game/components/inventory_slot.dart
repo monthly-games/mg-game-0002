@@ -37,7 +37,7 @@ class InventorySlot extends PositionComponent with TapCallbacks {
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(8)),
-      Paint()..color = bgColor.withOpacity(isEmpty ? 0.5 : 1.0),
+      Paint()..color = bgColor.withValues(alpha: isEmpty ? 0.5 : 1.0),
     );
 
     // Slot border

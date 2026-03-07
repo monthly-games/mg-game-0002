@@ -117,7 +117,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
     save();
   }
 
-  bool spendGold(int amount) {
+  bool trySpendGold(int amount) {
     if (state.gold < amount) return false;
 
     state = GameState(

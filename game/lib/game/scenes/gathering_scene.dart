@@ -337,14 +337,14 @@ class GatheringNode extends PositionComponent with TapCallbacks {
       Offset(size.x / 2, size.y / 2 + bobY),
       glowRadius,
       Paint()
-        ..color = _getMaterialColor().withOpacity(0.3)
+        ..color = _getMaterialColor().withValues(alpha: 0.3)
         ..maskFilter = const MaskFilter.blur(BlurStyle.normal, 10),
     );
 
     canvas.drawCircle(
       Offset(size.x / 2, size.y / 2 + bobY),
       glowRadius - 5,
-      Paint()..color = _getMaterialColor().withOpacity(0.6),
+      Paint()..color = _getMaterialColor().withValues(alpha: 0.6),
     );
 
     // Material icon (emoji placeholder)

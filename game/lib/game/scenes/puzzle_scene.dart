@@ -340,7 +340,7 @@ class PuzzleSlot extends PositionComponent {
       canvas.drawCircle(
         Offset(size.x / 2, size.y / 2),
         20,
-        Paint()..color = Colors.blueAccent.withOpacity(0.5),
+        Paint()..color = Colors.blueAccent.withValues(alpha: 0.5),
       );
     }
   }
@@ -422,7 +422,7 @@ class IngredientDragItem extends PositionComponent with DragCallbacks {
     canvas.drawCircle(
       Offset(size.x / 2, size.y / 2),
       25,
-      Paint()..color = Colors.blue.withOpacity(0.8),
+      Paint()..color = Colors.blue.withValues(alpha: 0.8),
     );
 
     final textSpan = TextSpan(

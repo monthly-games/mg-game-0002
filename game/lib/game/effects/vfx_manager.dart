@@ -34,7 +34,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createRisingEffect(
         position: position,
-        color: Colors.white.withOpacity(0.7),
+        color: Colors.white.withValues(alpha: 0.7),
         count: 5,
         speed: 40,
         lifespan: 0.6,
@@ -234,7 +234,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createBurstEffect(
         position: position,
-        color: Colors.white.withOpacity(0.5),
+        color: Colors.white.withValues(alpha: 0.5),
         count: 6,
         speed: 40,
         lifespan: 0.2,
@@ -288,7 +288,7 @@ class VfxManager extends Component with HasGameRef {
                 canvas.drawCircle(
                   Offset.zero,
                   size,
-                  Paint()..color = color.withOpacity(opacity),
+                  Paint()..color = color.withValues(alpha: opacity),
                 );
               },
             ),
@@ -325,7 +325,7 @@ class VfxManager extends Component with HasGameRef {
                 canvas.drawCircle(
                   Offset.zero,
                   size,
-                  Paint()..color = color.withOpacity(opacity),
+                  Paint()..color = color.withValues(alpha: opacity),
                 );
               },
             ),
@@ -374,7 +374,7 @@ class VfxManager extends Component with HasGameRef {
 
                 canvas.drawPath(
                   path,
-                  Paint()..color = color.withOpacity(opacity),
+                  Paint()..color = color.withValues(alpha: opacity),
                 );
               },
             ),
@@ -411,7 +411,7 @@ class VfxManager extends Component with HasGameRef {
                 canvas.drawCircle(
                   Offset.zero,
                   size,
-                  Paint()..color = Colors.grey.withOpacity(opacity),
+                  Paint()..color = Colors.grey.withValues(alpha: opacity),
                 );
               },
             ),
@@ -449,12 +449,12 @@ class VfxManager extends Component with HasGameRef {
                 // 코인 모양 (타원)
                 canvas.drawOval(
                   const Rect.fromLTWH(-4, -3, 8, 6),
-                  Paint()..color = Colors.amber.withOpacity(opacity),
+                  Paint()..color = Colors.amber.withValues(alpha: opacity),
                 );
                 canvas.drawOval(
                   const Rect.fromLTWH(-4, -3, 8, 6),
                   Paint()
-                    ..color = Colors.orange.withOpacity(opacity)
+                    ..color = Colors.orange.withValues(alpha: opacity)
                     ..style = PaintingStyle.stroke
                     ..strokeWidth = 1,
                 );
