@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
@@ -176,7 +177,7 @@ class LeaderboardScene extends Component with HasGameRef {
       position: Vector2(20, 20),
       size: Vector2(120, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF808080),
+      backgroundColor: MGColors.common,
     );
     add(_backButton);
 
@@ -202,7 +203,7 @@ class LeaderboardScene extends Component with HasGameRef {
       position: Vector2(30 + buttonWidth + buttonSpacing, buttonY),
       size: Vector2(buttonWidth, 50),
       fontSize: 24,
-      backgroundColor: const Color(0xFFFFD700), // Gold
+      backgroundColor: MGColors.gold, // Gold
     );
     add(_wealthCategoryButton);
 
@@ -212,7 +213,7 @@ class LeaderboardScene extends Component with HasGameRef {
       position: Vector2(30 + (buttonWidth + buttonSpacing) * 2, buttonY),
       size: Vector2(buttonWidth, 50),
       fontSize: 24,
-      backgroundColor: const Color(0xFF4169E1), // Blue
+      backgroundColor: MGColors.info, // Blue
     );
     add(_reputationCategoryButton);
 
@@ -222,7 +223,7 @@ class LeaderboardScene extends Component with HasGameRef {
       position: Vector2(30 + (buttonWidth + buttonSpacing) * 3, buttonY),
       size: Vector2(buttonWidth, 50),
       fontSize: 24,
-      backgroundColor: const Color(0xFF228B22), // Green
+      backgroundColor: MGColors.success, // Green
     );
     add(_craftsCategoryButton);
   }
@@ -279,7 +280,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFD700), // Gold
+          color: MGColors.gold, // Gold
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -333,10 +334,10 @@ class LeaderboardScene extends Component with HasGameRef {
   /// Update category button appearance
   void _updateCategoryButtons() {
     // Reset all to gray
-    _potionsCategoryButton.backgroundColor = const Color(0xFF808080);
-    _wealthCategoryButton.backgroundColor = const Color(0xFF808080);
-    _reputationCategoryButton.backgroundColor = const Color(0xFF808080);
-    _craftsCategoryButton.backgroundColor = const Color(0xFF808080);
+    _potionsCategoryButton.backgroundColor = MGColors.common;
+    _wealthCategoryButton.backgroundColor = MGColors.common;
+    _reputationCategoryButton.backgroundColor = MGColors.common;
+    _craftsCategoryButton.backgroundColor = MGColors.common;
 
     // Highlight active category
     switch (_currentCategory) {
@@ -344,13 +345,13 @@ class LeaderboardScene extends Component with HasGameRef {
         _potionsCategoryButton.backgroundColor = const Color(0xFF9370DB);
         break;
       case 'wealth':
-        _wealthCategoryButton.backgroundColor = const Color(0xFFFFD700);
+        _wealthCategoryButton.backgroundColor = MGColors.gold;
         break;
       case 'reputation':
-        _reputationCategoryButton.backgroundColor = const Color(0xFF4169E1);
+        _reputationCategoryButton.backgroundColor = MGColors.info;
         break;
       case 'crafts':
-        _craftsCategoryButton.backgroundColor = const Color(0xFF228B22);
+        _craftsCategoryButton.backgroundColor = MGColors.success;
         break;
     }
   }
@@ -399,7 +400,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFFFFF), // White
+          color: MGColors.textHighEmphasis, // White
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -415,7 +416,7 @@ class LeaderboardScene extends Component with HasGameRef {
     // Row background
     final bgColor = isEven
         ? const Color(0xFFF5F5F5) // White smoke
-        : const Color(0xFFFFFFFF); // White
+        : MGColors.textHighEmphasis; // White
 
     canvas.drawRect(
       Rect.fromLTWH(30, y, size.x - 60, 48),
@@ -432,7 +433,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -447,7 +448,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22), // Forest green
+          color: MGColors.success, // Forest green
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -460,13 +461,13 @@ class LeaderboardScene extends Component with HasGameRef {
   void _drawRankBadge(Canvas canvas, int rank, double x, double y) {
     Color badgeColor;
     if (rank == 1) {
-      badgeColor = const Color(0xFFFFD700); // Gold
+      badgeColor = MGColors.gold; // Gold
     } else if (rank == 2) {
       badgeColor = const Color(0xFFC0C0C0); // Silver
     } else if (rank == 3) {
       badgeColor = const Color(0xFFCD7F32); // Bronze
     } else {
-      badgeColor = const Color(0xFF808080); // Gray
+      badgeColor = MGColors.common; // Gray
     }
 
     // Badge circle
@@ -483,7 +484,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFFFFF), // White
+          color: MGColors.textHighEmphasis, // White
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -517,7 +518,7 @@ class LeaderboardScene extends Component with HasGameRef {
       Rect.fromLTWH(20, y - 10, size.x - 40, 80),
       Paint()
         ..style = PaintingStyle.stroke
-        ..color = const Color(0xFFFFD700) // Gold
+        ..color = MGColors.gold // Gold
         ..strokeWidth = 3,
     );
 
@@ -528,7 +529,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -546,7 +547,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -561,7 +562,7 @@ class LeaderboardScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22), // Forest green
+          color: MGColors.success, // Forest green
         ),
       ),
       textDirection: TextDirection.ltr,

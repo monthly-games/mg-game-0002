@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'game_button.dart';
 
 /// Dialog box component for popups and messages
@@ -60,7 +61,7 @@ class DialogBox extends PositionComponent {
     // Dialog background
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(20)),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Dialog border
@@ -68,7 +69,7 @@ class DialogBox extends PositionComponent {
       RRect.fromRectAndRadius(rect, const Radius.circular(20)),
       Paint()
         ..color =
-            const Color(0xFF8B4513) // Saddle brown
+            MGColors.warning // Saddle brown
         ..style = PaintingStyle.stroke
         ..strokeWidth = 4,
     );
@@ -81,7 +82,7 @@ class DialogBox extends PositionComponent {
         topLeft: const Radius.circular(20),
         topRight: const Radius.circular(20),
       ),
-      Paint()..color = const Color(0xFF8B6914), // Dark goldenrod
+      Paint()..color = MGColors.warning, // Dark goldenrod
     );
 
     // Title text
@@ -104,7 +105,7 @@ class DialogBox extends PositionComponent {
     final messagePaint = TextPaint(
       style: const TextStyle(
         fontSize: 18,
-        color: Color(0xFF5D4E37), // Dark brown
+        color: MGColors.border, // Dark brown
         height: 1.5,
       ),
     );
@@ -167,7 +168,7 @@ class DialogButton {
   DialogButton({
     required this.text,
     required this.onPressed,
-    this.color = const Color(0xFF8B6914), // Dark goldenrod
+    this.color = MGColors.warning, // Dark goldenrod
     this.closeOnPress = true,
   });
 }
@@ -186,12 +187,12 @@ class ConfirmDialog extends DialogBox {
            DialogButton(
              text: 'Cancel',
              onPressed: onCancel ?? () {},
-             color: const Color(0xFF808080), // Gray
+             color: MGColors.common, // Gray
            ),
            DialogButton(
              text: 'Confirm',
              onPressed: onConfirm,
-             color: const Color(0xFF228B22), // Forest green
+             color: MGColors.success, // Forest green
            ),
          ],
          size: Vector2(500, 300),
@@ -211,7 +212,7 @@ class InfoDialog extends DialogBox {
            DialogButton(
              text: 'OK',
              onPressed: onOk ?? () {},
-             color: const Color(0xFF8B6914),
+             color: MGColors.warning,
            ),
          ],
          size: Vector2(450, 250),
@@ -234,7 +235,7 @@ class RewardDialog extends DialogBox {
            DialogButton(
              text: 'Collect',
              onPressed: onCollect ?? () {},
-             color: const Color(0xFFFFD700), // Gold
+             color: MGColors.gold, // Gold
            ),
          ],
          size: Vector2(500, 400),

@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/models/recipe.dart';
 import '../../providers/game_providers.dart';
@@ -72,7 +73,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -100,7 +101,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22), // Forest green
+          color: MGColors.success, // Forest green
         ),
       ),
       position: Vector2(size.x - 200, 40),
@@ -127,7 +128,7 @@ class RecipesScene extends Component with HasGameRef {
       position: Vector2(centerX - 200, 100),
       size: Vector2(120, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFF8B6914),
+      backgroundColor: MGColors.warning,
     );
     add(_filterAllButton);
 
@@ -138,7 +139,7 @@ class RecipesScene extends Component with HasGameRef {
       position: Vector2(centerX - 60, 100),
       size: Vector2(160, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFFD4B896),
+      backgroundColor: MGColors.textMediumEmphasis,
     );
     add(_filterDiscoveredButton);
 
@@ -149,7 +150,7 @@ class RecipesScene extends Component with HasGameRef {
       position: Vector2(centerX + 120, 100),
       size: Vector2(140, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFFD4B896),
+      backgroundColor: MGColors.textMediumEmphasis,
     );
     add(_filterLockedButton);
   }
@@ -224,8 +225,8 @@ class RecipesScene extends Component with HasGameRef {
         ..strokeWidth = 2,
     );
     cardBorder.paint.color = isDiscovered
-        ? const Color(0xFF8B6914)
-        : const Color(0xFF5D4E37);
+        ? MGColors.warning
+        : MGColors.border;
     add(cardBorder);
 
     if (isDiscovered) {
@@ -267,7 +268,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: position + Vector2(cardSize.x / 2, 90),
@@ -279,7 +280,7 @@ class RecipesScene extends Component with HasGameRef {
     final tierText = TextComponent(
       text: 'Tier ${recipe.tier}',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 14, color: Color(0xFF5D4E37)),
+        style: const TextStyle(fontSize: 14, color: MGColors.border),
       ),
       position: position + Vector2(cardSize.x / 2, 115),
       anchor: Anchor.center,
@@ -294,7 +295,7 @@ class RecipesScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 12,
-          color: Color(0xFF4169E1), // Royal blue
+          color: MGColors.info, // Royal blue
         ),
       ),
       position: position + Vector2(cardSize.x / 2, 140),
@@ -309,7 +310,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 12,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFD700), // Gold
+          color: MGColors.gold, // Gold
         ),
       ),
       position: position + Vector2(cardSize.x / 2, 165),
@@ -321,7 +322,7 @@ class RecipesScene extends Component with HasGameRef {
     final ingredientsText = TextComponent(
       text: '${recipe.ingredients.length} ingredients',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 11, color: Color(0xFF808080)),
+        style: const TextStyle(fontSize: 11, color: MGColors.common),
       ),
       position: position + Vector2(cardSize.x / 2, 190),
       anchor: Anchor.center,
@@ -347,7 +348,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: position + Vector2(cardSize.x / 2, 110),
@@ -359,7 +360,7 @@ class RecipesScene extends Component with HasGameRef {
     final tierHint = TextComponent(
       text: 'Tier ${recipe.tier} Recipe',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 12, color: Color(0xFF808080)),
+        style: const TextStyle(fontSize: 12, color: MGColors.common),
       ),
       position: position + Vector2(cardSize.x / 2, 145),
       anchor: Anchor.center,
@@ -373,7 +374,7 @@ class RecipesScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 11,
-          color: Color(0xFF808080),
+          color: MGColors.common,
           fontStyle: FontStyle.italic,
         ),
       ),
@@ -420,7 +421,7 @@ class RecipesScene extends Component with HasGameRef {
       size: Vector2(500, 450),
       anchor: Anchor.center,
       paint: Paint()
-        ..color = const Color(0xFF8B6914)
+        ..color = MGColors.warning
         ..style = PaintingStyle.stroke
         ..strokeWidth = 3,
     );
@@ -433,7 +434,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: size / 2 + Vector2(0, -190),
@@ -445,7 +446,7 @@ class RecipesScene extends Component with HasGameRef {
     final descText = TextComponent(
       text: recipe.description,
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 16, color: Color(0xFF5D4E37)),
+        style: const TextStyle(fontSize: 16, color: MGColors.border),
       ),
       position: size / 2 + Vector2(0, -150),
       anchor: Anchor.center,
@@ -456,7 +457,7 @@ class RecipesScene extends Component with HasGameRef {
     final infoText = TextComponent(
       text: 'Tier ${recipe.tier} • ${recipe.category}',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 14, color: Color(0xFF808080)),
+        style: const TextStyle(fontSize: 14, color: MGColors.common),
       ),
       position: size / 2 + Vector2(0, -120),
       anchor: Anchor.center,
@@ -470,7 +471,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: size / 2 + Vector2(0, -80),
@@ -484,7 +485,7 @@ class RecipesScene extends Component with HasGameRef {
       final ingredientText = TextComponent(
         text: '• ${ingredient.id} x${ingredient.amount}',
         textRenderer: TextPaint(
-          style: const TextStyle(fontSize: 14, color: Color(0xFF5D4E37)),
+          style: const TextStyle(fontSize: 14, color: MGColors.border),
         ),
         position: size / 2 + Vector2(0, ingredientY),
         anchor: Anchor.center,
@@ -499,7 +500,7 @@ class RecipesScene extends Component with HasGameRef {
     final timeText = TextComponent(
       text: '⏱ Craft Time: ${recipe.craftTime}s',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 14, color: Color(0xFF4169E1)),
+        style: const TextStyle(fontSize: 14, color: MGColors.info),
       ),
       position: size / 2 + Vector2(0, statsY),
       anchor: Anchor.center,
@@ -512,7 +513,7 @@ class RecipesScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFD700),
+          color: MGColors.gold,
         ),
       ),
       position: size / 2 + Vector2(0, statsY + 25),
@@ -572,7 +573,7 @@ class RecipesScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 24,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
           height: 1.5,
         ),
       ),
@@ -588,14 +589,14 @@ class RecipesScene extends Component with HasGameRef {
 
     // Update button colors
     _filterAllButton.backgroundColor = filter == 'all'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _filterDiscoveredButton.backgroundColor = filter == 'discovered'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _filterLockedButton.backgroundColor = filter == 'locked'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
 
     // Rebuild cards
     _refreshUI();
@@ -634,21 +635,21 @@ class RecipesScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Book background decoration
     final bookRect = Rect.fromLTWH(30, 160, size.x - 60, size.y - 190);
     canvas.drawRRect(
       RRect.fromRectAndRadius(bookRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
+      Paint()..color = MGColors.warning.withValues(alpha: 0.1),
     );
 
     // Book spine decoration (left side)
     final spineRect = Rect.fromLTWH(30, 160, 20, size.y - 190);
     canvas.drawRect(
       spineRect,
-      Paint()..color = const Color(0xFF8B4513).withValues(alpha: 0.3),
+      Paint()..color = MGColors.warning.withValues(alpha: 0.3),
     );
   }
 }

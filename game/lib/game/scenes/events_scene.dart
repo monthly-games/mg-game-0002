@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
@@ -65,7 +66,7 @@ class EventsScene extends Component with HasGameRef {
         progress: 60,
         maxProgress: 100,
         difficulty: 'Easy',
-        color: const Color(0xFFFFD700), // Gold
+        color: MGColors.gold, // Gold
       ),
     ]);
 
@@ -105,7 +106,7 @@ class EventsScene extends Component with HasGameRef {
         progress: 0,
         maxProgress: 100,
         difficulty: 'Easy',
-        color: const Color(0xFFFF8C00), // Dark orange
+        color: MGColors.warning, // Dark orange
       ),
     ]);
 
@@ -126,7 +127,7 @@ class EventsScene extends Component with HasGameRef {
         progress: 100,
         maxProgress: 100,
         difficulty: 'Easy',
-        color: const Color(0xFF808080), // Gray
+        color: MGColors.common, // Gray
       ),
     ]);
   }
@@ -140,7 +141,7 @@ class EventsScene extends Component with HasGameRef {
       position: Vector2(20, 20),
       size: Vector2(120, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF808080),
+      backgroundColor: MGColors.common,
     );
     add(_backButton);
   }
@@ -251,7 +252,7 @@ class EventsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -311,7 +312,7 @@ class EventsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -353,7 +354,7 @@ class EventsScene extends Component with HasGameRef {
           style: const TextStyle(
             fontSize: 12,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF228B22),
+            color: MGColors.success,
           ),
         ),
         textDirection: TextDirection.ltr,
@@ -375,7 +376,7 @@ class EventsScene extends Component with HasGameRef {
             fontSize: 12,
             color: event.status == EventStatus.active
                 ? const Color(0xFFFF4500) // Orange red
-                : const Color(0xFF808080), // Gray
+                : MGColors.common, // Gray
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -399,15 +400,15 @@ class EventsScene extends Component with HasGameRef {
     switch (event.status) {
       case EventStatus.active:
         text = 'ACTIVE';
-        color = const Color(0xFF228B22); // Forest green
+        color = MGColors.success; // Forest green
         break;
       case EventStatus.upcoming:
         text = 'UPCOMING';
-        color = const Color(0xFF4169E1); // Royal blue
+        color = MGColors.info; // Royal blue
         break;
       case EventStatus.completed:
         text = 'ENDED';
-        color = const Color(0xFF808080); // Gray
+        color = MGColors.common; // Gray
         break;
     }
 
@@ -424,7 +425,7 @@ class EventsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFFFFF),
+          color: MGColors.textHighEmphasis,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -459,7 +460,7 @@ class EventsScene extends Component with HasGameRef {
           Rect.fromLTWH(position.dx, position.dy, width * progress, height),
           const Radius.circular(8),
         ),
-        Paint()..color = const Color(0xFF228B22), // Forest green
+        Paint()..color = MGColors.success, // Forest green
       );
     }
 
@@ -471,7 +472,7 @@ class EventsScene extends Component with HasGameRef {
       ),
       Paint()
         ..style = PaintingStyle.stroke
-        ..color = const Color(0xFF808080)
+        ..color = MGColors.common
         ..strokeWidth = 1,
     );
   }
@@ -512,7 +513,7 @@ class EventsScene extends Component with HasGameRef {
     // Overlay
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0x80000000), // 50% black
+      Paint()..color = MGColors.backgroundDark.withValues(alpha: 0.5), // 50% black
     );
 
     // Detail panel
@@ -556,7 +557,7 @@ class EventsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 26,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -640,7 +641,7 @@ class EventsScene extends Component with HasGameRef {
         style: TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -688,7 +689,7 @@ class EventsScene extends Component with HasGameRef {
         text: text,
         style: const TextStyle(
           fontSize: 14,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -702,16 +703,16 @@ class EventsScene extends Component with HasGameRef {
     Color color;
     switch (difficulty) {
       case 'Easy':
-        color = const Color(0xFF228B22); // Green
+        color = MGColors.success; // Green
         break;
       case 'Normal':
-        color = const Color(0xFF4169E1); // Blue
+        color = MGColors.info; // Blue
         break;
       case 'Hard':
         color = const Color(0xFFFF4500); // Orange red
         break;
       default:
-        color = const Color(0xFF808080);
+        color = MGColors.common;
     }
 
     final badgeRect = RRect.fromRectAndRadius(
@@ -727,7 +728,7 @@ class EventsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 14,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFFFFF),
+          color: MGColors.textHighEmphasis,
         ),
       ),
       textDirection: TextDirection.ltr,

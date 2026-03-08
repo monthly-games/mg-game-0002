@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
@@ -251,7 +252,7 @@ class AchievementsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -279,7 +280,7 @@ class AchievementsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22), // Forest green
+          color: MGColors.success, // Forest green
         ),
       ),
       position: Vector2(size.x - 220, 40),
@@ -305,7 +306,7 @@ class AchievementsScene extends Component with HasGameRef {
       position: Vector2(centerX - 240, 100),
       size: Vector2(100, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFF8B6914),
+      backgroundColor: MGColors.warning,
     );
     add(_categoryAllButton);
 
@@ -315,7 +316,7 @@ class AchievementsScene extends Component with HasGameRef {
       position: Vector2(centerX - 120, 100),
       size: Vector2(120, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFFD4B896),
+      backgroundColor: MGColors.textMediumEmphasis,
     );
     add(_categoryCraftingButton);
 
@@ -325,7 +326,7 @@ class AchievementsScene extends Component with HasGameRef {
       position: Vector2(centerX + 20, 100),
       size: Vector2(130, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFFD4B896),
+      backgroundColor: MGColors.textMediumEmphasis,
     );
     add(_categoryGatheringButton);
 
@@ -335,7 +336,7 @@ class AchievementsScene extends Component with HasGameRef {
       position: Vector2(centerX + 170, 100),
       size: Vector2(110, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFFD4B896),
+      backgroundColor: MGColors.textMediumEmphasis,
     );
     add(_categorySocialButton);
   }
@@ -371,7 +372,7 @@ class AchievementsScene extends Component with HasGameRef {
       size: cardSize,
       paint: Paint()
         ..color = isCompleted
-            ? const Color(0xFFFFD700).withValues(alpha: 
+            ? MGColors.gold.withValues(alpha: 
                 0.2,
               ) // Gold tint for completed
             : const Color(0xFFE8D5B7).withValues(alpha: 0.9),
@@ -380,8 +381,8 @@ class AchievementsScene extends Component with HasGameRef {
 
     // Card border
     final borderColor = isCompleted
-        ? const Color(0xFFFFD700) // Gold
-        : const Color(0xFF8B6914);
+        ? MGColors.gold // Gold
+        : MGColors.warning;
     final cardBorder = RectangleComponent(
       position: position,
       size: cardSize,
@@ -407,7 +408,7 @@ class AchievementsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: position + Vector2(90, 15),
@@ -418,7 +419,7 @@ class AchievementsScene extends Component with HasGameRef {
     final descText = TextComponent(
       text: achievement.description,
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 14, color: Color(0xFF5D4E37)),
+        style: const TextStyle(fontSize: 14, color: MGColors.border),
       ),
       position: position + Vector2(90, 40),
     );
@@ -432,8 +433,8 @@ class AchievementsScene extends Component with HasGameRef {
           fontSize: 14,
           fontWeight: FontWeight.bold,
           color: isCompleted
-              ? const Color(0xFF228B22) // Green for completed
-              : const Color(0xFF4169E1), // Blue for in progress
+              ? MGColors.success // Green for completed
+              : MGColors.info, // Blue for in progress
         ),
       ),
       position: position + Vector2(90, 65),
@@ -444,7 +445,7 @@ class AchievementsScene extends Component with HasGameRef {
     final progressBarBg = RectangleComponent(
       position: position + Vector2(90, 85),
       size: Vector2(300, 15),
-      paint: Paint()..color = const Color(0xFFD4B896),
+      paint: Paint()..color = MGColors.textMediumEmphasis,
     );
     add(progressBarBg);
 
@@ -453,8 +454,8 @@ class AchievementsScene extends Component with HasGameRef {
       size: Vector2(300 * achievement.getProgress(), 15),
       paint: Paint()
         ..color = isCompleted
-            ? const Color(0xFF228B22) // Green
-            : const Color(0xFF4169E1), // Blue
+            ? MGColors.success // Green
+            : MGColors.info, // Blue
     );
     add(progressBarFill);
 
@@ -465,7 +466,7 @@ class AchievementsScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 12,
-          color: Color(0xFF228B22),
+          color: MGColors.success,
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -481,7 +482,7 @@ class AchievementsScene extends Component with HasGameRef {
         position: position + Vector2(cardSize.x - 120, 55),
         size: Vector2(100, 40),
         fontSize: 16,
-        backgroundColor: const Color(0xFFFFD700), // Gold
+        backgroundColor: MGColors.gold, // Gold
       );
       add(claimButton);
     } else if (achievement.claimed) {
@@ -491,7 +492,7 @@ class AchievementsScene extends Component with HasGameRef {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF228B22), // Green
+            color: MGColors.success, // Green
           ),
         ),
         position: position + Vector2(cardSize.x - 100, 70),
@@ -545,17 +546,17 @@ class AchievementsScene extends Component with HasGameRef {
 
     // Update button colors
     _categoryAllButton.backgroundColor = category == 'all'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _categoryCraftingButton.backgroundColor = category == 'crafting'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _categoryGatheringButton.backgroundColor = category == 'gathering'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _categorySocialButton.backgroundColor = category == 'social'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
 
     // Rebuild achievement cards
     _refreshUI();
@@ -568,7 +569,7 @@ class AchievementsScene extends Component with HasGameRef {
     final emptyText = TextComponent(
       text: 'No achievements in this category.',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 24, color: Color(0xFF8B4513)),
+        style: const TextStyle(fontSize: 24, color: MGColors.warning),
       ),
       position: Vector2(size.x / 2, size.y / 2),
       anchor: Anchor.center,
@@ -586,9 +587,9 @@ class AchievementsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFD700), // Gold
+          color: MGColors.gold, // Gold
           shadows: [
-            Shadow(color: Colors.white, offset: Offset(2, 2), blurRadius: 4),
+            Shadow(color: MGColors.textHighEmphasis, offset: Offset(2, 2), blurRadius: 4),
           ],
         ),
       ),
@@ -645,14 +646,14 @@ class AchievementsScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Achievement panel background
     final panelRect = Rect.fromLTWH(30, 160, size.x - 60, size.y - 190);
     canvas.drawRRect(
       RRect.fromRectAndRadius(panelRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
+      Paint()..color = MGColors.warning.withValues(alpha: 0.1),
     );
   }
 }

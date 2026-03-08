@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 /// Reusable game button component
 class GameButton extends PositionComponent with TapCallbacks {
@@ -16,7 +17,7 @@ class GameButton extends PositionComponent with TapCallbacks {
   GameButton({
     required this.text,
     required this.onPressed,
-    this.backgroundColor = const Color(0xFF8B6914), // Dark goldenrod
+    this.backgroundColor = MGColors.warning, // Dark goldenrod
     this.textColor = const Color(0xFFFFF8DC), // Cornsilk
     this.fontSize = 20,
     this.enabled = true,
@@ -50,7 +51,7 @@ class GameButton extends PositionComponent with TapCallbacks {
       RRect.fromRectAndRadius(rect, const Radius.circular(10)),
       Paint()
         ..color =
-            const Color(0xFF5D4E37) // Dark brown
+            MGColors.border // Dark brown
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2,
     );
@@ -106,7 +107,7 @@ class GameIconButton extends PositionComponent with TapCallbacks {
   GameIconButton({
     required this.iconText,
     required this.onPressed,
-    this.backgroundColor = const Color(0xFF8B6914),
+    this.backgroundColor = MGColors.warning,
     this.enabled = true,
     required Vector2 position,
     required double size,
@@ -134,7 +135,7 @@ class GameIconButton extends PositionComponent with TapCallbacks {
       center,
       radius,
       Paint()
-        ..color = const Color(0xFF5D4E37)
+        ..color = MGColors.border
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2,
     );

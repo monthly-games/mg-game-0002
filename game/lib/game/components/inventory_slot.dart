@@ -1,6 +1,7 @@
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 /// Inventory slot component for displaying items
 class InventorySlot extends PositionComponent with TapCallbacks {
@@ -32,8 +33,8 @@ class InventorySlot extends PositionComponent with TapCallbacks {
 
     // Slot background
     final bgColor = isSelected
-        ? const Color(0xFFFFD700) // Gold when selected
-        : const Color(0xFFD4B896); // Light tan
+        ? MGColors.gold // Gold when selected
+        : MGColors.textMediumEmphasis; // Light tan
 
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(8)),
@@ -42,7 +43,7 @@ class InventorySlot extends PositionComponent with TapCallbacks {
 
     // Slot border
     final borderColor = isSelected
-        ? const Color(0xFF8B6914) // Dark goldenrod
+        ? MGColors.warning // Dark goldenrod
         : const Color(0xFFA0826D); // Light brown
 
     canvas.drawRRect(
@@ -61,7 +62,7 @@ class InventorySlot extends PositionComponent with TapCallbacks {
       final iconPaint = TextPaint(
         style: TextStyle(
           fontSize: iconSize * 0.8,
-          color: const Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       );
 
@@ -83,7 +84,7 @@ class InventorySlot extends PositionComponent with TapCallbacks {
             color: Color(0xFF2F4F4F), // Dark slate gray
             shadows: [
               Shadow(
-                color: Colors.white,
+                color: MGColors.textHighEmphasis,
                 offset: Offset(1, 1),
                 blurRadius: 2,
               ),

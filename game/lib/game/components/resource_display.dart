@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 /// Resource display component (gold, gems, materials)
 class ResourceDisplay extends PositionComponent {
@@ -12,7 +13,7 @@ class ResourceDisplay extends PositionComponent {
   ResourceDisplay({
     required this.iconText,
     required int amount,
-    this.iconColor = const Color(0xFFFFD700), // Gold
+    this.iconColor = MGColors.gold, // Gold
     this.textColor = const Color(0xFF2F4F4F), // Dark slate gray
     this.fontSize = 20,
     required Vector2 position,
@@ -39,14 +40,14 @@ class ResourceDisplay extends PositionComponent {
     final rect = size.toRect();
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(20)),
-      Paint()..color = const Color(0xFFD4B896).withValues(alpha: 0.8), // Light tan
+      Paint()..color = MGColors.textMediumEmphasis.withValues(alpha: 0.8), // Light tan
     );
 
     // Border
     canvas.drawRRect(
       RRect.fromRectAndRadius(rect, const Radius.circular(20)),
       Paint()
-        ..color = const Color(0xFF8B6914) // Dark goldenrod
+        ..color = MGColors.warning // Dark goldenrod
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2,
     );
@@ -217,6 +218,6 @@ class ResourcePanelItem {
   ResourcePanelItem({
     required this.icon,
     required this.amount,
-    this.color = const Color(0xFFFFD700),
+    this.color = MGColors.gold,
   });
 }

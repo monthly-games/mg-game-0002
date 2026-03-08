@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:mg_common_game/core/ui/mg_ui.dart';
 
 /// MG UI 기반 아이들 게임 HUD
@@ -81,7 +82,7 @@ class MGIdleHud extends StatelessWidget {
         Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
           decoration: BoxDecoration(
-            color: Colors.black54,
+            color: MGColors.backgroundDark.withValues(alpha: 0.54),
             borderRadius: BorderRadius.circular(20),
           ),
           child: Row(
@@ -90,13 +91,13 @@ class MGIdleHud extends StatelessWidget {
               const Icon(
                 Icons.home_work,
                 size: 18,
-                color: Colors.brown,
+                color: MGColors.warning,
               ),
               const SizedBox(width: 6),
               Text(
                 'Lv.$workshopLevel',
                 style: MGTextStyles.hudSmall.copyWith(
-                  color: Colors.white,
+                  color: MGColors.textHighEmphasis,
                   fontWeight: FontWeight.bold,
                 ),
               ),
@@ -116,8 +117,8 @@ class MGIdleHud extends StatelessWidget {
             icon: Icons.celebration,
             onPressed: onEvents,
             size: 44,
-            backgroundColor: Colors.pink.withValues(alpha: 0.8),
-            color: Colors.white,
+            backgroundColor: MGColors.error.withValues(alpha: 0.8),
+            color: MGColors.textHighEmphasis,
             tooltip: 'Events',
           ),
         MGSpacing.hXs,
@@ -126,8 +127,8 @@ class MGIdleHud extends StatelessWidget {
             icon: Icons.auto_awesome,
             onPressed: onPrestige,
             size: 44,
-            backgroundColor: Colors.purple.withValues(alpha: 0.8),
-            color: Colors.white,
+            backgroundColor: MGColors.gem.withValues(alpha: 0.8),
+            color: MGColors.textHighEmphasis,
             tooltip: 'Prestige',
           ),
         MGSpacing.hXs,
@@ -136,8 +137,8 @@ class MGIdleHud extends StatelessWidget {
             icon: Icons.menu_book,
             onPressed: onCollection,
             size: 44,
-            backgroundColor: Colors.deepPurple.withValues(alpha: 0.8),
-            color: Colors.white,
+            backgroundColor: MGColors.gem.withValues(alpha: 0.8),
+            color: MGColors.textHighEmphasis,
             tooltip: 'Collection',
           ),
         MGSpacing.hXs,
@@ -146,8 +147,8 @@ class MGIdleHud extends StatelessWidget {
             icon: Icons.help,
             onPressed: onTutorial,
             size: 44,
-            backgroundColor: Colors.blue.withValues(alpha: 0.8),
-            color: Colors.white,
+            backgroundColor: MGColors.info.withValues(alpha: 0.8),
+            color: MGColors.textHighEmphasis,
             tooltip: 'Tutorial',
           ),
         MGSpacing.hXs,
@@ -156,8 +157,8 @@ class MGIdleHud extends StatelessWidget {
             icon: Icons.settings,
             onPressed: onSettings,
             size: 44,
-            backgroundColor: Colors.grey.withValues(alpha: 0.8),
-            color: Colors.white,
+            backgroundColor: MGColors.common.withValues(alpha: 0.8),
+            color: MGColors.textHighEmphasis,
             tooltip: 'Settings',
           ),
       ],

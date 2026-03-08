@@ -2,6 +2,7 @@ import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/models/material.dart' as game_material;
 import '../../providers/game_providers.dart';
@@ -195,7 +196,7 @@ class GatheringScene extends Component with HasGameRef {
           color: Color(0xFF32CD32), // Lime green
           shadows: [
             Shadow(
-              color: Colors.white,
+              color: MGColors.textHighEmphasis,
               offset: Offset(2, 2),
               blurRadius: 4,
             ),
@@ -253,7 +254,7 @@ class GatheringScene extends Component with HasGameRef {
         begin: Alignment.topCenter,
         end: Alignment.bottomCenter,
         colors: [
-          const Color(0xFF87CEEB), // Sky blue
+          MGColors.info, // Sky blue
           const Color(0xFFADD8E6), // Light blue
         ],
       ).createShader(Rect.fromLTWH(0, 0, size.x, size.y));
@@ -277,7 +278,7 @@ class GatheringScene extends Component with HasGameRef {
           color: Color(0xFF2F4F4F), // Dark slate gray
           shadows: [
             Shadow(
-              color: Colors.white,
+              color: MGColors.textHighEmphasis,
               offset: Offset(1, 1),
               blurRadius: 2,
             ),
@@ -390,12 +391,12 @@ class GatheringNode extends PositionComponent with TapCallbacks {
   /// Get color for material type
   Color _getMaterialColor() {
     if (material.id.contains('grass')) return const Color(0xFF32CD32); // Lime green
-    if (material.id.contains('water')) return const Color(0xFF4169E1); // Royal blue
-    if (material.id.contains('stone')) return const Color(0xFF808080); // Gray
-    if (material.id.contains('branch')) return const Color(0xFF8B4513); // Saddle brown
+    if (material.id.contains('water')) return MGColors.info; // Royal blue
+    if (material.id.contains('stone')) return MGColors.common; // Gray
+    if (material.id.contains('branch')) return MGColors.warning; // Saddle brown
     if (material.id.contains('ember')) return const Color(0xFFFF4500); // Orange red
     if (material.id.contains('dew')) return const Color(0xFF00CED1); // Dark turquoise
-    return const Color(0xFFFFD700); // Gold (default)
+    return MGColors.gold; // Gold (default)
   }
 
   /// Get icon for material (same as inventory_slot.dart)

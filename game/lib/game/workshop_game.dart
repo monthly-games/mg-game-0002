@@ -4,6 +4,7 @@ import 'package:flame/components.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mg_common_game/core/audio/audio_manager.dart';
 import 'package:mg_common_game/core/ui/theme/app_colors.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 class WorkshopGame extends FlameGame {
   @override
@@ -44,7 +45,7 @@ class WorkshopGame extends FlameGame {
         size: Vector2(128, 128),
         position: cauldron.position + Vector2(0, -60), // Above cauldron
         anchor: Anchor.center,
-        paint: Paint()..color = const Color(0xAAFFFFFF), // Semi-transparent
+        paint: Paint()..color = MGColors.textHighEmphasis.withValues(alpha: 0.67), // Semi-transparent
       ),
     );
 

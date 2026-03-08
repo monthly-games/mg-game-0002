@@ -1,16 +1,17 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 // ============================================================
 // Color Constants
 // ============================================================
 // Default colors for progress bars (game-specific palette)
-const Color _defaultFillColor = Color(0xFF8B6914); // Dark goldenrod
-const Color _defaultBackgroundColor = Color(0xFFD4B896); // Light tan
-const Color _defaultBorderColor = Color(0xFF5D4E37); // Dark brown
+const Color _defaultFillColor = MGColors.warning; // Dark goldenrod
+const Color _defaultBackgroundColor = MGColors.textMediumEmphasis; // Light tan
+const Color _defaultBorderColor = MGColors.border; // Dark brown
 const Color _defaultTextColor = Color(0xFF2F4F4F); // Dark slate gray
 
-const Color _timerFillColor = Color(0xFF4169E1); // Royal blue
+const Color _timerFillColor = MGColors.info; // Royal blue
 const Color _timerTextColor = Color(0xFFFFF8DC); // Cornsilk
 
 /// Progress bar component for Flame game scenes
@@ -95,7 +96,7 @@ class ProgressBar extends PositionComponent {
           color: _defaultTextColor,
           shadows: [
             Shadow(
-              color: Colors.white,
+              color: MGColors.textHighEmphasis,
               offset: Offset(1, 1),
               blurRadius: 2,
             ),

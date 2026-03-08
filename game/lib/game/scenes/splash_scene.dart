@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/services/game_initialization_service.dart';
 import '../cat_alchemy_game.dart';
@@ -78,7 +79,7 @@ class SplashScene extends Component with HasGameRef {
     // Background color
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream color
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream color
     );
 
     // Title text
@@ -86,7 +87,7 @@ class SplashScene extends Component with HasGameRef {
       style: const TextStyle(
         fontSize: 48,
         fontWeight: FontWeight.bold,
-        color: Color(0xFF8B4513), // Saddle brown
+        color: MGColors.warning, // Saddle brown
       ),
     );
 
@@ -125,7 +126,7 @@ class SplashScene extends Component with HasGameRef {
           Rect.fromLTWH(barX, barY, barWidth, barHeight),
           const Radius.circular(10),
         ),
-        Paint()..color = const Color(0xFFD4B896), // Light tan
+        Paint()..color = MGColors.textMediumEmphasis, // Light tan
       );
 
       // Bar fill
@@ -134,14 +135,14 @@ class SplashScene extends Component with HasGameRef {
           Rect.fromLTWH(barX, barY, barWidth * _loadingProgress, barHeight),
           const Radius.circular(10),
         ),
-        Paint()..color = const Color(0xFF8B6914), // Dark goldenrod
+        Paint()..color = MGColors.warning, // Dark goldenrod
       );
 
       // Loading percentage text
       final progressText = TextPaint(
         style: const TextStyle(
           fontSize: 16,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       );
 

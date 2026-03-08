@@ -3,6 +3,7 @@ import 'package:flame/effects.dart'; // For ScaleEffect
 import 'package:flame/events.dart';
 import 'package:flame/particles.dart'; // For ParticleSystem
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'dart:math'; // For Random
 import '../../core/models/recipe.dart';
@@ -55,7 +56,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
           style: const TextStyle(
             fontSize: 28,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF8B4513),
+            color: MGColors.warning,
           ),
         ),
         position: Vector2(size.x / 2, 40),
@@ -90,7 +91,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
         TextComponent(
           text: 'Pattern Required:',
           position: Vector2(50, 450),
-          textRenderer: TextPaint(style: const TextStyle(color: Colors.black)),
+          textRenderer: TextPaint(style: const TextStyle(color: MGColors.backgroundDark)),
         ),
       );
 
@@ -104,7 +105,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
               style: const TextStyle(
                 fontFamily: 'Courier',
                 fontSize: 20,
-                color: Colors.blueGrey,
+                color: MGColors.surfaceDark,
               ),
             ),
           ),
@@ -120,7 +121,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
         position: Vector2(size.x / 2, size.y - 80),
         size: Vector2(150, 50),
         onPressed: _tryCraft,
-        backgroundColor: Colors.green,
+        backgroundColor: MGColors.success,
       ),
     );
 
@@ -131,7 +132,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
         position: Vector2(80, size.y - 80),
         size: Vector2(100, 40),
         onPressed: () => gameRef.navigateTo('crafting'),
-        backgroundColor: Colors.grey,
+        backgroundColor: MGColors.common,
       ),
     );
 
@@ -148,7 +149,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
           text: ing.id,
           position: Vector2(invX, invY - 20),
           textRenderer: TextPaint(
-            style: const TextStyle(color: Colors.black, fontSize: 12),
+            style: const TextStyle(color: MGColors.backgroundDark, fontSize: 12),
           ),
         ),
       );
@@ -213,7 +214,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
             position: Vector2(size.x / 2, size.y / 2), // Center
             child: CircleParticle(
               radius: 5,
-              paint: Paint()..color = Colors.amber,
+              paint: Paint()..color = MGColors.warning,
             ),
           ),
         ),
@@ -285,7 +286,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
     super.render(canvas);
     canvas.drawRect(
       Rect.fromLTWH(0, 0, gameRef.size.x, gameRef.size.y),
-      Paint()..color = const Color(0xFFF5E6D3),
+      Paint()..color = MGColors.textHighEmphasis,
     );
   }
 }
@@ -319,7 +320,7 @@ class PuzzleSlot extends PositionComponent {
   @override
   void render(Canvas canvas) {
     final paint = Paint()
-      ..color = const Color(0xFFD4B896)
+      ..color = MGColors.textMediumEmphasis
       ..style = PaintingStyle.stroke
       ..strokeWidth = 2;
     canvas.drawRect(size.toRect(), paint);
@@ -327,7 +328,7 @@ class PuzzleSlot extends PositionComponent {
     if (currentItem != null) {
       final textSpan = TextSpan(
         text: currentItem,
-        style: const TextStyle(color: Colors.black, fontSize: 10),
+        style: const TextStyle(color: MGColors.backgroundDark, fontSize: 10),
       );
       final textPainter = TextPainter(
         text: textSpan,
@@ -340,7 +341,7 @@ class PuzzleSlot extends PositionComponent {
       canvas.drawCircle(
         Offset(size.x / 2, size.y / 2),
         20,
-        Paint()..color = Colors.blueAccent.withValues(alpha: 0.5),
+        Paint()..color = MGColors.info.withValues(alpha: 0.5),
       );
     }
   }
@@ -360,12 +361,12 @@ class IngredientSource extends PositionComponent
   @override
   void render(Canvas canvas) {
     // Draw container
-    canvas.drawRect(size.toRect(), Paint()..color = Colors.grey.shade400);
+    canvas.drawRect(size.toRect(), Paint()..color = MGColors.common);
     // Draw item placeholder
     canvas.drawCircle(
       Offset(size.x / 2, size.y / 2),
       20,
-      Paint()..color = Colors.blue,
+      Paint()..color = MGColors.info,
     );
   }
 
@@ -422,12 +423,12 @@ class IngredientDragItem extends PositionComponent with DragCallbacks {
     canvas.drawCircle(
       Offset(size.x / 2, size.y / 2),
       25,
-      Paint()..color = Colors.blue.withValues(alpha: 0.8),
+      Paint()..color = MGColors.info.withValues(alpha: 0.8),
     );
 
     final textSpan = TextSpan(
       text: itemId,
-      style: const TextStyle(color: Colors.white, fontSize: 10),
+      style: const TextStyle(color: MGColors.textHighEmphasis, fontSize: 10),
     );
     final textPainter = TextPainter(
       text: textSpan,

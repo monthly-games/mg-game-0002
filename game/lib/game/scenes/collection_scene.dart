@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
@@ -199,7 +200,7 @@ class CollectionScene extends Component with HasGameRef {
       position: Vector2(20, 20),
       size: Vector2(120, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF808080),
+      backgroundColor: MGColors.common,
     );
     add(_backButton);
 
@@ -211,7 +212,7 @@ class CollectionScene extends Component with HasGameRef {
       position: Vector2(centerX - 170, 90),
       size: Vector2(160, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF228B22), // Green
+      backgroundColor: MGColors.success, // Green
     );
     add(_materialsTabButton);
 
@@ -330,10 +331,10 @@ class CollectionScene extends Component with HasGameRef {
   /// Update tab button appearance
   void _updateTabButtons() {
     if (_currentTab == 'materials') {
-      _materialsTabButton.backgroundColor = const Color(0xFF228B22); // Green (active)
-      _potionsTabButton.backgroundColor = const Color(0xFF808080); // Gray (inactive)
+      _materialsTabButton.backgroundColor = MGColors.success; // Green (active)
+      _potionsTabButton.backgroundColor = MGColors.common; // Gray (inactive)
     } else {
-      _materialsTabButton.backgroundColor = const Color(0xFF808080); // Gray (inactive)
+      _materialsTabButton.backgroundColor = MGColors.common; // Gray (inactive)
       _potionsTabButton.backgroundColor = const Color(0xFF9370DB); // Purple (active)
     }
   }
@@ -393,14 +394,14 @@ class CollectionScene extends Component with HasGameRef {
     } else if (isSelected) {
       bgColor = const Color(0xFFFFE4B5); // Moccasin (selected)
     } else {
-      bgColor = const Color(0xFFFFFFFF); // White (normal)
+      bgColor = MGColors.textHighEmphasis; // White (normal)
     }
 
     canvas.drawRRect(cardRect, Paint()..color = bgColor);
 
     // Border
     final borderColor = isSelected
-        ? const Color(0xFFFFD700) // Gold (selected)
+        ? MGColors.gold // Gold (selected)
         : _getRarityColor(item.rarity);
 
     canvas.drawRRect(
@@ -433,7 +434,7 @@ class CollectionScene extends Component with HasGameRef {
           style: const TextStyle(
             fontSize: 16,
             fontWeight: FontWeight.bold,
-            color: Color(0xFF333333),
+            color: MGColors.border,
           ),
         ),
         textDirection: TextDirection.ltr,
@@ -549,7 +550,7 @@ class CollectionScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 11,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFFFFF),
+          color: MGColors.textHighEmphasis,
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -568,17 +569,17 @@ class CollectionScene extends Component with HasGameRef {
   Color _getRarityColor(String rarity) {
     switch (rarity) {
       case 'Common':
-        return const Color(0xFF808080); // Gray
+        return MGColors.common; // Gray
       case 'Uncommon':
-        return const Color(0xFF228B22); // Green
+        return MGColors.success; // Green
       case 'Rare':
-        return const Color(0xFF4169E1); // Blue
+        return MGColors.info; // Blue
       case 'Epic':
         return const Color(0xFF9370DB); // Purple
       case 'Legendary':
-        return const Color(0xFFFFD700); // Gold
+        return MGColors.gold; // Gold
       default:
-        return const Color(0xFF808080);
+        return MGColors.common;
     }
   }
 
@@ -591,7 +592,7 @@ class CollectionScene extends Component with HasGameRef {
     // Overlay
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0x80000000), // 50% black
+      Paint()..color = MGColors.backgroundDark.withValues(alpha: 0.5), // 50% black
     );
 
     // Detail panel
@@ -640,7 +641,7 @@ class CollectionScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF333333),
+          color: MGColors.border,
         ),
       ),
       textDirection: TextDirection.ltr,

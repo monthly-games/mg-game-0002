@@ -1,6 +1,7 @@
 import 'dart:math' as math;
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
@@ -197,7 +198,7 @@ class UpgradeScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -222,7 +223,7 @@ class UpgradeScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFD700), // Gold
+          color: MGColors.gold, // Gold
         ),
       ),
       position: Vector2(size.x - 200, 30),
@@ -260,7 +261,7 @@ class UpgradeScene extends Component with HasGameRef {
       position: Vector2(centerX - 220, 100),
       size: Vector2(140, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFF8B6914),
+      backgroundColor: MGColors.warning,
     );
     add(_categoryWorkshopButton);
 
@@ -270,7 +271,7 @@ class UpgradeScene extends Component with HasGameRef {
       position: Vector2(centerX - 60, 100),
       size: Vector2(140, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFFD4B896),
+      backgroundColor: MGColors.textMediumEmphasis,
     );
     add(_categoryProductionButton);
 
@@ -280,7 +281,7 @@ class UpgradeScene extends Component with HasGameRef {
       position: Vector2(centerX + 100, 100),
       size: Vector2(140, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFFD4B896),
+      backgroundColor: MGColors.textMediumEmphasis,
     );
     add(_categoryCraftingButton);
   }
@@ -322,8 +323,8 @@ class UpgradeScene extends Component with HasGameRef {
 
     // Card border
     final borderColor = upgrade.canUpgrade()
-        ? const Color(0xFF8B6914)
-        : const Color(0xFF808080);
+        ? MGColors.warning
+        : MGColors.common;
     final cardBorder = RectangleComponent(
       position: position,
       size: cardSize,
@@ -351,7 +352,7 @@ class UpgradeScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: position + Vector2(80, 20),
@@ -364,7 +365,7 @@ class UpgradeScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 14,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: position + Vector2(80, 45),
@@ -378,7 +379,7 @@ class UpgradeScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF4169E1), // Royal blue
+          color: MGColors.info, // Royal blue
         ),
       ),
       position: position + Vector2(80, 70),
@@ -389,14 +390,14 @@ class UpgradeScene extends Component with HasGameRef {
     final progressBarBg = RectangleComponent(
       position: position + Vector2(80, 90),
       size: Vector2(200, 20),
-      paint: Paint()..color = const Color(0xFFD4B896),
+      paint: Paint()..color = MGColors.textMediumEmphasis,
     );
     add(progressBarBg);
 
     final progressBarFill = RectangleComponent(
       position: position + Vector2(80, 90),
       size: Vector2(200 * upgrade.getProgress(), 20),
-      paint: Paint()..color = const Color(0xFF228B22), // Forest green
+      paint: Paint()..color = MGColors.success, // Forest green
     );
     add(progressBarFill);
 
@@ -413,8 +414,8 @@ class UpgradeScene extends Component with HasGameRef {
         fontSize: 14,
         enabled: canAfford,
         backgroundColor: canAfford
-            ? const Color(0xFF228B22)
-            : const Color(0xFF808080),
+            ? MGColors.success
+            : MGColors.common,
       );
       add(upgradeButton);
     } else {
@@ -425,7 +426,7 @@ class UpgradeScene extends Component with HasGameRef {
           style: const TextStyle(
             fontSize: 20,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFFFD700), // Gold
+            color: MGColors.gold, // Gold
           ),
         ),
         position: position + Vector2(cardSize.x - 90, 60),
@@ -507,14 +508,14 @@ class UpgradeScene extends Component with HasGameRef {
 
     // Update button colors
     _categoryWorkshopButton.backgroundColor = category == 'workshop'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _categoryProductionButton.backgroundColor = category == 'production'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _categoryCraftingButton.backgroundColor = category == 'crafting'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
 
     // Rebuild upgrade cards
     _refreshUI();
@@ -529,7 +530,7 @@ class UpgradeScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 24,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(size.x / 2, size.y / 2),
@@ -548,10 +549,10 @@ class UpgradeScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22),
+          color: MGColors.success,
           shadows: [
             Shadow(
-              color: Colors.white,
+              color: MGColors.textHighEmphasis,
               offset: Offset(2, 2),
               blurRadius: 4,
             ),
@@ -610,14 +611,14 @@ class UpgradeScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Upgrade panel background
     final panelRect = Rect.fromLTWH(30, 160, size.x - 60, size.y - 190);
     canvas.drawRRect(
       RRect.fromRectAndRadius(panelRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
+      Paint()..color = MGColors.warning.withValues(alpha: 0.1),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/particles.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 /// VFX Manager for Cat Alchemy Workshop (MG-0002)
 /// Crafting + Idle 게임 전용 이펙트 관리자
@@ -34,7 +35,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createRisingEffect(
         position: position,
-        color: Colors.white.withValues(alpha: 0.7),
+        color: MGColors.textHighEmphasis.withValues(alpha: 0.7),
         count: 5,
         speed: 40,
         lifespan: 0.6,
@@ -44,7 +45,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 조합 성공 - 빛나는 폭발 이펙트
   void showCraftingSuccess(Vector2 position, {bool isRare = false}) {
-    final color = isRare ? Colors.purple : Colors.yellow;
+    final color = isRare ? MGColors.gem : MGColors.gold;
     final count = isRare ? 30 : 20;
 
     // 메인 폭발
@@ -63,7 +64,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createSparkleEffect(
         position: position,
-        color: Colors.white,
+        color: MGColors.textHighEmphasis,
         count: 15,
       ),
     );
@@ -75,7 +76,7 @@ class VfxManager extends Component with HasGameRef {
         gameRef.add(
           _createBurstEffect(
             position: position,
-            color: Colors.amber,
+            color: MGColors.warning,
             count: 15,
             speed: 80,
             lifespan: 0.6,
@@ -102,7 +103,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createSparkleEffect(
         position: position,
-        color: Colors.amber,
+        color: MGColors.warning,
         count: 20,
       ),
     );
@@ -111,7 +112,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createRisingEffect(
         position: position,
-        color: Colors.yellow,
+        color: MGColors.gold,
         count: 10,
         speed: 80,
         lifespan: 1.0,
@@ -143,7 +144,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createBurstEffect(
         position: position,
-        color: Colors.amber,
+        color: MGColors.warning,
         count: 40,
         speed: 150,
         lifespan: 1.0,
@@ -161,7 +162,7 @@ class VfxManager extends Component with HasGameRef {
               (_random.nextDouble() - 0.5) * 60,
               (_random.nextDouble() - 0.5) * 60,
             ),
-            color: Colors.yellow,
+            color: MGColors.gold,
             count: 8,
           ),
         );
@@ -206,7 +207,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createRisingEffect(
         position: position + Vector2(0, -30),
-        color: Colors.pink,
+        color: MGColors.error,
         count: 3,
         speed: 30,
         lifespan: 1.0,
@@ -219,7 +220,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createSparkleEffect(
         position: position,
-        color: Colors.white,
+        color: MGColors.textHighEmphasis,
         count: 5,
       ),
     );
@@ -234,7 +235,7 @@ class VfxManager extends Component with HasGameRef {
     gameRef.add(
       _createBurstEffect(
         position: position,
-        color: Colors.white.withValues(alpha: 0.5),
+        color: MGColors.textHighEmphasis.withValues(alpha: 0.5),
         count: 6,
         speed: 40,
         lifespan: 0.2,
@@ -244,7 +245,7 @@ class VfxManager extends Component with HasGameRef {
   }
 
   /// 숫자 팝업 (데미지, 획득량 등)
-  void showNumberPopup(Vector2 position, String text, {Color color = Colors.white}) {
+  void showNumberPopup(Vector2 position, String text, {Color color = MGColors.textHighEmphasis}) {
     gameRef.add(
       _NumberPopup(
         position: position,
@@ -411,7 +412,7 @@ class VfxManager extends Component with HasGameRef {
                 canvas.drawCircle(
                   Offset.zero,
                   size,
-                  Paint()..color = Colors.grey.withValues(alpha: opacity),
+                  Paint()..color = MGColors.common.withValues(alpha: opacity),
                 );
               },
             ),
@@ -449,12 +450,12 @@ class VfxManager extends Component with HasGameRef {
                 // 코인 모양 (타원)
                 canvas.drawOval(
                   const Rect.fromLTWH(-4, -3, 8, 6),
-                  Paint()..color = Colors.amber.withValues(alpha: opacity),
+                  Paint()..color = MGColors.warning.withValues(alpha: opacity),
                 );
                 canvas.drawOval(
                   const Rect.fromLTWH(-4, -3, 8, 6),
                   Paint()
-                    ..color = Colors.orange.withValues(alpha: opacity)
+                    ..color = MGColors.warning.withValues(alpha: opacity)
                     ..style = PaintingStyle.stroke
                     ..strokeWidth = 1,
                 );
@@ -485,7 +486,7 @@ class _NumberPopup extends TextComponent {
               fontWeight: FontWeight.bold,
               color: color,
               shadows: const [
-                Shadow(color: Colors.black, blurRadius: 4, offset: Offset(1, 1)),
+                Shadow(color: MGColors.backgroundDark, blurRadius: 4, offset: Offset(1, 1)),
               ],
             ),
           ),

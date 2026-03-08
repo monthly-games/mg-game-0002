@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
@@ -39,7 +40,7 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -75,7 +76,7 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(60, yPos),
@@ -136,7 +137,7 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(60, yPos),
@@ -171,7 +172,7 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(60, yPos),
@@ -186,7 +187,7 @@ class SettingsScene extends Component with HasGameRef {
       position: Vector2(60, yPos),
       size: Vector2(200, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF228B22), // Forest green
+      backgroundColor: MGColors.success, // Forest green
     );
     add(saveButton);
 
@@ -197,7 +198,7 @@ class SettingsScene extends Component with HasGameRef {
       position: Vector2(280, yPos),
       size: Vector2(200, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF4169E1), // Royal blue
+      backgroundColor: MGColors.info, // Royal blue
     );
     add(loadButton);
 
@@ -210,7 +211,7 @@ class SettingsScene extends Component with HasGameRef {
       position: Vector2(60, yPos),
       size: Vector2(200, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFFDC143C), // Crimson
+      backgroundColor: MGColors.error, // Crimson
     );
     add(resetButton);
 
@@ -221,7 +222,7 @@ class SettingsScene extends Component with HasGameRef {
       position: Vector2(280, yPos),
       size: Vector2(200, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF8B6914), // Golden brown
+      backgroundColor: MGColors.warning, // Golden brown
     );
     add(exportButton);
   }
@@ -238,7 +239,7 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(60, yPos),
@@ -252,7 +253,7 @@ class SettingsScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 16,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: Vector2(60, yPos),
@@ -266,7 +267,7 @@ class SettingsScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 16,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: Vector2(60, yPos),
@@ -281,7 +282,7 @@ class SettingsScene extends Component with HasGameRef {
       position: Vector2(60, yPos),
       size: Vector2(150, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFF8B6914),
+      backgroundColor: MGColors.warning,
     );
     add(creditsButton);
 
@@ -292,7 +293,7 @@ class SettingsScene extends Component with HasGameRef {
       position: Vector2(230, yPos),
       size: Vector2(150, 45),
       fontSize: 16,
-      backgroundColor: const Color(0xFF8B6914),
+      backgroundColor: MGColors.warning,
     );
     add(helpButton);
   }
@@ -310,7 +311,7 @@ class SettingsScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 18,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: position,
@@ -325,8 +326,8 @@ class SettingsScene extends Component with HasGameRef {
       size: Vector2(100, 40),
       fontSize: 16,
       backgroundColor: value
-          ? const Color(0xFF228B22) // Green for ON
-          : const Color(0xFF808080), // Gray for OFF
+          ? MGColors.success // Green for ON
+          : MGColors.common, // Gray for OFF
     );
     add(toggleButton);
   }
@@ -339,7 +340,7 @@ class SettingsScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 18,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: position,
@@ -360,7 +361,7 @@ class SettingsScene extends Component with HasGameRef {
       position: position + Vector2(250, -10),
       size: Vector2(50, 40),
       fontSize: 24,
-      backgroundColor: const Color(0xFF8B6914),
+      backgroundColor: MGColors.warning,
     );
     add(decreaseButton);
 
@@ -378,7 +379,7 @@ class SettingsScene extends Component with HasGameRef {
       position: position + Vector2(320, -10),
       size: Vector2(50, 40),
       fontSize: 24,
-      backgroundColor: const Color(0xFF8B6914),
+      backgroundColor: MGColors.warning,
     );
     add(increaseButton);
 
@@ -386,14 +387,14 @@ class SettingsScene extends Component with HasGameRef {
     final volumeBarBg = RectangleComponent(
       position: position + Vector2(390, 5),
       size: Vector2(150, 20),
-      paint: Paint()..color = const Color(0xFFD4B896),
+      paint: Paint()..color = MGColors.textMediumEmphasis,
     );
     add(volumeBarBg);
 
     final volumeBarFill = RectangleComponent(
       position: position + Vector2(390, 5),
       size: Vector2(150 * volume, 20),
-      paint: Paint()..color = const Color(0xFF228B22),
+      paint: Paint()..color = MGColors.success,
     );
     add(volumeBarFill);
   }
@@ -477,7 +478,7 @@ class SettingsScene extends Component with HasGameRef {
     final overlay = RectangleComponent(
       position: Vector2.zero(),
       size: size,
-      paint: Paint()..color = Colors.black.withValues(alpha: 0.5),
+      paint: Paint()..color = MGColors.backgroundDark.withValues(alpha: 0.5),
     );
     add(overlay);
 
@@ -496,7 +497,7 @@ class SettingsScene extends Component with HasGameRef {
       size: Vector2(450, 300),
       anchor: Anchor.center,
       paint: Paint()
-        ..color = const Color(0xFFDC143C)
+        ..color = MGColors.error
         ..style = PaintingStyle.stroke
         ..strokeWidth = 3,
     );
@@ -509,7 +510,7 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFDC143C),
+          color: MGColors.error,
         ),
       ),
       position: size / 2 + Vector2(0, -120),
@@ -523,7 +524,7 @@ class SettingsScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 16,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
           height: 1.5,
         ),
       ),
@@ -545,7 +546,7 @@ class SettingsScene extends Component with HasGameRef {
       position: size / 2 + Vector2(-120, 80),
       size: Vector2(100, 50),
       fontSize: 16,
-      backgroundColor: const Color(0xFF808080),
+      backgroundColor: MGColors.common,
     );
     add(cancelButton);
 
@@ -564,7 +565,7 @@ class SettingsScene extends Component with HasGameRef {
       position: size / 2 + Vector2(20, 80),
       size: Vector2(100, 50),
       fontSize: 16,
-      backgroundColor: const Color(0xFFDC143C),
+      backgroundColor: MGColors.error,
     );
     add(confirmButton);
   }
@@ -577,7 +578,7 @@ class SettingsScene extends Component with HasGameRef {
     final overlay = RectangleComponent(
       position: Vector2.zero(),
       size: size,
-      paint: Paint()..color = Colors.black.withValues(alpha: 0.5),
+      paint: Paint()..color = MGColors.backgroundDark.withValues(alpha: 0.5),
     );
     add(overlay);
 
@@ -597,7 +598,7 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: size / 2 + Vector2(0, -160),
@@ -611,7 +612,7 @@ class SettingsScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 14,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
           height: 1.8,
         ),
       ),
@@ -646,10 +647,10 @@ class SettingsScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22),
+          color: MGColors.success,
           shadows: [
             Shadow(
-              color: Colors.white,
+              color: MGColors.textHighEmphasis,
               offset: Offset(2, 2),
               blurRadius: 4,
             ),
@@ -698,14 +699,14 @@ class SettingsScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Settings panel background
     final panelRect = Rect.fromLTWH(30, 100, size.x - 60, size.y - 130);
     canvas.drawRRect(
       RRect.fromRectAndRadius(panelRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.1),
+      Paint()..color = MGColors.warning.withValues(alpha: 0.1),
     );
   }
 }

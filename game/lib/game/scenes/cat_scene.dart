@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
@@ -38,7 +39,7 @@ class CatScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFF8C00), // Dark orange
+          color: MGColors.warning, // Dark orange
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -61,7 +62,7 @@ class CatScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 48,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(size.x / 2, 150),
@@ -76,7 +77,7 @@ class CatScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 28,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(size.x / 2, 220),
@@ -90,7 +91,7 @@ class CatScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 24,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: Vector2(size.x / 2, 270),
@@ -104,7 +105,7 @@ class CatScene extends Component with HasGameRef {
       position: Vector2(size.x / 2 - 200, 310),
       size: Vector2(400, 30),
       progress: trustProgress.clamp(0.0, 1.0),
-      fillColor: const Color(0xFFFF8C00), // Dark orange
+      fillColor: MGColors.warning, // Dark orange
     );
     add(_trustBar);
 
@@ -127,7 +128,7 @@ class CatScene extends Component with HasGameRef {
       position: Vector2(centerX - 180, 400),
       size: Vector2(160, 70),
       fontSize: 18,
-      backgroundColor: const Color(0xFFFF8C00),
+      backgroundColor: MGColors.warning,
     );
     add(petButton);
 
@@ -138,7 +139,7 @@ class CatScene extends Component with HasGameRef {
       position: Vector2(centerX + 20, 400),
       size: Vector2(160, 70),
       fontSize: 18,
-      backgroundColor: const Color(0xFFFF8C00),
+      backgroundColor: MGColors.warning,
     );
     add(treatButton);
 
@@ -149,7 +150,7 @@ class CatScene extends Component with HasGameRef {
       position: Vector2(centerX - 80, 490),
       size: Vector2(160, 70),
       fontSize: 18,
-      backgroundColor: const Color(0xFFFF8C00),
+      backgroundColor: MGColors.warning,
     );
     add(playButton);
   }
@@ -165,7 +166,7 @@ class CatScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: Vector2(size.x / 2, 600),
@@ -183,7 +184,7 @@ class CatScene extends Component with HasGameRef {
         textRenderer: TextPaint(
           style: const TextStyle(
             fontSize: 18,
-            color: Color(0xFF228B22), // Forest green
+            color: MGColors.success, // Forest green
           ),
         ),
         position: Vector2(size.x / 2, skillY),
@@ -276,10 +277,10 @@ class CatScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFF8C00),
+          color: MGColors.warning,
           shadows: [
             Shadow(
-              color: Colors.white,
+              color: MGColors.textHighEmphasis,
               offset: Offset(2, 2),
               blurRadius: 4,
             ),

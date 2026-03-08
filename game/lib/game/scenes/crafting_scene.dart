@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/models/recipe.dart';
 import '../../providers/game_providers.dart';
@@ -59,7 +60,7 @@ class CraftingScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -122,7 +123,7 @@ class CraftingScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: Vector2(queueX, queueY),
@@ -149,7 +150,7 @@ class CraftingScene extends Component with HasGameRef {
     final slotBg = RectangleComponent(
       position: position,
       size: Vector2(300, 90),
-      paint: Paint()..color = const Color(0xFFD4B896).withValues(alpha: 0.8),
+      paint: Paint()..color = MGColors.textMediumEmphasis.withValues(alpha: 0.8),
     );
     add(slotBg);
 
@@ -160,7 +161,7 @@ class CraftingScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 16,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF5D4E37),
+          color: MGColors.border,
         ),
       ),
       position: position + Vector2(10, 10),
@@ -173,7 +174,7 @@ class CraftingScene extends Component with HasGameRef {
       size: Vector2(280, 24),
       remaining: job.getRemainingTime(),
       total: job.craftDuration,
-      fillColor: const Color(0xFF8B6914),
+      fillColor: MGColors.warning,
     );
     add(progressBar);
 
@@ -184,7 +185,7 @@ class CraftingScene extends Component with HasGameRef {
         onPressed: () => _collectCrafting(job.id),
         position: position + Vector2(150, 70),
         size: Vector2(140, 35),
-        backgroundColor: const Color(0xFF228B22), // Forest green
+        backgroundColor: MGColors.success, // Forest green
       );
       add(collectBtn);
     }
@@ -196,7 +197,7 @@ class CraftingScene extends Component with HasGameRef {
       position: position,
       size: Vector2(300, 90),
       paint: Paint()
-        ..color = const Color(0xFFD4B896).withValues(alpha: 0.3)
+        ..color = MGColors.textMediumEmphasis.withValues(alpha: 0.3)
         ..style = PaintingStyle.stroke
         ..strokeWidth = 2,
     );
@@ -248,8 +249,8 @@ class CraftingScene extends Component with HasGameRef {
           text: 'Craft',
           onPressed: canCraft ? () => _startCrafting(recipe) : () {},
           color: canCraft
-              ? const Color(0xFF228B22) // Green
-              : const Color(0xFF808080), // Gray (disabled)
+              ? MGColors.success // Green
+              : MGColors.common, // Gray (disabled)
         ),
       ],
       onClose: () => remove(children.whereType<DialogBox>().first),
@@ -302,9 +303,9 @@ class CraftingScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22),
+          color: MGColors.success,
           shadows: [
-            Shadow(color: Colors.white, offset: Offset(1, 1), blurRadius: 2),
+            Shadow(color: MGColors.textHighEmphasis, offset: Offset(1, 1), blurRadius: 2),
           ],
         ),
       ),
@@ -338,7 +339,7 @@ class CraftingScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Recipe selection area background

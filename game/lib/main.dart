@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:mg_common_game/systems/systems.dart';
 import 'package:mg_common_game/systems/gacha/gacha_pool.dart';
@@ -57,8 +58,8 @@ class CatAlchemyApp extends StatelessWidget {
     return MaterialApp(
       title: '고양이 연금술 공방',
       theme: ThemeData(
-        primarySwatch: Colors.brown,
-        scaffoldBackgroundColor: const Color(0xFFF5E6D3), // Warm cream
+        colorScheme: ColorScheme.fromSeed(seedColor: MGColors.warning),
+        scaffoldBackgroundColor: MGColors.textHighEmphasis, // Warm cream
         fontFamily: 'Pretendard', // TODO: Add font to pubspec
       ),
       routes: {

@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mg_common_game/systems/progression/prestige_manager.dart';
 import '../../providers/game_providers.dart';
@@ -28,7 +29,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
       RectangleComponent(
         size: size,
         paint: Paint()
-          ..color = const Color(0xFF2C2C2C), // Dark theme for prestige
+          ..color = MGColors.cardDark, // Dark theme for prestige
       ),
     );
 
@@ -40,7 +41,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
           style: const TextStyle(
             fontSize: 36,
             fontWeight: FontWeight.bold,
-            color: Color(0xFFFFD700),
+            color: MGColors.gold,
           ),
         ), // Gold
         position: Vector2(size.x / 2, 40),
@@ -53,7 +54,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
       TextComponent(
         text: 'Prestige Level: ${prestigeManager.prestigeLevel}',
         textRenderer: TextPaint(
-          style: const TextStyle(fontSize: 24, color: Colors.white),
+          style: const TextStyle(fontSize: 24, color: MGColors.textHighEmphasis),
         ),
         position: Vector2(size.x / 2, 90),
         anchor: Anchor.center,
@@ -64,7 +65,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
       TextComponent(
         text: 'Prestige Points: ${prestigeManager.prestigePoints}',
         textRenderer: TextPaint(
-          style: const TextStyle(fontSize: 24, color: Colors.amber),
+          style: const TextStyle(fontSize: 24, color: MGColors.warning),
         ),
         position: Vector2(size.x / 2, 125),
         anchor: Anchor.center,
@@ -81,7 +82,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
         onPressed: () => _confirmAscend(potentialPoints),
         position: Vector2(size.x / 2, 190),
         size: Vector2(250, 60),
-        backgroundColor: Colors.purple,
+        backgroundColor: MGColors.gem,
         enabled: potentialPoints > 0,
       ),
     );
@@ -100,7 +101,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
         onPressed: () => gameRef.navigateTo('home'),
         position: Vector2(80, 40),
         size: Vector2(100, 40),
-        backgroundColor: Colors.grey,
+        backgroundColor: MGColors.common,
       ),
     );
   }
@@ -116,7 +117,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
       RectangleComponent(
         position: topLeft,
         size: size,
-        paint: Paint()..color = Colors.grey.shade800,
+        paint: Paint()..color = MGColors.border,
       ),
     );
 
@@ -128,7 +129,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
         textRenderer: TextPaint(
           style: const TextStyle(
             fontSize: 20,
-            color: Colors.white,
+            color: MGColors.textHighEmphasis,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -139,7 +140,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
       TextComponent(
         text: upgrade.description,
         textRenderer: TextPaint(
-          style: const TextStyle(fontSize: 14, color: Colors.grey),
+          style: const TextStyle(fontSize: 14, color: MGColors.common),
         ),
         position: topLeft + Vector2(20, 45),
       ),
@@ -164,7 +165,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
         position: topLeft + Vector2(size.x - 100, size.y / 2),
         size: Vector2(160, 50),
         enabled: cost != -1 && canAfford,
-        backgroundColor: cost != -1 && canAfford ? Colors.green : Colors.grey,
+        backgroundColor: cost != -1 && canAfford ? MGColors.success : MGColors.common,
         fontSize: 14,
       ),
     );
@@ -180,7 +181,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
           DialogButton(text: "Cancel", onPressed: () => {}),
           DialogButton(
             text: "Ascend",
-            color: Colors.purple,
+            color: MGColors.gem,
             onPressed: () {
               final manager = ref.read(prestigeManagerProvider);
               final gameStateNotifier = ref.read(gameStateProvider.notifier);

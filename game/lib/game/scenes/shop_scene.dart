@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/models/material.dart' as game_material;
 import '../../core/models/recipe.dart';
@@ -80,7 +81,7 @@ class ShopScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -104,8 +105,8 @@ class ShopScene extends Component with HasGameRef {
       position: Vector2(size.x / 2 - 160, 120),
       size: Vector2(150, 50),
       backgroundColor: _currentTab == 'buy'
-          ? const Color(0xFF8B6914)
-          : const Color(0xFFD4B896),
+          ? MGColors.warning
+          : MGColors.textMediumEmphasis,
     );
     add(_buyTabButton);
 
@@ -115,8 +116,8 @@ class ShopScene extends Component with HasGameRef {
       position: Vector2(size.x / 2 + 10, 120),
       size: Vector2(150, 50),
       backgroundColor: _currentTab == 'sell'
-          ? const Color(0xFF8B6914)
-          : const Color(0xFFD4B896),
+          ? MGColors.warning
+          : MGColors.textMediumEmphasis,
     );
     add(_sellTabButton);
 
@@ -132,11 +133,11 @@ class ShopScene extends Component with HasGameRef {
 
     // Update button colors
     _buyTabButton.backgroundColor = _currentTab == 'buy'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
     _sellTabButton.backgroundColor = _currentTab == 'sell'
-        ? const Color(0xFF8B6914)
-        : const Color(0xFFD4B896);
+        ? MGColors.warning
+        : MGColors.textMediumEmphasis;
 
     // Rebuild content
     _refreshContent();
@@ -177,7 +178,7 @@ class ShopScene extends Component with HasGameRef {
     final instructionText = TextComponent(
       text: 'Click on materials to buy them',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 18, color: Color(0xFF5D4E37)),
+        style: const TextStyle(fontSize: 18, color: MGColors.border),
       ),
       position: Vector2(size.x / 2, size.y - 60),
       anchor: Anchor.center,
@@ -206,7 +207,7 @@ class ShopScene extends Component with HasGameRef {
         textRenderer: TextPaint(
           style: const TextStyle(
             fontSize: 20,
-            color: Color(0xFF8B4513),
+            color: MGColors.warning,
             height: 1.5,
           ),
         ),
@@ -232,7 +233,7 @@ class ShopScene extends Component with HasGameRef {
       final instructionText = TextComponent(
         text: 'Click on potions to sell them',
         textRenderer: TextPaint(
-          style: const TextStyle(fontSize: 18, color: Color(0xFF5D4E37)),
+          style: const TextStyle(fontSize: 18, color: MGColors.border),
         ),
         position: Vector2(size.x / 2, size.y - 60),
         anchor: Anchor.center,
@@ -268,7 +269,7 @@ class ShopScene extends Component with HasGameRef {
         DialogButton(
           text: 'Buy (x1)',
           onPressed: canAfford ? () => _buyMaterial(material, 1) : () {},
-          color: canAfford ? const Color(0xFF228B22) : const Color(0xFF808080),
+          color: canAfford ? MGColors.success : MGColors.common,
         ),
         DialogButton(
           text: 'Buy (x10)',
@@ -276,8 +277,8 @@ class ShopScene extends Component with HasGameRef {
               ? () => _buyMaterial(material, 10)
               : () {},
           color: canAfford && gameState.gold >= buyPrice * 10
-              ? const Color(0xFF228B22)
-              : const Color(0xFF808080),
+              ? MGColors.success
+              : MGColors.common,
         ),
       ],
       onClose: () => remove(children.whereType<DialogBox>().first),
@@ -354,15 +355,15 @@ class ShopScene extends Component with HasGameRef {
           text: 'Sell (x1)',
           onPressed: amount >= 1 ? () => _sellPotion(recipe, 1) : () {},
           color: amount >= 1
-              ? const Color(0xFF228B22)
-              : const Color(0xFF808080),
+              ? MGColors.success
+              : MGColors.common,
         ),
         DialogButton(
           text: 'Sell (x10)',
           onPressed: amount >= 10 ? () => _sellPotion(recipe, 10) : () {},
           color: amount >= 10
-              ? const Color(0xFF228B22)
-              : const Color(0xFF808080),
+              ? MGColors.success
+              : MGColors.common,
         ),
       ],
       onClose: () => remove(children.whereType<DialogBox>().first),
@@ -426,9 +427,9 @@ class ShopScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22),
+          color: MGColors.success,
           shadows: [
-            Shadow(color: Colors.white, offset: Offset(2, 2), blurRadius: 4),
+            Shadow(color: MGColors.textHighEmphasis, offset: Offset(2, 2), blurRadius: 4),
           ],
         ),
       ),
@@ -461,7 +462,7 @@ class ShopScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Shop counter/table decoration

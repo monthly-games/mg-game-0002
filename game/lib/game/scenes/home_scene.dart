@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
@@ -73,7 +74,7 @@ class HomeScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 24,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFFD700), // Gold color
+          color: MGColors.gold, // Gold color
         ),
       ),
       position: Vector2(20, 20),
@@ -100,7 +101,7 @@ class HomeScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 20,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(20, 100),
@@ -115,7 +116,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(size.x - 70, 20),
       size: Vector2(50, 50),
       fontSize: 24,
-      backgroundColor: const Color(0xFF808080), // Gray
+      backgroundColor: MGColors.common, // Gray
     );
     add(_settingsButton);
 
@@ -126,7 +127,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(size.x - 130, 20),
       size: Vector2(50, 50),
       fontSize: 24,
-      backgroundColor: const Color(0xFF4169E1), // Royal blue
+      backgroundColor: MGColors.info, // Royal blue
     );
     add(_tutorialButton);
 
@@ -148,7 +149,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(size.x - 250, 20),
       size: Vector2(50, 50),
       fontSize: 24,
-      backgroundColor: Colors.purple, // Purple
+      backgroundColor: MGColors.gem, // Purple
     );
     add(_leaderboardButton);
 
@@ -220,7 +221,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(centerX - 180, centerY - 100),
       size: Vector2(160, 70),
       fontSize: 22,
-      backgroundColor: const Color(0xFF8B6914), // Golden brown
+      backgroundColor: MGColors.warning, // Golden brown
     );
     add(inventoryButton);
 
@@ -231,7 +232,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(centerX + 20, centerY - 100),
       size: Vector2(160, 70),
       fontSize: 22,
-      backgroundColor: const Color(0xFF8B6914), // Golden brown
+      backgroundColor: MGColors.warning, // Golden brown
     );
     add(recipesButton);
 
@@ -242,7 +243,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(centerX - 260, centerY + 200),
       size: Vector2(150, 70),
       fontSize: 20,
-      backgroundColor: const Color(0xFF4169E1), // Royal blue
+      backgroundColor: MGColors.info, // Royal blue
     );
     add(upgradeButton);
 
@@ -253,7 +254,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(centerX - 90, centerY + 200),
       size: Vector2(180, 70),
       fontSize: 20,
-      backgroundColor: const Color(0xFFFFD700), // Gold
+      backgroundColor: MGColors.gold, // Gold
     );
     add(achievementsButton);
 
@@ -264,7 +265,7 @@ class HomeScene extends Component with HasGameRef {
       position: Vector2(centerX + 110, centerY + 200),
       size: Vector2(150, 70),
       fontSize: 22,
-      backgroundColor: const Color(0xFFFF8C00), // Dark orange
+      backgroundColor: MGColors.warning, // Dark orange
     );
     add(catButton);
   }
@@ -295,7 +296,7 @@ class HomeScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // TODO: Draw workshop background

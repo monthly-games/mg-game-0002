@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
@@ -188,7 +189,7 @@ class TutorialScene extends Component with HasGameRef {
       position: Vector2(20, 20),
       size: Vector2(120, 50),
       fontSize: 18,
-      backgroundColor: const Color(0xFF808080), // Gray
+      backgroundColor: MGColors.common, // Gray
     );
     add(_backButton);
 
@@ -213,7 +214,7 @@ class TutorialScene extends Component with HasGameRef {
       position: Vector2(centerX - 220, bottomY),
       size: Vector2(140, 60),
       fontSize: 18,
-      backgroundColor: const Color(0xFF4169E1), // Royal blue
+      backgroundColor: MGColors.info, // Royal blue
     );
     add(_prevButton);
 
@@ -223,7 +224,7 @@ class TutorialScene extends Component with HasGameRef {
       position: Vector2(centerX + 80, bottomY),
       size: Vector2(140, 60),
       fontSize: 18,
-      backgroundColor: const Color(0xFF228B22), // Forest green
+      backgroundColor: MGColors.success, // Forest green
     );
     add(_nextButton);
 
@@ -327,7 +328,7 @@ class TutorialScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 32,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -345,7 +346,7 @@ class TutorialScene extends Component with HasGameRef {
         text: step.description,
         style: const TextStyle(
           fontSize: 20,
-          color: Color(0xFF333333),
+          color: MGColors.border,
           height: 1.5,
         ),
       ),
@@ -408,7 +409,7 @@ class TutorialScene extends Component with HasGameRef {
         style: TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFFFF8C00), // Dark orange
+          color: MGColors.warning, // Dark orange
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -428,7 +429,7 @@ class TutorialScene extends Component with HasGameRef {
           text: '•',
           style: TextStyle(
             fontSize: 18,
-            color: Color(0xFFFF8C00),
+            color: MGColors.warning,
             fontWeight: FontWeight.bold,
           ),
         ),
@@ -443,7 +444,7 @@ class TutorialScene extends Component with HasGameRef {
           text: tip,
           style: const TextStyle(
             fontSize: 16,
-            color: Color(0xFF333333),
+            color: MGColors.border,
             height: 1.4,
           ),
         ),
@@ -470,7 +471,7 @@ class TutorialScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 18,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF4169E1), // Royal blue
+          color: MGColors.info, // Royal blue
         ),
       ),
       textDirection: TextDirection.ltr,
@@ -502,7 +503,7 @@ class TutorialScene extends Component with HasGameRef {
         Rect.fromLTWH(barX, indicatorY, barWidth * progress, barHeight),
         const Radius.circular(6),
       ),
-      Paint()..color = const Color(0xFF228B22), // Forest green
+      Paint()..color = MGColors.success, // Forest green
     );
 
     // Dots for each step
@@ -510,7 +511,7 @@ class TutorialScene extends Component with HasGameRef {
     for (int i = 0; i < _tutorialSteps.length; i++) {
       final dotX = barX + (i * dotSpacing);
       final dotColor = i <= _currentStep
-          ? const Color(0xFF228B22) // Green (completed)
+          ? MGColors.success // Green (completed)
           : const Color(0xFFD3D3D3); // Gray (not completed)
 
       canvas.drawCircle(
@@ -523,7 +524,7 @@ class TutorialScene extends Component with HasGameRef {
         6,
         Paint()
           ..style = PaintingStyle.stroke
-          ..color = const Color(0xFF808080)
+          ..color = MGColors.common
           ..strokeWidth = 2,
       );
     }

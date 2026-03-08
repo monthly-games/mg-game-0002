@@ -1,5 +1,6 @@
 import 'package:flame/components.dart';
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../core/models/npc.dart';
 import '../../core/models/recipe.dart';
@@ -102,7 +103,7 @@ class OrdersScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 36,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513), // Saddle brown
+          color: MGColors.warning, // Saddle brown
         ),
       ),
       position: Vector2(size.x / 2, 40),
@@ -170,7 +171,7 @@ class OrdersScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 22,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
         ),
       ),
       position: position + Vector2(20, 15),
@@ -183,7 +184,7 @@ class OrdersScene extends Component with HasGameRef {
       final itemText = TextComponent(
         text: '- ${item.recipeId} x${item.amount}',
         textRenderer: TextPaint(
-          style: const TextStyle(fontSize: 18, color: Color(0xFF5D4E37)),
+          style: const TextStyle(fontSize: 18, color: MGColors.border),
         ),
         position: position + Vector2(30, itemY),
       );
@@ -198,7 +199,7 @@ class OrdersScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 16,
-          color: Color(0xFF228B22), // Forest green
+          color: MGColors.success, // Forest green
           fontWeight: FontWeight.bold,
         ),
       ),
@@ -214,8 +215,8 @@ class OrdersScene extends Component with HasGameRef {
         style: TextStyle(
           fontSize: 16,
           color: order.isExpired()
-              ? const Color(0xFFDC143C) // Crimson
-              : const Color(0xFF4169E1), // Royal blue
+              ? MGColors.error // Crimson
+              : MGColors.info, // Royal blue
         ),
       ),
       position: position + Vector2(20, size.y - 35),
@@ -231,7 +232,7 @@ class OrdersScene extends Component with HasGameRef {
     final completionText = TextComponent(
       text: 'Progress: ${(completionPct * 100).toInt()}%',
       textRenderer: TextPaint(
-        style: const TextStyle(fontSize: 16, color: Color(0xFF8B4513)),
+        style: const TextStyle(fontSize: 16, color: MGColors.warning),
       ),
       position: position + Vector2(size.x - 200, size.y - 35),
     );
@@ -250,8 +251,8 @@ class OrdersScene extends Component with HasGameRef {
       size: Vector2(120, 50),
       enabled: canComplete,
       backgroundColor: canComplete
-          ? const Color(0xFF228B22)
-          : const Color(0xFF808080),
+          ? MGColors.success
+          : MGColors.common,
       fontSize: 16,
     );
     add(completeButton);
@@ -266,7 +267,7 @@ class OrdersScene extends Component with HasGameRef {
       textRenderer: TextPaint(
         style: const TextStyle(
           fontSize: 24,
-          color: Color(0xFF8B4513),
+          color: MGColors.warning,
           height: 1.5,
         ),
       ),
@@ -376,9 +377,9 @@ class OrdersScene extends Component with HasGameRef {
         style: const TextStyle(
           fontSize: 20,
           fontWeight: FontWeight.bold,
-          color: Color(0xFF228B22),
+          color: MGColors.success,
           shadows: [
-            Shadow(color: Colors.white, offset: Offset(2, 2), blurRadius: 4),
+            Shadow(color: MGColors.textHighEmphasis, offset: Offset(2, 2), blurRadius: 4),
           ],
         ),
       ),
@@ -410,14 +411,14 @@ class OrdersScene extends Component with HasGameRef {
     final size = gameRef.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = const Color(0xFFF5E6D3), // Warm cream
+      Paint()..color = MGColors.textHighEmphasis, // Warm cream
     );
 
     // Quest board decoration
     final boardRect = Rect.fromLTWH(30, 100, size.x - 60, size.y - 150);
     canvas.drawRRect(
       RRect.fromRectAndRadius(boardRect, const Radius.circular(15)),
-      Paint()..color = const Color(0xFF8B6914).withValues(alpha: 0.2),
+      Paint()..color = MGColors.warning.withValues(alpha: 0.2),
     );
   }
 }

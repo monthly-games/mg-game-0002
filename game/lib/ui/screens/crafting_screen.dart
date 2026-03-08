@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mg_common_game/core/systems/rpg/inventory_system.dart';
 import 'package:mg_common_game/features/crafting/logic/crafting_manager.dart';
@@ -89,7 +90,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
                   const Text(
                     'Inventory',
                     style: TextStyle(
-                      color: Colors.white,
+                      color: MGColors.textHighEmphasis,
                       fontSize: 18,
                       fontWeight: FontWeight.bold,
                     ),
@@ -140,7 +141,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
         return Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            const Icon(Icons.check_circle, color: Colors.greenAccent, size: 48),
+            const Icon(Icons.check_circle, color: MGColors.success, size: 48),
             const SizedBox(height: 8),
             ElevatedButton(
               onPressed: _claimResult,
@@ -153,7 +154,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
         return Container(
           padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
           decoration: BoxDecoration(
-            color: Colors.black54,
+            color: MGColors.backgroundDark.withValues(alpha: 0.54),
             borderRadius: BorderRadius.circular(20),
           ),
           child: const Row(
@@ -164,13 +165,13 @@ class _CraftingScreenState extends State<CraftingScreen> {
                 height: 16,
                 child: CircularProgressIndicator(
                   strokeWidth: 2,
-                  color: Colors.purpleAccent,
+                  color: MGColors.gem,
                 ),
               ),
               SizedBox(width: 8),
               Text(
                 'Brewing...',
-                style: TextStyle(color: Colors.white, fontSize: 12),
+                style: TextStyle(color: MGColors.textHighEmphasis, fontSize: 12),
               ),
             ],
           ),
@@ -186,8 +187,8 @@ class _CraftingScreenState extends State<CraftingScreen> {
       padding: const EdgeInsets.only(right: 8),
       child: ActionChip(
         label: Text(recipe.id),
-        backgroundColor: canCraft ? Colors.purple : Colors.grey[800],
-        labelStyle: TextStyle(color: canCraft ? Colors.white : Colors.white54),
+        backgroundColor: canCraft ? MGColors.gem : MGColors.border,
+        labelStyle: TextStyle(color: canCraft ? MGColors.textHighEmphasis : MGColors.textHighEmphasis.withValues(alpha: 0.54)),
         onPressed: canCraft && currentJob == null
             ? () => _startCraft(recipe)
             : null,
@@ -217,14 +218,14 @@ class _CraftingScreenState extends State<CraftingScreen> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 12, vertical: 6),
       decoration: BoxDecoration(
-        color: Colors.black87,
+        color: MGColors.backgroundDark.withValues(alpha: 0.87),
         borderRadius: BorderRadius.circular(20),
-        border: Border.all(color: Colors.amber),
+        border: Border.all(color: MGColors.warning),
       ),
       child: Row(
         mainAxisSize: MainAxisSize.min,
         children: [
-          const Icon(Icons.monetization_on, color: Colors.amber, size: 20),
+          const Icon(Icons.monetization_on, color: MGColors.warning, size: 20),
           const SizedBox(width: 8),
           StreamBuilder<int>(
             stream: goldManager.onGoldChanged,
@@ -233,7 +234,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
               return Text(
                 '${snapshot.data ?? 0}',
                 style: const TextStyle(
-                  color: Colors.amber,
+                  color: MGColors.warning,
                   fontWeight: FontWeight.bold,
                 ),
               );
