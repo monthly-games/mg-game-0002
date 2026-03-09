@@ -129,7 +129,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               onCollection: () => game.navigateTo('collection'),
               onPrestige: () => game.navigateTo('prestige'),
               onEvents: () => game.navigateTo('events'),
-              onDailyHub: () => Navigator.of(context).pushNamed('/daily-hub'),
             );
           },
         },
