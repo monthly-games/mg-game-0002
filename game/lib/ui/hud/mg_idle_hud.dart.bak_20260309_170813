@@ -13,7 +13,6 @@ class MGIdleHud extends StatelessWidget {
   final VoidCallback? onCollection;
   final VoidCallback? onPrestige;
   final VoidCallback? onEvents;
-  final VoidCallback? onDailyHub;
 
   const MGIdleHud({
     super.key,
@@ -25,7 +24,6 @@ class MGIdleHud extends StatelessWidget {
     this.onCollection,
     this.onPrestige,
     this.onEvents,
-    this.onDailyHub,
   });
 
   @override
@@ -152,16 +150,6 @@ class MGIdleHud extends StatelessWidget {
             backgroundColor: MGColors.info.withValues(alpha: 0.8),
             color: MGColors.textHighEmphasis,
             tooltip: 'Tutorial',
-          ),
-        MGSpacing.hXs,
-        if (onDailyHub != null)
-          MGIconButton(
-            icon: Icons.calendar_today,
-            onPressed: onDailyHub,
-            size: 44,
-            backgroundColor: MGColors.info.withValues(alpha: 0.8),
-            color: MGColors.textHighEmphasis,
-            tooltip: 'Daily Hub',
           ),
         MGSpacing.hXs,
         if (onSettings != null)
