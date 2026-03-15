@@ -8,7 +8,7 @@ import '../components/dialog_box.dart';
 import '../cat_alchemy_game.dart';
 
 /// Home scene - main workshop view
-class HomeScene extends Component with HasGameRef {
+class HomeScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI Components
@@ -31,11 +31,11 @@ class HomeScene extends Component with HasGameRef {
   }
 
   void _checkOfflineRewards() {
-    if (gameRef is CatAlchemyGame) {
-      final game = gameRef as CatAlchemyGame;
-      if (game.offlineRewards != null && game.offlineRewards!.isNotEmpty) {
-        final rewards = game.offlineRewards!;
-        game.offlineRewards = null; // Consume
+    if (game is CatAlchemyGame) {
+      final catGame = game as CatAlchemyGame;
+      if (catGame.offlineRewards != null && catGame.offlineRewards!.isNotEmpty) {
+        final rewards = catGame.offlineRewards!;
+        catGame.offlineRewards = null; // Consume
 
         String message = 'While you were away:\n\n';
         rewards.forEach((id, qty) {
@@ -55,7 +55,7 @@ class HomeScene extends Component with HasGameRef {
               ),
             ],
             onClose: () => remove(children.whereType<DialogBox>().first),
-            position: gameRef.size / 2,
+            position: game.size / 2,
             size: Vector2(400, 300),
           ),
         );
@@ -109,7 +109,7 @@ class HomeScene extends Component with HasGameRef {
     add(_workshopLevelText);
 
     // Settings button (top right)
-    final size = gameRef.size;
+    final size = game.size;
     _settingsButton = GameButton(
       text: '⚙️',
       onPressed: () => _navigateTo('settings'),
@@ -170,7 +170,7 @@ class HomeScene extends Component with HasGameRef {
 
   /// Add navigation buttons to different scenes
   void _addNavigationButtons() {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
     final centerY = size.y / 2;
 
@@ -272,8 +272,8 @@ class HomeScene extends Component with HasGameRef {
 
   /// Navigate to a scene
   void _navigateTo(String sceneName) {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo(sceneName);
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo(sceneName);
     }
   }
 
@@ -293,7 +293,7 @@ class HomeScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

@@ -12,7 +12,7 @@ import '../cat_alchemy_game.dart';
 import 'package:mg_common_game/mg_common_game.dart';
 
 /// Crafting scene - recipe selection and crafting
-class CraftingScene extends Component with HasGameRef {
+class CraftingScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI State
@@ -45,13 +45,13 @@ class CraftingScene extends Component with HasGameRef {
             .toList();
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
   }
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -112,7 +112,7 @@ class CraftingScene extends Component with HasGameRef {
     _craftingQueue = craftingManager.queue;
 
     // Display queue (top right area)
-    final queueX = gameRef.size.x - 350;
+    final queueX = game.size.x - 350;
     var queueY = 120.0;
 
     // Queue title
@@ -254,7 +254,7 @@ class CraftingScene extends Component with HasGameRef {
         ),
       ],
       onClose: () => remove(children.whereType<DialogBox>().first),
-      position: gameRef.size / 2,
+      position: game.size / 2,
       size: Vector2(500, 350),
     );
 
@@ -263,10 +263,10 @@ class CraftingScene extends Component with HasGameRef {
 
   /// Start crafting a recipe
   void _startCrafting(Recipe recipe) {
-    if (gameRef is CatAlchemyGame) {
-      final game = gameRef as CatAlchemyGame;
-      game.selectedRecipe = recipe;
-      game.navigateTo('puzzle');
+    if (game is CatAlchemyGame) {
+      final catGame = game as CatAlchemyGame;
+      catGame.selectedRecipe = recipe;
+      catGame.navigateTo('puzzle');
 
       // Close dialog
       for (final child in children.whereType<DialogBox>()) {
@@ -309,7 +309,7 @@ class CraftingScene extends Component with HasGameRef {
           ],
         ),
       ),
-      position: gameRef.size / 2 + Vector2(0, -50),
+      position: game.size / 2 + Vector2(0, -50),
       anchor: Anchor.center,
     );
 
@@ -325,8 +325,8 @@ class CraftingScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -336,7 +336,7 @@ class CraftingScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

@@ -190,40 +190,25 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 
 void _setupGacha() {
   final gacha = GetIt.I<GachaManager>();
-  
   gacha.registerPool(GachaPool(
     id: 'standard_pool',
-    name: '스탠다드 뽑기',
+    nameKr: '스탠다드 뽑기',
     items: [
-      // N (50%)
-      ...List.generate(20, (i) => GachaItem(
-        id: 'n_item_$i',
-        rarity: Rarity.N,
-        weight: 2.5,
-      )),
-      
-      // R (35%)
-      ...List.generate(10, (i) => GachaItem(
-        id: 'r_item_$i',
-        rarity: Rarity.R,
-        weight: 3.5,
-      )),
-      
-      // SR (12%)
-      ...List.generate(5, (i) => GachaItem(
-        id: 'sr_item_$i',
-        rarity: Rarity.SR,
-        weight: 2.4,
-      )),
-      
-      // SSR (2.7%)
-      GachaItem(id: 'ssr_item_1', rarity: Rarity.SSR, weight: 2.7),
-      
-      // UR (0.3%)
-      GachaItem(id: 'ur_item_1', rarity: Rarity.UR, weight: 0.3),
+      ...List.generate(
+        20,
+        (i) => GachaItem(id: 'n_item_$i', nameKr: '일반 아이템 $i', rarity: GachaRarity.normal),
+      ),
+      ...List.generate(
+        10,
+        (i) => GachaItem(id: 'r_item_$i', nameKr: '레어 아이템 $i', rarity: GachaRarity.rare),
+      ),
+      ...List.generate(
+        5,
+        (i) => GachaItem(id: 'sr_item_$i', nameKr: '슈퍼레어 아이템 $i', rarity: GachaRarity.superRare),
+      ),
+      const GachaItem(id: 'ssr_item_1', nameKr: '울트라레어 아이템 1', rarity: GachaRarity.ultraRare),
+      const GachaItem(id: 'ur_item_1', nameKr: '레전더리 아이템 1', rarity: GachaRarity.legendary),
     ],
-    pityThreshold: 80,
-    softPityStart: 70,
   ));
 
   // Prestige 시스템 (mg_common_game)
@@ -357,7 +342,7 @@ void _registerCollections() {
   final collection = GetIt.I<CollectionManager>();
 
   // Characters 컬렉션
-  collection.registerCollection(const Collection(
+  collection.registerCollection(Collection(
     id: 'characters',
     name: '캐릭터',
     description: '모든 캐릭터를 수집하세요',

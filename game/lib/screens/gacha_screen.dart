@@ -142,7 +142,7 @@ class _GachaScreenState extends State<GachaScreen>
   Widget build(BuildContext context) {
     if (_pullResults != null) {
       return Scaffold(
-        backgroundColor: MGColors.backgroundDarkDark,
+        backgroundColor: MGColors.backgroundDark,
         body: SafeArea(
           child: Column(
             children: [
@@ -175,7 +175,7 @@ class _GachaScreenState extends State<GachaScreen>
                     onPressed: _dismissResults,
                     size: MGButtonSize.large,
                     width: double.infinity,
-                    backgroundColor: MGColors.primaryActionAction,
+                    backgroundColor: MGColors.primaryAction,
                   ),
                 ),
             ],
@@ -185,7 +185,7 @@ class _GachaScreenState extends State<GachaScreen>
     }
 
     return Scaffold(
-      backgroundColor: MGColors.backgroundDarkDark,
+      backgroundColor: MGColors.backgroundDark,
       body: SafeArea(
         child: Column(
           children: [
@@ -317,7 +317,7 @@ class _GachaScreenState extends State<GachaScreen>
       child: ListView.separated(
         scrollDirection: Axis.horizontal,
         itemCount: pools.length,
-        separatorBuilder: (_, __) => SizedBox(width: MGSpacing.sm),
+        separatorBuilder: (_, _) => SizedBox(width: MGSpacing.sm),
         itemBuilder: (context, index) {
           final pool = pools[index];
           final isSelected = pool.id == _selectedPoolId;
