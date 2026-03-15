@@ -10,15 +10,9 @@ import 'package:mg_common_game/systems/retention/daily_challenge_manager.dart';
 import 'package:mg_common_game/systems/retention/streak_manager.dart';
 import 'package:mg_common_game/systems/retention/login_rewards_manager.dart';
 import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
-import 'package:flutter/foundation.dart';
 import 'package:mg_common_game/systems/systems.dart';
-import 'package:mg_common_game/systems/gacha/gacha_pool.dart';
-import 'package:mg_common_game/systems/battlepass/battlepass_config.dart';
-import 'package:mg_common_game/systems/battlepass/battlepass_manager.dart';
 import 'package:mg_common_game/systems/quests/daily_quest.dart';
 import 'package:get_it/get_it.dart';
-import 'package:mg_common_game/systems/progression/achievement_manager.dart';
-import 'package:mg_common_game/systems/gacha/gacha_manager.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flame/game.dart';
 import 'package:hive_flutter/hive_flutter.dart';
@@ -26,7 +20,6 @@ import 'core/models/game_state.dart';
 import 'game/cat_alchemy_game.dart';
 import 'providers/game_providers.dart';
 import 'ui/hud/mg_idle_hud.dart';
-import 'package:mg_common_game/systems/progression/prestige_manager.dart';
 import 'screens/daily_quest_screen.dart';
 import 'screens/battlepass_screen.dart';
 import 'screens/collection_screen.dart';
@@ -188,64 +181,6 @@ class _GameScreenState extends ConsumerState<GameScreen> {
 }
 
 
-void _setupGacha() {
-  final gacha = GetIt.I<GachaManager>();
-  gacha.registerPool(GachaPool(
-    id: 'standard_pool',
-    nameKr: '스탠다드 뽑기',
-    items: [
-      ...List.generate(
-        20,
-        (i) => GachaItem(id: 'n_item_$i', nameKr: '일반 아이템 $i', rarity: GachaRarity.normal),
-      ),
-      ...List.generate(
-        10,
-        (i) => GachaItem(id: 'r_item_$i', nameKr: '레어 아이템 $i', rarity: GachaRarity.rare),
-      ),
-      ...List.generate(
-        5,
-        (i) => GachaItem(id: 'sr_item_$i', nameKr: '슈퍼레어 아이템 $i', rarity: GachaRarity.superRare),
-      ),
-      const GachaItem(id: 'ssr_item_1', nameKr: '울트라레어 아이템 1', rarity: GachaRarity.ultraRare),
-      const GachaItem(id: 'ur_item_1', nameKr: '레전더리 아이템 1', rarity: GachaRarity.legendary),
-    ],
-  ));
-
-  // Prestige 시스템 (mg_common_game)
-  if (!GetIt.I.isRegistered<PrestigeManager>()) {
-    final prestigeManager = PrestigeManager();
-    GetIt.I.registerSingleton(prestigeManager);
-    _setupPrestige(prestigeManager);
-  }
-}
-
-
-void _registerAchievements() {
-  final achievement = GetIt.I<AchievementManager>();
-  
-  achievement.registerAchievement(Achievement(
-    id: 'gold_1000',
-    title: '골드 1000 달성',
-    description: '총 골드 1000을 모으세요',
-    iconAsset: 'assets/achievements/gold_1000.png',
-  ));
-  
-  achievement.registerAchievement(Achievement(
-    id: 'level_10',
-    title: '레벨 10 달성',
-    description: '레벨 10에 도달하세요',
-    iconAsset: 'assets/achievements/level_10.png',
-  ));
-  
-  achievement.registerAchievement(Achievement(
-    id: 'play_100',
-    title: '100판 플레이',
-    description: '게임을 100판 플레이하세요',
-    iconAsset: 'assets/achievements/play_100.png',
-  ));
-}
-
-
 void _registerDailyQuests() {
   final dailyQuest = GetIt.I<DailyQuestManager>();
   
@@ -294,48 +229,6 @@ void _setupBattlePass() {
     daily: BPSeasonBuilder.createDefaultDailyMissions(),
     weekly: BPSeasonBuilder.createDefaultWeeklyMissions(),
   );
-}
-
-void _setupPrestige(PrestigeManager manager) {
-  // ── Prestige Upgrades (idle game defaults) ──────────────────
-  // Milestone targets: 5→Gold, 10→XP, 25→Speed (unlocked via prestige points)
-  manager.registerPrestigeUpgrade(PrestigeUpgrade(
-    id: 'gold_multiplier',
-    name: '골드 배수',
-    description: '골드 획득량 +10%',
-    maxLevel: 50,
-    costPerLevel: 1,
-    bonusPerLevel: 0.1,
-  ));
-
-  manager.registerPrestigeUpgrade(PrestigeUpgrade(
-    id: 'xp_boost',
-    name: 'XP 부스트',
-    description: 'XP 획득량 +15%',
-    maxLevel: 40,
-    costPerLevel: 2,
-    bonusPerLevel: 0.15,
-  ));
-
-  manager.registerPrestigeUpgrade(PrestigeUpgrade(
-    id: 'production_speed',
-    name: '생산 속도',
-    description: '생산 속도 +20%',
-    maxLevel: 30,
-    costPerLevel: 2,
-    bonusPerLevel: 0.2,
-  ));
-
-  // ── Prestige Callbacks ──────────────────────────────────────
-  manager.onPrestigePerformed = (level, points) {
-    debugPrint('Prestige level $level reached (+$points points)');
-  };
-
-  // TODO: Add game-specific reset callbacks:
-  // manager.registerResetCallback(() {
-  //   GetIt.I<ProgressionManager>().reset();
-  //   GetIt.I<GoldManager>().reset();
-  // });
 }
 
 void _registerCollections() {

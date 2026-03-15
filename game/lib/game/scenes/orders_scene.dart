@@ -11,7 +11,7 @@ import '../components/dialog_box.dart';
 import '../cat_alchemy_game.dart';
 
 /// Orders scene - NPC orders and quest board
-class OrdersScene extends Component with HasGameRef {
+class OrdersScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // Order data
@@ -46,7 +46,7 @@ class OrdersScene extends Component with HasGameRef {
         _availableNPCs = npcs;
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
 
     // Load discovered recipes
@@ -58,7 +58,7 @@ class OrdersScene extends Component with HasGameRef {
             .toList();
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
   }
 
@@ -87,14 +87,14 @@ class OrdersScene extends Component with HasGameRef {
         );
         _activeOrders.add(order);
       } catch (e) {
-        print('Failed to generate order: $e');
+        debugPrint('Failed to generate order: $e');
       }
     }
   }
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -141,7 +141,6 @@ class OrdersScene extends Component with HasGameRef {
       return;
     }
 
-    final size = gameRef.size;
     var yPos = 120.0;
 
     for (int i = 0; i < _activeOrders.length; i++) {
@@ -153,7 +152,7 @@ class OrdersScene extends Component with HasGameRef {
 
   /// Build a single order card
   void _buildOrderCard(ActiveOrder order, Vector2 position) {
-    final size = Vector2(gameRef.size.x - 100, 180);
+    final size = Vector2(game.size.x - 100, 180);
     final gameState = ref.read(gameStateProvider);
 
     // Card background
@@ -260,7 +259,7 @@ class OrdersScene extends Component with HasGameRef {
 
   /// Show no orders message
   void _showNoOrdersMessage() {
-    final size = gameRef.size;
+    final size = game.size;
 
     final noOrdersText = TextComponent(
       text: 'No active orders.\nCheck back later or refresh!',
@@ -328,7 +327,7 @@ class OrdersScene extends Component with HasGameRef {
     final dialog = InfoDialog(
       title: 'Order Complete! 🎉',
       message: message,
-      position: gameRef.size / 2,
+      position: game.size / 2,
     );
 
     add(dialog);
@@ -383,7 +382,7 @@ class OrdersScene extends Component with HasGameRef {
           ],
         ),
       ),
-      position: gameRef.size / 2 + Vector2(0, -100),
+      position: game.size / 2 + Vector2(0, -100),
       anchor: Anchor.center,
     );
 
@@ -398,8 +397,8 @@ class OrdersScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -408,7 +407,7 @@ class OrdersScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

@@ -1,4 +1,4 @@
-import 'package:mg_common_game/mg_common_game.dart' hide GameState;
+import 'package:mg_common_game/mg_common_game.dart';
 import '../models/game_state.dart';
 
 /// Manages inventory system with integration to GameState

@@ -7,7 +7,7 @@ import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
 /// Leaderboard scene - global rankings and competition
-class LeaderboardScene extends Component with HasGameRef {
+class LeaderboardScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI state
@@ -168,7 +168,7 @@ class LeaderboardScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Back button
     _backButton = GameButton(
@@ -182,7 +182,6 @@ class LeaderboardScene extends Component with HasGameRef {
     add(_backButton);
 
     // Category buttons
-    final centerX = size.x / 2;
     final buttonY = 90.0;
     final buttonWidth = (size.x - 100) / 4;
     final buttonSpacing = 10.0;
@@ -236,8 +235,8 @@ class LeaderboardScene extends Component with HasGameRef {
 
   /// Navigate back to home
   void _navigateBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -245,7 +244,7 @@ class LeaderboardScene extends Component with HasGameRef {
   void render(Canvas canvas) {
     super.render(canvas);
 
-    final size = gameRef.size;
+    final size = game.size;
 
     // Background
     canvas.drawRect(
@@ -271,7 +270,7 @@ class LeaderboardScene extends Component with HasGameRef {
 
   /// Draw title
   void _drawTitle(Canvas canvas) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     final titlePainter = TextPainter(
@@ -294,7 +293,7 @@ class LeaderboardScene extends Component with HasGameRef {
 
   /// Draw category description
   void _drawCategoryDescription(Canvas canvas) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     String description = '';
@@ -358,7 +357,6 @@ class LeaderboardScene extends Component with HasGameRef {
 
   /// Draw leaderboard
   void _drawLeaderboard(Canvas canvas) {
-    final size = gameRef.size;
     final startY = 200.0;
     final rowHeight = 50.0;
     final maxRows = 10; // Show top 10
@@ -376,7 +374,7 @@ class LeaderboardScene extends Component with HasGameRef {
 
   /// Draw leaderboard header
   void _drawLeaderboardHeader(Canvas canvas, double y) {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Header background
     canvas.drawRect(
@@ -411,7 +409,7 @@ class LeaderboardScene extends Component with HasGameRef {
 
   /// Draw leaderboard row
   void _drawLeaderboardRow(Canvas canvas, LeaderboardEntry entry, double y, bool isEven) {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Row background
     final bgColor = isEven
@@ -504,7 +502,7 @@ class LeaderboardScene extends Component with HasGameRef {
   void _drawPlayerEntry(Canvas canvas) {
     if (_playerEntry == null) return;
 
-    final size = gameRef.size;
+    final size = game.size;
     final y = size.y - 100;
 
     // Background with highlight

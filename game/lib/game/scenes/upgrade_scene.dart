@@ -47,7 +47,7 @@ class UpgradeOption {
 }
 
 /// Upgrade scene - workshop and system upgrades
-class UpgradeScene extends Component with HasGameRef {
+class UpgradeScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI Components
@@ -189,7 +189,7 @@ class UpgradeScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -252,7 +252,7 @@ class UpgradeScene extends Component with HasGameRef {
 
   /// Add category filter buttons
   void _addCategoryButtons() {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     _categoryWorkshopButton = GameButton(
@@ -288,8 +288,6 @@ class UpgradeScene extends Component with HasGameRef {
 
   /// Build upgrade cards
   void _buildUpgradeCards() {
-    final size = gameRef.size;
-
     // Filter upgrades by category
     final categoryUpgrades = _upgrades
         .where((u) => u.category == _currentCategory)
@@ -311,7 +309,7 @@ class UpgradeScene extends Component with HasGameRef {
   /// Build a single upgrade card
   void _buildUpgradeCard(UpgradeOption upgrade, Vector2 position) {
     final gameState = ref.read(gameStateProvider);
-    final cardSize = Vector2(gameRef.size.x - 100, 120);
+    final cardSize = Vector2(game.size.x - 100, 120);
 
     // Card background
     final cardBg = RectangleComponent(
@@ -523,7 +521,7 @@ class UpgradeScene extends Component with HasGameRef {
 
   /// Show empty message
   void _showEmptyMessage() {
-    final size = gameRef.size;
+    final size = game.size;
 
     final emptyText = TextComponent(
       text: 'No upgrades available in this category.',
@@ -541,7 +539,7 @@ class UpgradeScene extends Component with HasGameRef {
 
   /// Show temporary message
   void _showMessage(String message) {
-    final size = gameRef.size;
+    final size = game.size;
 
     final messageText = TextComponent(
       text: message,
@@ -598,8 +596,8 @@ class UpgradeScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -608,7 +606,7 @@ class UpgradeScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

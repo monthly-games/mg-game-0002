@@ -266,7 +266,7 @@ void main() {
         gameState.addToInventory('grass', 95); // Now at 105 (exceeds 100 max)
 
         gameState.lastLoginTime = DateTime.now().subtract(Duration(hours: 8));
-        final rewards = manager.calculateOfflineProduction();
+        manager.calculateOfflineProduction();
 
         // Should cap at max storage
         final finalAmount = gameState.getInventoryAmount('grass');

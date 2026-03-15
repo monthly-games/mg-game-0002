@@ -2,7 +2,7 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:cat_alchemy/core/managers/crafting_game_manager.dart';
 import 'package:cat_alchemy/core/models/recipe.dart';
 import 'package:cat_alchemy/core/models/game_state.dart';
-import 'package:mg_common_game/mg_common_game.dart' hide GameState;
+import 'package:mg_common_game/mg_common_game.dart';
 
 void main() {
   group('CraftingGameManager', () {

@@ -8,7 +8,7 @@ import '../components/inventory_slot.dart';
 import '../cat_alchemy_game.dart';
 
 /// Inventory scene - dedicated inventory management
-class InventoryScene extends Component with HasGameRef {
+class InventoryScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI Components
@@ -42,7 +42,7 @@ class InventoryScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -101,7 +101,7 @@ class InventoryScene extends Component with HasGameRef {
 
   /// Add filter buttons
   void _addFilterButtons() {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     // All filter
@@ -140,7 +140,7 @@ class InventoryScene extends Component with HasGameRef {
 
   /// Build inventory grid
   void _buildInventoryGrid() {
-    final size = gameRef.size;
+    final size = game.size;
     final gameState = ref.read(gameStateProvider);
 
     // Get filtered and sorted items
@@ -299,7 +299,7 @@ class InventoryScene extends Component with HasGameRef {
 
   /// Show item details
   void _showItemDetails(String itemId, int quantity) {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Get item info (placeholder - would fetch from data in production)
     final itemName = _getItemDisplayName(itemId);
@@ -412,17 +412,10 @@ class InventoryScene extends Component with HasGameRef {
     return 'Item';
   }
 
-  /// Update inventory info display
-  void _updateInventoryInfo() {
-    final gameState = ref.read(gameStateProvider);
-    final usedSlots = gameState.inventory.length;
-    _inventoryInfoText.text = 'Slots: $usedSlots / $_totalSlots';
-  }
-
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -431,7 +424,7 @@ class InventoryScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

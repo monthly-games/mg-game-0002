@@ -10,7 +10,6 @@ import 'package:mg_common_game/core/ui/mg_ui.dart';
 import 'package:mg_common_game/core/ui/widgets/gacha/gacha_pull_animation.dart';
 import 'package:mg_common_game/systems/gacha/gacha_manager.dart';
 import 'package:mg_common_game/systems/gacha/gacha_pool.dart';
-import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 const int _kSinglePullCost = 160;
 const int _kMultiPullCost = 1600;
@@ -637,7 +636,6 @@ class _GachaScreenState extends State<GachaScreen>
       GachaRarity.superRare => MGColors.epic,
       GachaRarity.ultraRare => MGColors.legendary,
       GachaRarity.legendary => MGColors.mythic,
-      _ => MGColors.common,
     };
   }
 

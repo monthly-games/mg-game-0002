@@ -1,28 +1,30 @@
-import 'package:mg_common_game/mg_common_game.dart' hide GameState;
+import 'package:mg_common_game/mg_common_game.dart';
 import '../models/material.dart';
 import '../models/game_state.dart';
 
 /// Manages idle production for materials
+///
+/// Uses inline resource management (migrated from deprecated IdleManager).
 class IdleProductionManager {
-  final IdleManager _idleManager;
+  final Map<String, IdleResource> _resources = {};
+  final Map<String, double> _resourceModifiers = {};
+  double _globalModifier = 1.0;
   final GameState _gameState;
 
-  IdleProductionManager(this._gameState) : _idleManager = IdleManager() {
-    _idleManager.clear();
-  }
+  static const double maxOfflineHours = 8.0;
+
+  IdleProductionManager(this._gameState);
 
   /// Initialize idle resources from material data
   void initializeResources(List<Material> materials) {
     for (final material in materials) {
       if (material.isIdleProduced) {
-        _idleManager.registerResource(
-          IdleResource(
-            id: material.id,
-            name: material.name,
-            tier: material.tier,
-            baseProductionRate: material.productionRate,
-            maxStorage: material.maxStorage,
-          ),
+        _resources[material.id] = IdleResource(
+          id: material.id,
+          name: material.name,
+          tier: material.tier,
+          baseProductionRate: material.productionRate,
+          maxStorage: material.maxStorage,
         );
       }
     }
@@ -30,23 +32,48 @@ class IdleProductionManager {
 
   /// Set production modifier for a material (from upgrades, cat skills)
   void setProductionModifier(String materialId, double modifier) {
-    _idleManager.setProductionModifier(materialId, modifier);
+    _resourceModifiers[materialId] = modifier;
   }
 
   /// Set global production multiplier (from workshop level)
   void setGlobalMultiplier(double multiplier) {
-    _idleManager.setGlobalModifier(multiplier);
+    _globalModifier = multiplier;
+  }
+
+  double _getProductionModifier(String resourceId) {
+    return _resourceModifiers[resourceId] ?? 1.0;
+  }
+
+  double _getTotalModifier(String resourceId) {
+    return _globalModifier * _getProductionModifier(resourceId);
   }
 
   /// Calculate and apply offline production rewards
   Map<String, int> calculateOfflineProduction() {
     final offlineTime = DateTime.now().difference(_gameState.lastLoginTime);
-    final rewards = _idleManager.calculateOfflineRewards(offlineTime);
-    final adjustedRewards = <String, int>{};
+    final cappedHours =
+        (offlineTime.inSeconds / 3600.0).clamp(0.0, maxOfflineHours);
+    final cappedDuration = Duration(seconds: (cappedHours * 3600).toInt());
 
-    // Add rewards to inventory
+    final rewards = <String, int>{};
+    for (final resource in _resources.values) {
+      if (!resource.isProducing) continue;
+      final produced = resource.calculateProduction(
+        cappedDuration,
+        modifier: _getTotalModifier(resource.id),
+      );
+      if (produced > 0) {
+        final added = resource.addProduction(produced);
+        rewards[resource.id] = added;
+      }
+    }
+    for (final resource in _resources.values) {
+      resource.updateTime();
+    }
+
+    final adjustedRewards = <String, int>{};
     for (final entry in rewards.entries) {
-      final resource = _idleManager.getResource(entry.key);
+      final resource = _resources[entry.key];
       if (resource == null) {
         _gameState.addToInventory(entry.key, entry.value);
         adjustedRewards[entry.key] = entry.value;
@@ -75,47 +102,67 @@ class IdleProductionManager {
 
   /// Get current production rate for a material (items per hour)
   double getProductionRate(String materialId) {
-    return _idleManager.getProductionRate(materialId);
+    final resource = _resources[materialId];
+    if (resource == null) return 0.0;
+    return resource.getProductionRate(_globalModifier);
   }
 
   /// Get estimated production for next duration
   int estimateProduction(String materialId, Duration duration) {
-    final resource = _idleManager.getResource(materialId);
+    final resource = _resources[materialId];
     if (resource == null) return 0;
 
-    final modifier = _idleManager.getProductionModifier(materialId);
+    final modifier = _getProductionModifier(materialId);
     return resource.calculateProduction(
       duration,
-      modifier: modifier * _idleManager.globalModifier,
+      modifier: modifier * _globalModifier,
     );
   }
 
   /// Get all idle resources
   Map<String, IdleResource> getAllResources() {
-    return _idleManager.resources;
+    return _resources;
   }
 
   /// Serialize to JSON
   Map<String, dynamic> toJson() {
-    final json = _idleManager.toJson();
-    json['productionModifiers'] = {
-      for (final id in _idleManager.resources.keys)
-        id: _idleManager.getProductionModifier(id),
+    return {
+      'resources':
+          _resources.map((key, value) => MapEntry(key, value.toJson())),
+      'globalModifier': _globalModifier,
+      'productionModifiers': {
+        for (final id in _resources.keys) id: _getProductionModifier(id),
+      },
     };
-    return json;
   }
 
   /// Deserialize from JSON
   void fromJson(Map<String, dynamic> json) {
-    _idleManager.fromJson(json);
+    if (json['globalModifier'] != null) {
+      _globalModifier = (json['globalModifier'] as num).toDouble();
+    }
+
+    if (json['resources'] != null) {
+      final resourcesJson = json['resources'] as Map<String, dynamic>;
+      for (final entry in resourcesJson.entries) {
+        final resource = _resources[entry.key];
+        if (resource != null) {
+          final stateJson = entry.value as Map<String, dynamic>;
+          resource.currentAmount = stateJson['currentAmount'] as int? ?? 0;
+          resource.lastUpdateTime = DateTime.fromMillisecondsSinceEpoch(
+            stateJson['lastUpdateTime'] as int? ??
+                DateTime.now().millisecondsSinceEpoch,
+          );
+          resource.isProducing = stateJson['isProducing'] as bool? ?? true;
+        }
+      }
+    }
 
     final modifiersJson = json['productionModifiers'];
     if (modifiersJson is Map) {
       for (final entry in modifiersJson.entries) {
-        _idleManager.setProductionModifier(
-          entry.key as String,
-          (entry.value as num).toDouble(),
-        );
+        _resourceModifiers[entry.key as String] =
+            (entry.value as num).toDouble();
       }
     }
   }

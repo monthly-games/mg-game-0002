@@ -175,8 +175,8 @@ void main() {
     group('collectAllCompleted', () {
       test('collects all completed jobs', () async {
         // Queue 2 jobs
-        final result1 = manager.startCrafting(testRecipe);
-        final result2 = manager.startCrafting(testRecipe);
+        manager.startCrafting(testRecipe);
+        manager.startCrafting(testRecipe);
 
         expect(manager.queueSize, 2);
 
@@ -189,7 +189,7 @@ void main() {
       });
 
       test('only collects completed jobs', () async {
-        final result1 = manager.startCrafting(testRecipe);
+        manager.startCrafting(testRecipe);
 
         // Create second recipe with longer duration
         final longRecipe = Recipe(
@@ -207,7 +207,7 @@ void main() {
         );
         gameState.discoverRecipe(longRecipe.id);
 
-        final result2 = manager.startCrafting(longRecipe);
+        manager.startCrafting(longRecipe);
 
         expect(manager.queueSize, 2);
 
@@ -223,8 +223,7 @@ void main() {
 
     group('processOfflineCrafting', () {
       test('completes jobs that finished offline', () async {
-        final result = manager.startCrafting(testRecipe);
-        final jobId = result.jobId!;
+        manager.startCrafting(testRecipe);
 
         // Simulate offline time
         gameState.lastLoginTime = DateTime.now().subtract(Duration(seconds: 10));
@@ -236,7 +235,7 @@ void main() {
       });
 
       test('adds offline rewards to inventory', () async {
-        final result = manager.startCrafting(testRecipe);
+        manager.startCrafting(testRecipe);
 
         gameState.lastLoginTime = DateTime.now().subtract(Duration(seconds: 10));
 

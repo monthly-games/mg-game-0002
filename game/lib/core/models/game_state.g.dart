@@ -28,10 +28,10 @@ class GameStateAdapter extends TypeAdapter<GameState> {
       catState: (fields[8] as Map?)?.cast<String, dynamic>(),
       craftingQueue: (fields[9] as List?)
           ?.map((dynamic e) => (e as Map).cast<String, dynamic>())
-          ?.toList(),
+          .toList(),
       activeOrders: (fields[10] as List?)
           ?.map((dynamic e) => (e as Map).cast<String, dynamic>())
-          ?.toList(),
+          .toList(),
       dailyInteractions: (fields[11] as Map?)?.cast<String, int>(),
       tutorialCompleted: fields[12] as bool,
     );

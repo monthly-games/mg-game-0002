@@ -7,7 +7,7 @@ import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
 /// Settings scene - game settings and data management
-class SettingsScene extends Component with HasGameRef {
+class SettingsScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI Components
@@ -31,7 +31,7 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -66,7 +66,6 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Build audio settings section
   void _buildAudioSettings() {
-    final size = gameRef.size;
     var yPos = 120.0;
 
     // Section title
@@ -127,7 +126,6 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Build gameplay settings section
   void _buildGameplaySettings() {
-    final size = gameRef.size;
     var yPos = 500.0;
 
     // Section title
@@ -162,7 +160,6 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Build data management section
   void _buildDataSettings() {
-    final size = gameRef.size;
     var yPos = 660.0;
 
     // Section title
@@ -229,7 +226,6 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Build info section
   void _buildInfoSection() {
-    final size = gameRef.size;
     var yPos = 850.0;
 
     // Section title
@@ -428,8 +424,8 @@ class SettingsScene extends Component with HasGameRef {
     // TODO: Implement reset logic in GameStateNotifier
     _showMessage('Progress reset! Starting fresh...');
     // Navigate back to splash or home
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('splash');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('splash');
     }
   }
 
@@ -472,7 +468,7 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Show confirmation dialog
   void _showConfirmDialog(String title, String message, VoidCallback onConfirm) {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Overlay
     final overlay = RectangleComponent(
@@ -572,7 +568,7 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Show info dialog
   void _showInfoDialog(String title, String message) {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Overlay
     final overlay = RectangleComponent(
@@ -639,7 +635,7 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Show temporary message
   void _showMessage(String message) {
-    final size = gameRef.size;
+    final size = game.size;
 
     final messageText = TextComponent(
       text: message,
@@ -686,8 +682,8 @@ class SettingsScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -696,7 +692,7 @@ class SettingsScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream
