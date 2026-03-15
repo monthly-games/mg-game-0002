@@ -1,0 +1,39 @@
+arm_R.png
+size: 70,259
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+arm_R
+  rotate: false
+  xy: 0, 0
+  size: 70, 259
+  orig: 70, 259
+  offset: 0, 0
+  index: -1
+
+leg_R.png
+size: 161,315
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leg_R
+  rotate: false
+  xy: 0, 0
+  size: 161, 315
+  orig: 161, 315
+  offset: 0, 0
+  index: -1
+
+weapon.png
+size: 295,139
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+weapon
+  rotate: false
+  xy: 0, 0
+  size: 295, 139
+  orig: 295, 139
+  offset: 0, 0
+  index: -1
+

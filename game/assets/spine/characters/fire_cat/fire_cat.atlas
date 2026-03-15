@@ -1,0 +1,78 @@
+body.png
+size: 150,219
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+body
+  rotate: false
+  xy: 0, 0
+  size: 150, 219
+  orig: 150, 219
+  offset: 0, 0
+  index: -1
+
+chest.png
+size: 130,104
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+chest
+  rotate: false
+  xy: 0, 0
+  size: 130, 104
+  orig: 130, 104
+  offset: 0, 0
+  index: -1
+
+head.png
+size: 96,102
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+head
+  rotate: false
+  xy: 0, 0
+  size: 96, 102
+  orig: 96, 102
+  offset: 0, 0
+  index: -1
+
+leg_R.png
+size: 406,206
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leg_R
+  rotate: false
+  xy: 0, 0
+  size: 406, 206
+  orig: 406, 206
+  offset: 0, 0
+  index: -1
+
+leg_R_lower.png
+size: 406,206
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leg_R_lower
+  rotate: false
+  xy: 0, 0
+  size: 406, 206
+  orig: 406, 206
+  offset: 0, 0
+  index: -1
+
+leg_R_upper.png
+size: 406,206
+format: RGBA8888
+filter: Linear,Linear
+repeat: none
+leg_R_upper
+  rotate: false
+  xy: 0, 0
+  size: 406, 206
+  orig: 406, 206
+  offset: 0, 0
+  index: -1
+
