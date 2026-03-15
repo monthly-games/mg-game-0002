@@ -6,7 +6,7 @@ import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
 /// Tutorial scene - interactive guide for new players
-class TutorialScene extends Component with HasGameRef {
+class TutorialScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // Tutorial state
@@ -180,7 +180,7 @@ class TutorialScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Back button
     _backButton = GameButton(
@@ -275,8 +275,8 @@ class TutorialScene extends Component with HasGameRef {
 
   /// Navigate back to home
   void _navigateBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -284,7 +284,7 @@ class TutorialScene extends Component with HasGameRef {
   void render(Canvas canvas) {
     super.render(canvas);
 
-    final size = gameRef.size;
+    final size = game.size;
 
     // Background
     canvas.drawRect(
@@ -303,7 +303,7 @@ class TutorialScene extends Component with HasGameRef {
 
   /// Draw tutorial step content
   void _drawTutorialStep(Canvas canvas, TutorialStep step) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
     final startY = 120.0;
 
@@ -366,7 +366,7 @@ class TutorialScene extends Component with HasGameRef {
 
   /// Draw tips box
   void _drawTipsBox(Canvas canvas, List<String> tips, double startY) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
     final boxWidth = size.x - 100.0;
     final boxX = centerX - boxWidth / 2;
@@ -459,7 +459,7 @@ class TutorialScene extends Component with HasGameRef {
 
   /// Draw progress indicator
   void _drawProgressIndicator(Canvas canvas) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
     final indicatorY = size.y - 160.0;
 

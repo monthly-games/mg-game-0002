@@ -6,7 +6,7 @@ import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
 /// Events scene - limited-time events and special challenges
-class EventsScene extends Component with HasGameRef {
+class EventsScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI state
@@ -148,8 +148,8 @@ class EventsScene extends Component with HasGameRef {
 
   /// Navigate back to home
   void _navigateBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -157,7 +157,7 @@ class EventsScene extends Component with HasGameRef {
   void render(Canvas canvas) {
     super.render(canvas);
 
-    final size = gameRef.size;
+    final size = game.size;
 
     // Background
     canvas.drawRect(
@@ -179,7 +179,7 @@ class EventsScene extends Component with HasGameRef {
 
   /// Draw title
   void _drawTitle(Canvas canvas) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     final titlePainter = TextPainter(
@@ -233,11 +233,11 @@ class EventsScene extends Component with HasGameRef {
     }
 
     // Upcoming events
-    if (_upcomingEvents.isNotEmpty && currentY < gameRef.size.y - 200) {
+    if (_upcomingEvents.isNotEmpty && currentY < game.size.y - 200) {
       _drawSectionHeader(canvas, '⏰ Upcoming Events', currentY);
       currentY += 40;
       for (final event in _upcomingEvents) {
-        if (currentY > gameRef.size.y - 180) break; // Don't draw off-screen
+        if (currentY > game.size.y - 180) break; // Don't draw off-screen
         _drawEventCard(canvas, event, Vector2(30, currentY));
         currentY += 140;
       }
@@ -263,7 +263,7 @@ class EventsScene extends Component with HasGameRef {
 
   /// Draw event card
   void _drawEventCard(Canvas canvas, GameEvent event, Vector2 position) {
-    final size = gameRef.size;
+    final size = game.size;
     final cardWidth = size.x - 60;
     final cardHeight = 120.0;
 
@@ -508,7 +508,7 @@ class EventsScene extends Component with HasGameRef {
     final event = _findEventById(_selectedEventId);
     if (event == null) return;
 
-    final size = gameRef.size;
+    final size = game.size;
 
     // Overlay
     canvas.drawRect(

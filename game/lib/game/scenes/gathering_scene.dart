@@ -11,7 +11,7 @@ import '../components/progress_bar.dart';
 import '../cat_alchemy_game.dart';
 
 /// Gathering scene - material collection with mini-game
-class GatheringScene extends Component with HasGameRef {
+class GatheringScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // Gathering state
@@ -51,13 +51,13 @@ class GatheringScene extends Component with HasGameRef {
             .toList();
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
   }
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -95,7 +95,7 @@ class GatheringScene extends Component with HasGameRef {
 
   /// Spawn gathering nodes on the field
   void _spawnGatheringNodes() {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Spawn 6-8 nodes in gathering area
     final nodeCount = 6 + _random.nextInt(3);
@@ -169,7 +169,7 @@ class GatheringScene extends Component with HasGameRef {
   void _respawnNode() {
     if (_availableMaterials.isEmpty) return;
 
-    final size = gameRef.size;
+    final size = game.size;
     final material = _availableMaterials[_random.nextInt(_availableMaterials.length)];
 
     final x = 150 + _random.nextDouble() * (size.x - 300);
@@ -203,7 +203,7 @@ class GatheringScene extends Component with HasGameRef {
           ],
         ),
       ),
-      position: gameRef.size / 2 + Vector2(0, -100),
+      position: game.size / 2 + Vector2(0, -100),
       anchor: Anchor.center,
     );
 
@@ -219,8 +219,8 @@ class GatheringScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -246,7 +246,7 @@ class GatheringScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background - nature scene
-    final size = gameRef.size;
+    final size = game.size;
 
     // Sky gradient
     final skyGradient = Paint()

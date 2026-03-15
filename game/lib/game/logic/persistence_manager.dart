@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:mg_common_game/core/economy/gold_manager.dart';
 import 'package:mg_common_game/core/systems/rpg/inventory_system.dart';
 import 'package:mg_common_game/core/systems/save_system.dart';
@@ -27,7 +28,7 @@ class PersistenceManager {
     };
 
     await _saveSystem.save(_saveKey, data);
-    print('Game Saved');
+    debugPrint('Game Saved');
   }
 
   Future<void> _load() async {
@@ -57,6 +58,6 @@ class PersistenceManager {
       _inventory.addItem(item, qty);
     }
 
-    print('Game Loaded');
+    debugPrint('Game Loaded');
   }
 }

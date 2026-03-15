@@ -1,16 +1,16 @@
+import 'package:flutter/foundation.dart';
 import 'dart:io';
 
 void main() async {
   final file = File('../../docs/resource_generation_prompts.md');
   if (!await file.exists()) {
-    print('Error: Docs file not found at ${file.path}');
+    debugPrint('Error: Docs file not found at ${file.path}');
     return;
   }
 
   final content = await file.readAsString();
   final lines = content.split('\n');
 
-  String? currentSection;
   String? currentName;
   List<String> currentPromptLines = [];
   bool inPromptBlock = false;
@@ -70,10 +70,10 @@ void main() async {
   // Filter for VFX only for this task
   final vfxPrompts = prompts.where((p) => p['type'] == 'VFX').toList();
 
-  print('Found ${vfxPrompts.length} VFX Prompts:');
+  debugPrint('Found ${vfxPrompts.length} VFX Prompts:');
   for (final p in vfxPrompts) {
-    print('Name: ${p['name']}');
-    print('Prompt: ${p['prompt']}');
-    print('---');
+    debugPrint('Name: ${p['name']}');
+    debugPrint('Prompt: ${p['prompt']}');
+    debugPrint('---');
   }
 }

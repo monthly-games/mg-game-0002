@@ -7,7 +7,7 @@ import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 
 /// VFX Manager for Cat Alchemy Workshop (MG-0002)
 /// Crafting + Idle 게임 전용 이펙트 관리자
-class VfxManager extends Component with HasGameRef {
+class VfxManager extends Component with HasGameReference {
   VfxManager();
 
   final Random _random = Random();
@@ -18,7 +18,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 조합 시작 - 재료 투입 이펙트
   void showIngredientAdd(Vector2 position, Color ingredientColor) {
-    gameRef.add(
+    game.add(
       _createBurstEffect(
         position: position,
         color: ingredientColor,
@@ -32,7 +32,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 조합 진행 중 - 버블링/보글보글 이펙트
   void showBubbling(Vector2 position) {
-    gameRef.add(
+    game.add(
       _createRisingEffect(
         position: position,
         color: MGColors.textHighEmphasis.withValues(alpha: 0.7),
@@ -49,7 +49,7 @@ class VfxManager extends Component with HasGameRef {
     final count = isRare ? 30 : 20;
 
     // 메인 폭발
-    gameRef.add(
+    game.add(
       _createBurstEffect(
         position: position,
         color: color,
@@ -61,7 +61,7 @@ class VfxManager extends Component with HasGameRef {
     );
 
     // 스파클
-    gameRef.add(
+    game.add(
       _createSparkleEffect(
         position: position,
         color: MGColors.textHighEmphasis,
@@ -73,7 +73,7 @@ class VfxManager extends Component with HasGameRef {
     if (isRare) {
       Future.delayed(const Duration(milliseconds: 100), () {
         if (!isMounted) return;
-        gameRef.add(
+        game.add(
           _createBurstEffect(
             position: position,
             color: MGColors.warning,
@@ -89,7 +89,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 조합 실패 - 연기 이펙트
   void showCraftingFailure(Vector2 position) {
-    gameRef.add(
+    game.add(
       _createSmokeEffect(
         position: position,
         count: 12,
@@ -100,7 +100,7 @@ class VfxManager extends Component with HasGameRef {
   /// 새 레시피 발견 - 발견 이펙트
   void showDiscovery(Vector2 position) {
     // 별 모양 스파클
-    gameRef.add(
+    game.add(
       _createSparkleEffect(
         position: position,
         color: MGColors.warning,
@@ -109,7 +109,7 @@ class VfxManager extends Component with HasGameRef {
     );
 
     // 위로 올라가는 빛
-    gameRef.add(
+    game.add(
       _createRisingEffect(
         position: position,
         color: MGColors.gold,
@@ -126,7 +126,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 자원 획득 - 픽업 이펙트
   void showPickup(Vector2 position, Color resourceColor) {
-    gameRef.add(
+    game.add(
       _createBurstEffect(
         position: position,
         color: resourceColor,
@@ -141,7 +141,7 @@ class VfxManager extends Component with HasGameRef {
   /// 레벨업 - 축하 이펙트
   void showLevelUp(Vector2 position) {
     // 큰 폭발
-    gameRef.add(
+    game.add(
       _createBurstEffect(
         position: position,
         color: MGColors.warning,
@@ -156,7 +156,7 @@ class VfxManager extends Component with HasGameRef {
     for (int i = 0; i < 3; i++) {
       Future.delayed(Duration(milliseconds: i * 100), () {
         if (!isMounted) return;
-        gameRef.add(
+        game.add(
           _createSparkleEffect(
             position: position + Vector2(
               (_random.nextDouble() - 0.5) * 60,
@@ -174,7 +174,7 @@ class VfxManager extends Component with HasGameRef {
   void showCoinGain(Vector2 position, {int amount = 1}) {
     final count = (amount / 10).clamp(5, 20).toInt();
 
-    gameRef.add(
+    game.add(
       _createCoinEffect(
         position: position,
         count: count,
@@ -191,7 +191,7 @@ class VfxManager extends Component with HasGameRef {
           (_random.nextDouble() - 0.5) * 200,
           -50,
         );
-        gameRef.add(
+        game.add(
           _createCoinEffect(position: pos, count: 8),
         );
       });
@@ -204,7 +204,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 고양이 반응 - 하트 이펙트
   void showCatHeart(Vector2 position) {
-    gameRef.add(
+    game.add(
       _createRisingEffect(
         position: position + Vector2(0, -30),
         color: MGColors.error,
@@ -217,7 +217,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 고양이 작업 - 반짝임 이펙트
   void showCatWorking(Vector2 position) {
-    gameRef.add(
+    game.add(
       _createSparkleEffect(
         position: position,
         color: MGColors.textHighEmphasis,
@@ -232,7 +232,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 버튼 탭 - 터치 피드백
   void showTapFeedback(Vector2 position) {
-    gameRef.add(
+    game.add(
       _createBurstEffect(
         position: position,
         color: MGColors.textHighEmphasis.withValues(alpha: 0.5),
@@ -246,7 +246,7 @@ class VfxManager extends Component with HasGameRef {
 
   /// 숫자 팝업 (데미지, 획득량 등)
   void showNumberPopup(Vector2 position, String text, {Color color = MGColors.textHighEmphasis}) {
-    gameRef.add(
+    game.add(
       _NumberPopup(
         position: position,
         text: text,

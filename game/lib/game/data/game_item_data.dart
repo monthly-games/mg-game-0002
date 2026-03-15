@@ -5,10 +5,10 @@ class GameItemData extends ItemData {
   final int tier;
 
   GameItemData({
-    required String id,
-    required String name,
-    required String description,
+    required super.id,
+    required super.name,
+    required super.description,
     required this.iconPath,
     this.tier = 1,
-  }) : super(id: id, name: name, description: description);
+  });
 }

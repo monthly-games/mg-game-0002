@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'package:image/image.dart';
 
@@ -13,10 +14,10 @@ void main() async {
   ];
 
   for (final filePath in files) {
-    print('Processing $filePath...');
+    debugPrint('Processing $filePath...');
     final file = File(filePath);
     if (!await file.exists()) {
-      print('File not found: $filePath');
+      debugPrint('File not found: $filePath');
       continue;
     }
 
@@ -24,7 +25,7 @@ void main() async {
     final image = decodeImage(bytes);
 
     if (image == null) {
-      print('Failed to decode image: $filePath');
+      debugPrint('Failed to decode image: $filePath');
       continue;
     }
 
@@ -77,7 +78,7 @@ void main() async {
     }
 
     await file.writeAsBytes(encodePng(image));
-    print('Saved processed image to $filePath');
+    debugPrint('Saved processed image to $filePath');
   }
 }
 

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:mg_common_game/core/ui/mg_ui.dart';
 
 /// MG UI 기반 아이들 게임 HUD

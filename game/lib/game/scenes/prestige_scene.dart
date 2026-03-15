@@ -8,7 +8,7 @@ import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 import '../components/dialog_box.dart';
 
-class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
+class PrestigeScene extends Component with HasGameReference<CatAlchemyGame> {
   final WidgetRef ref;
 
   PrestigeScene(this.ref);
@@ -20,7 +20,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
   }
 
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
     final prestigeManager = ref.read(prestigeManagerProvider);
     final gameState = ref.read(gameStateProvider);
 
@@ -98,7 +98,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
     add(
       GameButton(
         text: 'Back',
-        onPressed: () => gameRef.navigateTo('home'),
+        onPressed: () => game.navigateTo('home'),
         position: Vector2(80, 40),
         size: Vector2(100, 40),
         backgroundColor: MGColors.common,
@@ -107,7 +107,7 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
   }
 
   void _buildUpgradeCard(PrestigeUpgrade upgrade, Vector2 centerPos) {
-    final size = Vector2(gameRef.size.x - 60, 100);
+    final size = Vector2(game.size.x - 60, 100);
     final topLeft =
         centerPos -
         Vector2(size.x / 2, 0); // Anchor top-center logic adjustment
@@ -196,12 +196,12 @@ class PrestigeScene extends Component with HasGameRef<CatAlchemyGame> {
               // We need a 'soft reset' or ensure Prestige Data is safe (it is, separate sharedPrefs).
 
               // Navigate
-              gameRef.navigateTo('home');
+              game.navigateTo('home');
             },
           ),
         ],
         onClose: () => remove(children.whereType<DialogBox>().first),
-        position: gameRef.size / 2,
+        position: game.size / 2,
         size: Vector2(500, 350),
       ),
     );

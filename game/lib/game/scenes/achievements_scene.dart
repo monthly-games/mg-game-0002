@@ -47,7 +47,7 @@ class Achievement {
 }
 
 /// Achievements scene - track and claim achievements
-class AchievementsScene extends Component with HasGameRef {
+class AchievementsScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI Components
@@ -243,7 +243,7 @@ class AchievementsScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -297,7 +297,7 @@ class AchievementsScene extends Component with HasGameRef {
 
   /// Add category filter buttons
   void _addCategoryButtons() {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     _categoryAllButton = GameButton(
@@ -363,7 +363,7 @@ class AchievementsScene extends Component with HasGameRef {
 
   /// Build a single achievement card
   void _buildAchievementCard(Achievement achievement, Vector2 position) {
-    final cardSize = Vector2(gameRef.size.x - 100, 110);
+    final cardSize = Vector2(game.size.x - 100, 110);
     final isCompleted = achievement.isCompleted();
 
     // Card background
@@ -564,7 +564,7 @@ class AchievementsScene extends Component with HasGameRef {
 
   /// Show empty message
   void _showEmptyMessage() {
-    final size = gameRef.size;
+    final size = game.size;
 
     final emptyText = TextComponent(
       text: 'No achievements in this category.',
@@ -579,7 +579,7 @@ class AchievementsScene extends Component with HasGameRef {
 
   /// Show temporary message
   void _showMessage(String message) {
-    final size = gameRef.size;
+    final size = game.size;
 
     final messageText = TextComponent(
       text: message,
@@ -633,8 +633,8 @@ class AchievementsScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -643,7 +643,7 @@ class AchievementsScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

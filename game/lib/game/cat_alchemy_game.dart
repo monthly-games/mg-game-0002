@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flame/game.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'scenes/splash_scene.dart';
@@ -151,7 +152,7 @@ class CatAlchemyGame extends FlameGame {
           final puzzleScene = PuzzleScene(ref, selectedRecipe!);
           await add(puzzleScene);
         } else {
-          print("Error: No recipe selected for puzzle");
+          debugPrint("Error: No recipe selected for puzzle");
           _loadScene('crafting');
         }
         break;
@@ -162,7 +163,7 @@ class CatAlchemyGame extends FlameGame {
         break;
 
       default:
-        print('Unknown scene: $sceneName');
+        debugPrint('Unknown scene: $sceneName');
     }
   }
 

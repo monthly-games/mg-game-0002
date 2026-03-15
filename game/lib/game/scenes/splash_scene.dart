@@ -6,7 +6,7 @@ import '../../core/services/game_initialization_service.dart';
 import '../cat_alchemy_game.dart';
 
 /// Splash screen scene - shows logo and loads game data
-class SplashScene extends Component with HasGameRef {
+class SplashScene extends Component with HasGameReference {
   final WidgetRef ref;
   bool _isInitialized = false;
   double _loadingProgress = 0.0;
@@ -47,7 +47,7 @@ class SplashScene extends Component with HasGameRef {
       await Future.delayed(const Duration(milliseconds: 500));
       _transitionToHome();
     } catch (e) {
-      print('Error initializing game: $e');
+      debugPrint('Error initializing game: $e');
       // TODO: Show error screen
     }
   }
@@ -55,14 +55,14 @@ class SplashScene extends Component with HasGameRef {
   /// Update loading progress
   void _updateProgress(double progress, String message) {
     _loadingProgress = progress;
-    print('[$message] Progress: ${(_loadingProgress * 100).toStringAsFixed(0)}%');
+    debugPrint('[$message] Progress: ${(_loadingProgress * 100).toStringAsFixed(0)}%');
   }
 
   /// Transition to home scene
   void _transitionToHome() {
     // Get game instance and navigate
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -73,7 +73,7 @@ class SplashScene extends Component with HasGameRef {
     // Simple splash screen rendering
     // TODO: Replace with actual logo and styled loading bar
 
-    final size = gameRef.size;
+    final size = game.size;
     final center = size / 2;
 
     // Background color

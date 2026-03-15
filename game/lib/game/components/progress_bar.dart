@@ -123,7 +123,7 @@ class ProgressBar extends PositionComponent {
 /// - Requires game loop integration for countdown
 /// - Uses canvas rendering for Flame compatibility
 class TimerProgressBar extends PositionComponent {
-  Duration _remaining;
+  Duration remaining;
   final Duration total;
   final Color fillColor;
   final Color backgroundColor;
@@ -134,31 +134,24 @@ class TimerProgressBar extends PositionComponent {
   TimerProgressBar({
     required Vector2 position,
     required Vector2 size,
-    required Duration remaining,
+    required this.remaining,
     required this.total,
     this.fillColor = _timerFillColor,
     this.backgroundColor = _defaultBackgroundColor,
     this.borderColor = _defaultBorderColor,
     this.height = 24,
-  })  : _remaining = remaining,
+  })  :
         super(
           position: position,
           size: size,
           anchor: Anchor.topLeft,
         );
 
-  /// Get remaining time
-  Duration get remaining => _remaining;
-
-  /// Set remaining time
-  set remaining(Duration value) {
-    _remaining = value;
-  }
 
   /// Get progress (0.0 = complete, 1.0 = just started)
   double get progress {
     if (total.inMilliseconds == 0) return 0.0;
-    return (_remaining.inMilliseconds / total.inMilliseconds).clamp(0.0, 1.0);
+    return (remaining.inMilliseconds / total.inMilliseconds).clamp(0.0, 1.0);
   }
 
   @override
@@ -166,10 +159,10 @@ class TimerProgressBar extends PositionComponent {
     super.update(dt);
 
     // Countdown
-    if (_remaining > Duration.zero) {
-      _remaining -= Duration(milliseconds: (dt * 1000).round());
-      if (_remaining < Duration.zero) {
-        _remaining = Duration.zero;
+    if (remaining > Duration.zero) {
+      remaining -= Duration(milliseconds: (dt * 1000).round());
+      if (remaining < Duration.zero) {
+        remaining = Duration.zero;
       }
     }
   }
@@ -205,7 +198,7 @@ class TimerProgressBar extends PositionComponent {
     );
 
     // Time text
-    final timeText = _formatDuration(_remaining);
+    final timeText = _formatDuration(remaining);
     final textPaint = TextPaint(
       style: const TextStyle(
         fontSize: 16,

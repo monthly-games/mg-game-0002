@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'dart:io';
 import 'dart:math';
 import 'dart:typed_data';
@@ -73,7 +74,7 @@ void main() async {
     }
 
     await file.writeAsBytes(buffer.toBytes());
-    print('Generated $fileName');
+    debugPrint('Generated $fileName');
   }
 }
 

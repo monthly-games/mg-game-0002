@@ -11,7 +11,7 @@ import '../components/dialog_box.dart';
 import '../cat_alchemy_game.dart';
 
 /// Shop scene - buy materials and sell potions
-class ShopScene extends Component with HasGameRef {
+class ShopScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // Shop tabs
@@ -47,7 +47,7 @@ class ShopScene extends Component with HasGameRef {
             .toList();
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
 
     // Load sellable items (discovered potion recipes)
@@ -66,13 +66,13 @@ class ShopScene extends Component with HasGameRef {
             .toList();
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
   }
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -154,7 +154,7 @@ class ShopScene extends Component with HasGameRef {
 
   /// Build buy materials content
   void _buildBuyContent() {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Material grid
     final materialItems = <String, int>{};
@@ -188,7 +188,7 @@ class ShopScene extends Component with HasGameRef {
 
   /// Build sell potions content
   void _buildSellContent() {
-    final size = gameRef.size;
+    final size = game.size;
     final gameState = ref.read(gameStateProvider);
 
     // Get potions from inventory
@@ -282,7 +282,7 @@ class ShopScene extends Component with HasGameRef {
         ),
       ],
       onClose: () => remove(children.whereType<DialogBox>().first),
-      position: gameRef.size / 2,
+      position: game.size / 2,
       size: Vector2(500, 350),
     );
 
@@ -329,7 +329,7 @@ class ShopScene extends Component with HasGameRef {
         _showSellDialog(recipe);
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
   }
 
@@ -367,7 +367,7 @@ class ShopScene extends Component with HasGameRef {
         ),
       ],
       onClose: () => remove(children.whereType<DialogBox>().first),
-      position: gameRef.size / 2,
+      position: game.size / 2,
       size: Vector2(500, 350),
     );
 
@@ -433,7 +433,7 @@ class ShopScene extends Component with HasGameRef {
           ],
         ),
       ),
-      position: gameRef.size / 2 + Vector2(0, -100),
+      position: game.size / 2 + Vector2(0, -100),
       anchor: Anchor.center,
     );
 
@@ -449,8 +449,8 @@ class ShopScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -459,7 +459,7 @@ class ShopScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

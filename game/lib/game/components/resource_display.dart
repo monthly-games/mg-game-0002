@@ -5,32 +5,24 @@ import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 /// Resource display component (gold, gems, materials)
 class ResourceDisplay extends PositionComponent {
   final String iconText; // Emoji or text icon
-  int _amount;
+  int amount;
   final Color iconColor;
   final Color textColor;
   final double fontSize;
 
   ResourceDisplay({
     required this.iconText,
-    required int amount,
+    required this.amount,
     this.iconColor = MGColors.gold, // Gold
     this.textColor = const Color(0xFF2F4F4F), // Dark slate gray
     this.fontSize = 20,
     required Vector2 position,
-  })  : _amount = amount,
+  })  :
         super(
           position: position,
           size: Vector2(150, 40),
           anchor: Anchor.topLeft,
         );
-
-  /// Get current amount
-  int get amount => _amount;
-
-  /// Set amount
-  set amount(int value) {
-    _amount = value;
-  }
 
   @override
   void render(Canvas canvas) {
@@ -76,7 +68,7 @@ class ResourceDisplay extends PositionComponent {
       ),
     );
 
-    final formattedAmount = _formatNumber(_amount);
+    final formattedAmount = _formatNumber(amount);
     amountPaint.render(
       canvas,
       formattedAmount,
@@ -101,23 +93,19 @@ class ResourceDisplay extends PositionComponent {
 /// Compact resource display (icon + number, no background)
 class CompactResourceDisplay extends PositionComponent {
   final String iconText;
-  int _amount;
+  int amount;
   final double iconSize;
 
   CompactResourceDisplay({
     required this.iconText,
-    required int amount,
+    required this.amount,
     this.iconSize = 24,
     required Vector2 position,
-  })  : _amount = amount,
-        super(
+  })  : super(
           position: position,
           size: Vector2(100, 30),
           anchor: Anchor.centerLeft,
         );
-
-  int get amount => _amount;
-  set amount(int value) => _amount = value;
 
   @override
   void render(Canvas canvas) {
@@ -153,7 +141,7 @@ class CompactResourceDisplay extends PositionComponent {
 
     amountPaint.render(
       canvas,
-      _amount.toString(),
+      amount.toString(),
       Vector2(iconSize + 5, size.y / 2),
       anchor: Anchor.centerLeft,
     );

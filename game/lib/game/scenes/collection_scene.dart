@@ -7,7 +7,7 @@ import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
 /// Collection scene - codex of discovered materials and potions
-class CollectionScene extends Component with HasGameRef {
+class CollectionScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI state
@@ -191,7 +191,7 @@ class CollectionScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Back button
     _backButton = GameButton(
@@ -235,8 +235,8 @@ class CollectionScene extends Component with HasGameRef {
 
   /// Navigate back to home
   void _navigateBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -244,7 +244,7 @@ class CollectionScene extends Component with HasGameRef {
   void render(Canvas canvas) {
     super.render(canvas);
 
-    final size = gameRef.size;
+    final size = game.size;
 
     // Background
     canvas.drawRect(
@@ -276,7 +276,7 @@ class CollectionScene extends Component with HasGameRef {
 
   /// Draw title
   void _drawTitle(Canvas canvas) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     final titlePainter = TextPainter(
@@ -299,7 +299,7 @@ class CollectionScene extends Component with HasGameRef {
 
   /// Draw collection stats
   void _drawStats(Canvas canvas) {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     final collection = _currentTab == 'materials'
@@ -341,7 +341,7 @@ class CollectionScene extends Component with HasGameRef {
 
   /// Draw collection grid
   void _drawCollectionGrid(Canvas canvas, List<CollectionItem> items) {
-    final size = gameRef.size;
+    final size = game.size;
     final startX = 40.0;
     final startY = 210.0;
     final cardWidth = (size.x - 100) / 2; // 2 columns
@@ -585,7 +585,7 @@ class CollectionScene extends Component with HasGameRef {
 
   /// Draw item detail panel
   void _drawItemDetail(Canvas canvas) {
-    final size = gameRef.size;
+    final size = game.size;
     final item = _findItemById(_selectedItemId);
     if (item == null || !item.discovered) return;
 

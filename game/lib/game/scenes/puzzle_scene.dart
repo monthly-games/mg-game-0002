@@ -11,7 +11,7 @@ import '../../providers/game_providers.dart';
 import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
-class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
+class PuzzleScene extends Component with HasGameReference<CatAlchemyGame> {
   final WidgetRef ref;
   final Recipe recipe;
 
@@ -37,8 +37,9 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
     int size = 3;
     if (recipe.tier >= 5) {
       size = 5;
-    } else if (recipe.tier >= 3)
+    } else if (recipe.tier >= 3) {
       size = 4;
+    }
 
     _rows = size;
     _cols = size;
@@ -46,7 +47,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
   }
 
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     add(
@@ -131,7 +132,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
         text: 'Cancel',
         position: Vector2(80, size.y - 80),
         size: Vector2(100, 40),
-        onPressed: () => gameRef.navigateTo('crafting'),
+        onPressed: () => game.navigateTo('crafting'),
         backgroundColor: MGColors.common,
       ),
     );
@@ -184,22 +185,22 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
                 .read(craftingGameManagerProvider)
                 .startCrafting(recipe);
             if (result.success) {
-              gameRef.navigateTo('crafting');
+              game.navigateTo('crafting');
             } else {
-              print("Crafting failed: ${result.message}");
+              debugPrint("Crafting failed: ${result.message}");
             }
           },
         ),
       );
     } else {
-      print("Pattern mismatch!");
+      debugPrint("Pattern mismatch!");
       // Failure Shake Effect (Simulated by print for now, or could shake grid)
     }
   }
 
   void _playSuccessEffect() {
     // Particle Explosion at center of grid
-    final size = gameRef.size;
+    final size = game.size;
     add(
       ParticleSystemComponent(
         particle: Particle.generate(
@@ -285,7 +286,7 @@ class PuzzleScene extends Component with HasGameRef<CatAlchemyGame> {
   void render(Canvas canvas) {
     super.render(canvas);
     canvas.drawRect(
-      Rect.fromLTWH(0, 0, gameRef.size.x, gameRef.size.y),
+      Rect.fromLTWH(0, 0, game.size.x, game.size.y),
       Paint()..color = MGColors.textHighEmphasis,
     );
   }
@@ -349,7 +350,7 @@ class PuzzleSlot extends PositionComponent {
 
 // Source component that spawns draggables
 class IngredientSource extends PositionComponent
-    with TapCallbacks, HasGameRef<CatAlchemyGame> {
+    with TapCallbacks, HasGameReference<CatAlchemyGame> {
   final String itemId;
 
   IngredientSource({
@@ -378,7 +379,7 @@ class IngredientSource extends PositionComponent
       position: position.clone(),
       size: size.clone(),
     );
-    gameRef.add(dragItem); // Add to game ref to be top level
+    game.add(dragItem); // Add to game ref to be top level
     dragItem.startDrag(event);
   }
 }

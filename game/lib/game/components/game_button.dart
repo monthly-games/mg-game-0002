@@ -25,14 +25,11 @@ class GameButton extends PositionComponent with TapCallbacks {
     required Vector2 size,
   }) : super(position: position, size: size, anchor: Anchor.center);
 
-  bool _visible = true;
-
-  bool get isVisible => _visible;
-  set isVisible(bool visible) => _visible = visible;
+  bool isVisible = true;
 
   @override
   void render(Canvas canvas) {
-    if (!_visible) return;
+    if (!isVisible) return;
     super.render(canvas);
 
     // Button background
@@ -75,7 +72,7 @@ class GameButton extends PositionComponent with TapCallbacks {
 
   @override
   void onTapDown(TapDownEvent event) {
-    if (!_visible) return;
+    if (!isVisible) return;
     if (enabled) {
       _isPressed = true;
     }

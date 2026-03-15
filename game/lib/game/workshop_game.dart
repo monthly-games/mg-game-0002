@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'dart:ui';
 import 'package:flame/game.dart';
 import 'package:flame/components.dart';
@@ -66,17 +67,17 @@ class WorkshopGame extends FlameGame {
     try {
       GetIt.I<AudioManager>().playBgm('bgm_workshop.wav');
     } catch (e) {
-      print('Audio Error: $e');
+      debugPrint('Audio Error: $e');
     }
   }
 }
 
-class CatCharacter extends SpriteComponent with HasGameRef {
+class CatCharacter extends SpriteComponent with HasGameReference {
   CatCharacter({required Vector2 position})
     : super(position: position, size: Vector2.all(128), anchor: Anchor.center);
 
   @override
   Future<void> onLoad() async {
-    sprite = await gameRef.loadSprite('cat_orange_tabby.png');
+    sprite = await game.loadSprite('cat_orange_tabby.png');
   }
 }

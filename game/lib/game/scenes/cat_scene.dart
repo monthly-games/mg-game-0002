@@ -8,7 +8,7 @@ import '../components/progress_bar.dart';
 import '../cat_alchemy_game.dart';
 
 /// Cat scene - interact with cat companion
-class CatScene extends Component with HasGameRef {
+class CatScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // UI Components
@@ -29,7 +29,7 @@ class CatScene extends Component with HasGameRef {
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
     final gameState = ref.read(gameStateProvider);
 
     // Title
@@ -118,7 +118,7 @@ class CatScene extends Component with HasGameRef {
 
   /// Add interaction buttons
   void _addInteractionButtons() {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     // Pet button
@@ -157,7 +157,7 @@ class CatScene extends Component with HasGameRef {
 
   /// Add skills info
   void _addSkillsInfo() {
-    final size = gameRef.size;
+    final size = game.size;
     final gameState = ref.read(gameStateProvider);
 
     final skillsTitle = TextComponent(
@@ -287,7 +287,7 @@ class CatScene extends Component with HasGameRef {
           ],
         ),
       ),
-      position: gameRef.size / 2 + Vector2(0, -150),
+      position: game.size / 2 + Vector2(0, -150),
       anchor: Anchor.center,
     );
 
@@ -302,8 +302,8 @@ class CatScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -312,7 +312,7 @@ class CatScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = const Color(0xFFFFF8DC), // Cornsilk (lighter background)

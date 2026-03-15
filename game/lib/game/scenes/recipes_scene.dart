@@ -8,7 +8,7 @@ import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
 
 /// Recipes scene - recipe book/codex
-class RecipesScene extends Component with HasGameRef {
+class RecipesScene extends Component with HasGameReference {
   final WidgetRef ref;
 
   // Recipe data
@@ -58,13 +58,13 @@ class RecipesScene extends Component with HasGameRef {
             .toList();
       },
       loading: () {},
-      error: (_, __) {},
+      error: (_, _) {},
     );
   }
 
   /// Setup UI components
   Future<void> _setupUI() async {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Title
     _titleText = TextComponent(
@@ -118,7 +118,7 @@ class RecipesScene extends Component with HasGameRef {
 
   /// Add filter buttons
   void _addFilterButtons() {
-    final size = gameRef.size;
+    final size = game.size;
     final centerX = size.x / 2;
 
     // All filter
@@ -157,7 +157,7 @@ class RecipesScene extends Component with HasGameRef {
 
   /// Build recipe cards
   void _buildRecipeCards() {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Get filtered recipes
     List<Recipe> recipesToShow;
@@ -404,7 +404,7 @@ class RecipesScene extends Component with HasGameRef {
 
   /// Show recipe details dialog
   void _showRecipeDetails(Recipe recipe) {
-    final size = gameRef.size;
+    final size = game.size;
 
     // Dialog background
     final dialogBg = RectangleComponent(
@@ -553,7 +553,7 @@ class RecipesScene extends Component with HasGameRef {
 
   /// Show empty message
   void _showEmptyMessage() {
-    final size = gameRef.size;
+    final size = game.size;
 
     String message;
     switch (_currentFilter) {
@@ -622,8 +622,8 @@ class RecipesScene extends Component with HasGameRef {
 
   /// Go back to home scene
   void _goBack() {
-    if (gameRef is CatAlchemyGame) {
-      (gameRef as CatAlchemyGame).navigateTo('home');
+    if (game is CatAlchemyGame) {
+      (game as CatAlchemyGame).navigateTo('home');
     }
   }
 
@@ -632,7 +632,7 @@ class RecipesScene extends Component with HasGameRef {
     super.render(canvas);
 
     // Background
-    final size = gameRef.size;
+    final size = game.size;
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
       Paint()..color = MGColors.textHighEmphasis, // Warm cream

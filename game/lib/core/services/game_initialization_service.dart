@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../providers/game_providers.dart';
 
@@ -81,7 +82,7 @@ class GameInitializationService {
     // Show offline rewards UI if there are rewards
     if (productionRewards.isNotEmpty) {
       // TODO: Show offline rewards popup
-      print('Offline rewards: $productionRewards');
+      debugPrint('Offline rewards: $productionRewards');
     }
   }
 

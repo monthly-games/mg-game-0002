@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:mg_common_game/systems/progression/prestige_manager.dart'; // Add this import
@@ -42,14 +43,14 @@ class GameStateNotifier extends StateNotifier<GameState> {
 
       if (savedState != null) {
         state = savedState;
-        print('Loaded saved game state');
+        debugPrint('Loaded saved game state');
       } else {
         state = GameState.initial();
         await save(); // Save initial state
-        print('Created new game state');
+        debugPrint('Created new game state');
       }
     } catch (e) {
-      print('Error loading game state: $e');
+      debugPrint('Error loading game state: $e');
       state = GameState.initial();
     }
   }
@@ -60,7 +61,7 @@ class GameStateNotifier extends StateNotifier<GameState> {
       final box = await Hive.openBox<GameState>(_boxName);
       await box.put(_stateKey, state);
     } catch (e) {
-      print('Error saving game state: $e');
+      debugPrint('Error saving game state: $e');
     }
   }
 
@@ -71,9 +72,9 @@ class GameStateNotifier extends StateNotifier<GameState> {
       await box.delete(_stateKey);
       state = GameState.initial();
       await save();
-      print('Game state reset');
+      debugPrint('Game state reset');
     } catch (e) {
-      print('Error resetting game state: $e');
+      debugPrint('Error resetting game state: $e');
     }
   }
 
