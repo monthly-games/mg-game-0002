@@ -23,6 +23,10 @@ import 'ui/hud/mg_idle_hud.dart';
 import 'screens/daily_quest_screen.dart';
 import 'screens/battlepass_screen.dart';
 import 'screens/collection_screen.dart';
+import 'game/tutorial_config.dart';
+import 'game/balancing_config.dart';
+import 'package:mg_common_game/systems/tutorial/tutorial_manager.dart';
+import 'package:mg_common_game/systems/balancing/balancing_manager.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -67,6 +71,26 @@ Future<void> main() async {
   }
   _setupBattlePass();
   _registerDailyQuests();
+  // ── Tutorial & Balancing ──────────────────────────────────
+  if (!GetIt.I.isRegistered<TutorialManager>()) {
+    final tutorialManager = TutorialManager();
+    await tutorialManager.initialize();
+    tutorialManager.registerTutorial(
+      kOnboardingTutorial.id,
+      kOnboardingTutorial.steps,
+    );
+    GetIt.I.registerSingleton<TutorialManager>(tutorialManager);
+  }
+  if (!GetIt.I.isRegistered<BalancingManager>()) {
+    GetIt.I.registerSingleton<BalancingManager>(
+      BalancingManager(defaultConfig: kDefaultBalancingConfig),
+    );
+  }
+  // ── Q7 DI Fix: Missing Systems ──────────────────────────
+  if (!GetIt.I.isRegistered<GachaManager>()) {
+    GetIt.I.registerSingleton<GachaManager>(GachaManager());
+  }
+
   runApp(
     const ProviderScope(
       child: CatAlchemyApp(),
