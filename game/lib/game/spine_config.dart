@@ -14,7 +14,7 @@ const kAlchemistCatMeta = SpineAssetMeta(
   atlasPath:
       'assets/spine/characters/alchemist_cat/alchemist_cat.atlas',
   skeletonPath:
-      'assets/spine/characters/alchemist_cat/alchemist_cat.skel',
+      'assets/spine/characters/alchemist_cat/alchemist_cat.json',
   animations: ['idle', 'walk', 'attack', 'hit'],
   defaultAnimation: 'idle',
   defaultMix: 0.2,
@@ -26,7 +26,7 @@ const kFireCatMeta = SpineAssetMeta(
   key: 'fire_cat',
   path: 'spine/characters/fire_cat',
   atlasPath: 'assets/spine/characters/fire_cat/fire_cat.atlas',
-  skeletonPath: 'assets/spine/characters/fire_cat/fire_cat.skel',
+  skeletonPath: 'assets/spine/characters/fire_cat/fire_cat.json',
   animations: ['idle', 'walk', 'attack', 'hit'],
   defaultAnimation: 'idle',
   defaultMix: 0.2,
@@ -38,7 +38,7 @@ const kIceCatMeta = SpineAssetMeta(
   key: 'ice_cat',
   path: 'spine/characters/ice_cat',
   atlasPath: 'assets/spine/characters/ice_cat/ice_cat.atlas',
-  skeletonPath: 'assets/spine/characters/ice_cat/ice_cat.skel',
+  skeletonPath: 'assets/spine/characters/ice_cat/ice_cat.json',
   animations: ['idle', 'walk', 'attack', 'hit'],
   defaultAnimation: 'idle',
   defaultMix: 0.2,
