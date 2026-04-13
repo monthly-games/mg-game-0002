@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages, unused_local_variable
 // ============================================================
-// Collection Screen — MG-0002 Cat Alchemy Workshop
+// Collection Screen -- MG-0002 Cat Alchemy Workshop
 // Genre: Idle Clicker · Collection System UI
 //
 // Firebase Analytics Events:

@@ -1,10 +1,10 @@
 import 'package:mg_common_game/mg_common_game.dart';
-import '../models/game_state.dart';
+import '../models/game_state.dart' as models;
 
 /// Manages inventory system with integration to GameState
 class InventoryGameManager {
   final InventoryManager _inventoryManager;
-  final GameState _gameState;
+  final models.GameState _gameState;
 
   InventoryGameManager(this._gameState)
     : _inventoryManager = InventoryManager(maxSlots: 100, maxStackSize: 999) {

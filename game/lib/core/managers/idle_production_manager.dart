@@ -1,6 +1,6 @@
 import 'package:mg_common_game/mg_common_game.dart';
 import '../models/material.dart';
-import '../models/game_state.dart';
+import '../models/game_state.dart' as models;
 
 /// Manages idle production for materials
 ///
@@ -9,7 +9,7 @@ class IdleProductionManager {
   final Map<String, IdleResource> _resources = {};
   final Map<String, double> _resourceModifiers = {};
   double _globalModifier = 1.0;
-  final GameState _gameState;
+  final models.GameState _gameState;
 
   static const double maxOfflineHours = 8.0;
 
@@ -94,7 +94,7 @@ class IdleProductionManager {
         _gameState.addToInventory(entry.key, addable);
       }
 
-      adjustedRewards[entry.key] = addable;
+      adjustedRewards[entry.key] = addable.toInt();
     }
 
     return adjustedRewards;

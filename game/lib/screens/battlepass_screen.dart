@@ -1,6 +1,6 @@
 // ignore_for_file: depend_on_referenced_packages, unused_local_variable
 // ============================================================
-// BattlePass Screen — MG-0002 Cat Alchemy
+// BattlePass Screen -- MG-0002 Cat Alchemy
 // Genre: Idle Clicker · Retention System UI
 //
 // Firebase Analytics Events:
@@ -11,7 +11,8 @@
 //   - battlepass_claim_all: Bulk claim action
 //
 // Template: This file is the canonical template for 47 remaining games.
-// ============================================================
+// ============================================================import 'package:mg_common_game/l10n/localization.dart';
+
 
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
@@ -162,7 +163,7 @@ class _BattlePassScreenState extends State<BattlePassScreen>
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           SnackBar(
-            content: Text('${rewards.length} rewards claimed!'),
+            content: Text('${rewards.length} rewards claimed'),
             backgroundColor: MGColors.success,
             duration: const Duration(seconds: 2),
           ),
@@ -175,7 +176,7 @@ class _BattlePassScreenState extends State<BattlePassScreen>
     final names = rewards.map((r) => r.nameKr).join(', ');
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text('Tier $level: $names'),
+        content: Text('Rewards: $names'),
         backgroundColor: MGColors.success,
         duration: const Duration(seconds: 2),
       ),
@@ -188,7 +189,7 @@ class _BattlePassScreenState extends State<BattlePassScreen>
 
     if (season == null) {
       return Scaffold(
-        appBar: AppBar(title: const Text('BattlePass')),
+        appBar: AppBar(title: Text('Battle Pass - Level ${_bpManager.currentLevel}')),
         body: const Center(
           child: Text(
             'No active season',

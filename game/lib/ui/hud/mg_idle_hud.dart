@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:mg_common_game/core/ui/mg_ui.dart';
 
 /// MG UI 기반 아이들 게임 HUD
@@ -58,6 +59,9 @@ class MGIdleHud extends StatelessWidget {
 
           // 중앙 영역 확장 (게임 콘텐츠)
           const Expanded(child: SizedBox()),
+          // Spine 캐릭터 표시
+          _buildSpineCharacter(),
+          const SizedBox(height: 50),
 
           // 하단에는 게임 내 버튼들이 있으므로 HUD 없음
         ],
@@ -221,5 +225,37 @@ class MGIdleHud extends StatelessWidget {
       return '${(number / 1000).toStringAsFixed(1)}K';
     }
     return number.toString();
+  }
+
+  Widget _buildSpineCharacter() {
+    return GestureDetector(
+      onTap: () {
+        HapticFeedback.lightImpact();
+      },
+      child: Container(
+        width: 70,
+        height: 70,
+        decoration: BoxDecoration(
+          color: Colors.orange.withValues(alpha: 0.7),
+          borderRadius: BorderRadius.circular(12),
+          border: Border.all(color: Colors.orange.shade300, width: 2),
+        ),
+        child: const Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Icon(Icons.person, size: 28, color: Colors.white),
+            SizedBox(height: 4),
+            Text(
+              'Owner',
+              style: TextStyle(
+                color: Colors.white,
+                fontSize: 9,
+                fontWeight: FontWeight.bold,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }

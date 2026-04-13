@@ -1,153 +1,238 @@
-import 'package:flutter/material.dart';
-import 'package:mg_common_game/core/ui/screens/seasonal_event_screen.dart';
-import 'package:mg_common_game/core/ui/screens/tournament_screen.dart';
-import 'package:mg_common_game/core/ui/screens/guild_war_screen.dart';
-import 'package:mg_common_game/systems/events/seasonal_content_manager.dart';
-import 'package:mg_common_game/systems/competitive/tournament_manager.dart';
-import 'package:mg_common_game/systems/social/guild_war_manager.dart';
-import 'package:mg_common_game/core/ui/screens/daily_hub_screen.dart';
-import 'package:mg_common_game/systems/retention/daily_challenge_manager.dart';
-import 'package:mg_common_game/systems/retention/streak_manager.dart';
-import 'package:mg_common_game/systems/retention/login_rewards_manager.dart';
-import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
-import 'package:mg_common_game/systems/systems.dart';
-import 'package:mg_common_game/systems/quests/daily_quest.dart';
-import 'package:get_it/get_it.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mg_common_game/systems/progression/achievement_manager.dart';
+
+import 'dart:async';
 import 'package:flame/game.dart';
+import 'package:flutter/material.dart';
+import 'package:get_it/get_it.dart';
+import 'package:mg_common_game/core/ui/overlays/game_toast.dart';
+import 'package:mg_common_game/core/economy/gold_manager.dart';
+import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
+import 'package:mg_common_game/core/systems/save_system.dart';
+import 'package:mg_common_game/core/engine/game_manager.dart';
+import 'package:mg_common_game/core/engine/event_bus.dart';
+import 'package:mg_common_game/mg_common_game.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'core/models/game_state.dart';
+import 'core/models/game_state.dart' as local;
 import 'game/cat_alchemy_game.dart';
 import 'providers/game_providers.dart';
 import 'ui/hud/mg_idle_hud.dart';
 import 'screens/daily_quest_screen.dart';
 import 'screens/battlepass_screen.dart';
 import 'screens/collection_screen.dart';
-import 'game/tutorial_config.dart';
-import 'game/balancing_config.dart';
-import 'package:mg_common_game/systems/tutorial/tutorial_manager.dart';
-import 'package:mg_common_game/systems/balancing/balancing_manager.dart';
+// // import 'game/tutorial_config.dart'; // TutorialManager not available
+// Balancing config disabled - BalancingManager not available
+// import 'game/balancing_config.dart';
+// import 'package:mg_common_game/systems/tutorial/tutorial_manager.dart';
+// import 'package:mg_common_game/core/ui/accessibility/accessibility_settings.dart';
+// import 'package:firebase_core/firebase_core.dart';
+// import 'package:firebase_remote_config/firebase_remote_config.dart';
+// import 'firebase_options.dart';
+import 'package:mg_common_game/core/ui/screens/game_loading_screen.dart';
+// import 'core/models/game_state.dart' as models;
+// 
+// void main() async {
+//   runZonedGuarded(
+//     () async {
+//       WidgetsFlutterBinding.ensureInitialized();
+// 
+//       // Initialize Firebase Core
+//       try {
+//         await Firebase.initializeApp(
+//           options: DefaultFirebaseOptions.currentPlatform,
+//         );
+//         print('Firebase Core initialized successfully');
+//       } catch (e) {
+//         print('Failed to initialize Firebase Core: $e');
+//       }
+// 
+//       // Initialize Firebase Remote Config
+//       try {
+//         final remoteConfig = FirebaseRemoteConfig.instance;
+//         await remoteConfig.setDefaults({
+//           'feature_iap_enabled': true,
+//           'feature_battlepass_enabled': true,
+//           'feature_gacha_enabled': true,
+//           'feature_daily_quest_v2_enabled': true,
+//           'feature_daily_rewards_enabled': true,
+//           'feature_tutorial_enabled': true,
+//           'feature_new_ui_enabled': false,
+//           'min_app_version': '1.0.0',
+//         });
+//         await remoteConfig.fetchAndActivate();
+//         print('Remote Config initialized successfully');
+//       } catch (e) {
+//         print('Failed to initialize Remote Config: $e');
+//       }
+// 
+//       // Initialize Hive for data persistence
+//       await Hive.initFlutter();
+// 
+//       // Register Hive adapters
+//       Hive.registerAdapter(models.local.GameStateAdapter());
+// 
+//       // Open game state box
+//       await Hive.openBox<models.local.GameState>('gameState');
+// 
+//       // Register Core Services
+//       if (!GetIt.I.isRegistered<EventBus>()) {
+//         GetIt.I.registerSingleton(EventBus());
+//       }
+// 
+//       if (!GetIt.I.isRegistered<SaveSystem>()) {
+//         final saveSystem = LocalSaveSystem();
+//         await saveSystem.init();
+//         GetIt.I.registerSingleton<SaveSystem>(saveSystem);
+//       }
+// 
+//       if (!GetIt.I.isRegistered<GameManager>()) {
+//         GetIt.I.registerSingleton(
+//           GameManager(GetIt.I<EventBus>(), GetIt.I<SaveSystem>()),
+//         );
+//       }
+//       await GetIt.I<GameManager>().initialize();
+// 
+//       if (!GetIt.I.isRegistered<GoldManager>()) {
+//         GetIt.I.registerSingleton(GoldManager());
+//       }
+// 
+//       // Battlepass System
+//       if (!GetIt.I.isRegistered<BattlePassManager>()) {
+//         GetIt.I.registerSingleton(BattlePassManager());
+//         _setupBattlePass();
+//       }
+// 
+//       // Collection System
+//       if (!GetIt.I.isRegistered<CollectionManager>()) {
+//         GetIt.I.registerSingleton(CollectionManager());
+//         _registerCollections();
+//       }
+// 
+//       // Gacha System
+//       if (!GetIt.I.isRegistered<GachaManager>()) {
+//         GetIt.I.registerSingleton(GachaManager());
+//       }
+// 
+//       // Progression Manager
+//       if (!GetIt.I.isRegistered<ProgressionManager>()) {
+//         GetIt.I.registerSingleton(ProgressionManager());
+//       }
+// 
+//       // Upgrade Manager
+//       if (!GetIt.I.isRegistered<UpgradeManager>()) {
+//         GetIt.I.registerSingleton(UpgradeManager());
+//       }
+// 
+//       // Achievement Manager
+//       if (!GetIt.I.isRegistered<AchievementManager>()) {
+//         GetIt.I.registerSingleton(AchievementManager());
+//       }
+// 
+//       // Prestige Manager
+//       if (!GetIt.I.isRegistered<PrestigeManager>()) {
+//         GetIt.I.registerSingleton(PrestigeManager());
+//       }
+// 
+//       // Daily Quest Manager
+//       if (!GetIt.I.isRegistered<DailyQuestManager>()) {
+//         final questManager = DailyQuestManager();
+//         GetIt.I.registerSingleton(questManager);
+//         _registerDailyQuests(questManager);
+//       }
+// 
+//       // Weekly Challenge Manager
+//       if (!GetIt.I.isRegistered<WeeklyChallengeManager>()) {
+//         GetIt.I.registerSingleton(WeeklyChallengeManager());
+//       }
+// 
+//       // Statistics Manager
+//       if (!GetIt.I.isRegistered<StatisticsManager>()) {
+//         GetIt.I.registerSingleton(StatisticsManager());
+//       }
+// 
+//       // Settings Manager
+//       if (!GetIt.I.isRegistered<SettingsManager>()) {
+//         GetIt.I.registerSingleton(SettingsManager());
+//       }
+// 
+//       // Tutorial Manager
+//       if (!GetIt.I.isRegistered<TutorialManager>()) {
+//         final tutorialManager = TutorialManager();
+//         await tutorialManager.initialize();
+//         GetIt.I.registerSingleton<TutorialManager>(tutorialManager);
+//       }
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
+//       // Save Manager
+//       await SaveManagerHelper.setupSaveManager(
+//         autoSaveEnabled: true,
+//         autoSaveIntervalSeconds: 30,
+//       );
+// 
+//       print('Game initialization complete. Launching app.');
+//       runApp(const CatAlchemyApp());
+//     },
+//     (Object error, StackTrace stack) {
+//       print('Uncaught error in root zone: $error');
+//     },
+//   );
+//}
 
-  // Initialize Hive for data persistence
-  await Hive.initFlutter();
-
-  // Register Hive adapters
-  Hive.registerAdapter(GameStateAdapter());
-
-  // Open game state box
-  await Hive.openBox<GameState>('gameState');
-
-  // DailyQuest 시스템
-  GetIt.I.registerSingleton(DailyQuestManager());
-  // BattlePass 시스템
-  GetIt.I.registerSingleton(BattlePassManager());
-  // Collection 시스템
-  if (!GetIt.I.isRegistered<CollectionManager>()) {
-    GetIt.I.registerSingleton(CollectionManager());
-  // ── Retention Systems for DailyHub ────────────────────────
-  if (!GetIt.I.isRegistered<LoginRewardsManager>()) {
-    GetIt.I.registerSingleton(LoginRewardsManager());
-  }
-  if (!GetIt.I.isRegistered<StreakManager>()) {
-    GetIt.I.registerSingleton(StreakManager());
-  }
-  if (!GetIt.I.isRegistered<DailyChallengeManager>()) {
-    GetIt.I.registerSingleton(DailyChallengeManager());
-}
-  // ── P3 Engine Systems ─────────────────────────────────────
-  if (!GetIt.I.isRegistered<GuildWarManager>()) {
-    GetIt.I.registerSingleton(GuildWarManager());
-  }
-  if (!GetIt.I.isRegistered<TournamentManager>()) {
-    GetIt.I.registerSingleton(TournamentManager());
-  }
-  if (!GetIt.I.isRegistered<SeasonalContentManager>()) {
-    GetIt.I.registerSingleton(SeasonalContentManager());
-  }
-    _registerCollections();
-  }
-  _setupBattlePass();
-  _registerDailyQuests();
-  // ── Tutorial & Balancing ──────────────────────────────────
-  if (!GetIt.I.isRegistered<TutorialManager>()) {
-    final tutorialManager = TutorialManager();
-    await tutorialManager.initialize();
-    tutorialManager.registerTutorial(
-      kOnboardingTutorial.id,
-      kOnboardingTutorial.steps,
-    );
-    GetIt.I.registerSingleton<TutorialManager>(tutorialManager);
-  }
-  if (!GetIt.I.isRegistered<BalancingManager>()) {
-    GetIt.I.registerSingleton<BalancingManager>(
-      BalancingManager(defaultConfig: kDefaultBalancingConfig),
-    );
-  }
-  // ── Q7 DI Fix: Missing Systems ──────────────────────────
-  if (!GetIt.I.isRegistered<GachaManager>()) {
-    GetIt.I.registerSingleton<GachaManager>(GachaManager());
-  }
-
-  runApp(
-    const ProviderScope(
-      child: CatAlchemyApp(),
-    ),
-  );
-}
-
-class CatAlchemyApp extends StatelessWidget {
+class CatAlchemyApp extends StatefulWidget {
   const CatAlchemyApp({super.key});
 
   @override
+  State<CatAlchemyApp> createState() => _CatAlchemyAppState();
+}
+
+class _CatAlchemyAppState extends State<CatAlchemyApp> {
+  bool _isLoading = true;
+
+  @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: '고양이 연금술 공방',
-      theme: ThemeData(
-        colorScheme: ColorScheme.fromSeed(seedColor: MGColors.warning),
-        scaffoldBackgroundColor: MGColors.textHighEmphasis, // Warm cream
-        fontFamily: 'Pretendard', // TODO: Add font to pubspec
+    return MGAccessibilityProvider(
+      settings: MGAccessibilitySettings.defaults,
+      onSettingsChanged: (settings) {
+        // Settings updated
+      },
+      child: ProviderScope(
+        child: MaterialApp(
+          title: 'Cat Alchemy',
+          supportedLocales: const [Locale('en', 'US')],
+          localizationsDelegates: const [
+            DefaultMaterialLocalizations.delegate,
+            DefaultWidgetsLocalizations.delegate,
+          ],
+          theme: ThemeData(
+            colorScheme: ColorScheme.fromSeed(seedColor: MGColors.primaryAction),
+            scaffoldBackgroundColor: MGColors.textHighEmphasis,
+          ),
+          routes: {
+            '/daily-quest': (_) => const DailyQuestScreen(),
+            '/battlepass': (_) => const BattlePassScreen(),
+            '/collection': (context) => CollectionScreen(
+              collectionManager: GetIt.I<CollectionManager>(),
+            ),
+          },
+          home: _isLoading
+              ? GameLoadingScreen(
+                  images: const [],
+                  audio: const [],
+                  backgroundImage: 'assets/images/ui/background.png',
+                  onFinished: () {
+                    if (mounted) {
+                      setState(() {
+                        _isLoading = false;
+                      });
+                    }
+                  },
+                )
+              : const GameScreen(),
+        ),
       ),
-      routes: {
-        '/daily-quest': (_) => const DailyQuestScreen(),
-        '/battlepass': (_) => const BattlePassScreen(),
-        '/daily-hub': (context) => DailyHubScreen(
-          questManager: GetIt.I<DailyQuestManager>(),
-          loginRewardsManager: GetIt.I<LoginRewardsManager>(),
-          streakManager: GetIt.I<StreakManager>(),
-          challengeManager: GetIt.I<DailyChallengeManager>(),
-          accentColor: MGColors.primaryAction,
-          onClose: () => Navigator.pop(context),
-        ),
-      
-        '/collection': (context) => CollectionScreen(
-          collectionManager: GetIt.I<CollectionManager>(),
-        ),
-        '/guild-war': (context) => GuildWarScreen(
-          guildWarManager: GetIt.I<GuildWarManager>(),
-          accentColor: MGColors.primaryAction,
-          onClose: () => Navigator.pop(context),
-          ),
-        '/tournament': (context) => TournamentScreen(
-          tournamentManager: GetIt.I<TournamentManager>(),
-          accentColor: MGColors.primaryAction,
-          onClose: () => Navigator.pop(context),
-          ),
-        '/seasonal-event': (context) => SeasonalEventScreen(
-          seasonalContentManager: GetIt.I<SeasonalContentManager>(),
-          accentColor: MGColors.primaryAction,
-          onClose: () => Navigator.pop(context),
-          ),
-},
-      home: const GameScreen(),
-      debugShowCheckedModeBanner: false,
     );
   }
 }
 
-/// Main game screen with Flame game widget
 class GameScreen extends ConsumerStatefulWidget {
   const GameScreen({super.key});
 
@@ -179,22 +264,10 @@ class _GameScreenState extends ConsumerState<GameScreen> {
               workshopLevel: gameState.workshopLevel,
               onSettings: () => game.navigateTo('settings'),
               onTutorial: () => game.navigateTo('tutorial'),
-              onCollection: () => game.navigateTo('collection'),
+              onCollection: () => Navigator.of(context).pushNamed('/collection'),
               onPrestige: () => game.navigateTo('prestige'),
               onEvents: () => game.navigateTo('events'),
-              onDailyHub: () => Navigator.of(context).pushNamed('/daily-hub'),
-              onGuildWar: () {
-                game.pauseEngine();
-                Navigator.of(context).pushNamed('/guild-war').then((_) => game.resumeEngine());
-              },
-              onTournament: () {
-                game.pauseEngine();
-                Navigator.of(context).pushNamed('/tournament').then((_) => game.resumeEngine());
-              },
-              onSeasonalEvent: () {
-                game.pauseEngine();
-                Navigator.of(context).pushNamed('/seasonal-event').then((_) => game.resumeEngine());
-              },
+              onDailyHub: () => Navigator.of(context).pushNamed('/daily-quest'),
             );
           },
         },
@@ -204,38 +277,35 @@ class _GameScreenState extends ConsumerState<GameScreen> {
   }
 }
 
+void _registerDailyQuests(DailyQuestManager dailyQuest) {
+  // Cat Alchemy themed daily quests
+  dailyQuest.registerQuest(DailyQuest(
+    id: 'alchemy_combine_20',
+    title: 'Alchemy Apprentice',
+    description: 'Combine 20 ingredients',
+    targetValue: 20,
+    goldReward: 150,
+    xpReward: 50,
+  ));
 
-void _registerDailyQuests() {
-  final dailyQuest = GetIt.I<DailyQuestManager>();
-  
   dailyQuest.registerQuest(DailyQuest(
-    id: 'collect_gold',
-    title: '골드 모으기',
-    description: '골드 1000 획득',
-    targetValue: 1000,
-    goldReward: 500,
-    xpReward: 10,
-  ));
-  
-  dailyQuest.registerQuest(DailyQuest(
-    id: 'play_games',
-    title: '게임 플레이',
-    description: '게임 5판 플레이',
+    id: 'alchemy_recipes_5',
+    title: 'Recipe Master',
+    description: 'Discover 5 new recipes',
     targetValue: 5,
-    goldReward: 300,
-    xpReward: 5,
-  ));
-  
-  dailyQuest.registerQuest(DailyQuest(
-    id: 'level_up',
-    title: '레벨업',
-    description: '레벨 1 상승',
-    targetValue: 1,
     goldReward: 200,
-    xpReward: 3,
+    xpReward: 75,
+  ));
+
+  dailyQuest.registerQuest(DailyQuest(
+    id: 'alchemy_gold_1000',
+    title: 'Cat Merchant',
+    description: 'Earn 1000 gold from sales',
+    targetValue: 1000,
+    goldReward: 300,
+    xpReward: 100,
   ));
 }
-
 
 void _setupBattlePass() {
   final bp = GetIt.I<BattlePassManager>();
@@ -258,7 +328,6 @@ void _setupBattlePass() {
 void _registerCollections() {
   final collection = GetIt.I<CollectionManager>();
 
-  // Characters 컬렉션
   collection.registerCollection(Collection(
     id: 'characters',
     name: '캐릭터',
@@ -303,9 +372,63 @@ void _registerCollections() {
     },
   ));
 
-  // 아이템 해제 콜백 (햅틱 피드백)
   collection.onItemUnlocked = (collectionId, itemId) {
-    // SettingsManager가 등록되어 있으면 햅틱 피드백
     debugPrint('Collection item unlocked: $collectionId / $itemId');
   };
+}
+
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // Initialize Hive for data persistence
+  await Hive.initFlutter();
+
+  // Register Hive adapter for local.GameState (typeId: 100)
+  // Only register if not already registered (main can be called multiple times in tests)
+  if (!Hive.isAdapterRegistered(100)) {
+    Hive.registerAdapter(local.GameStateAdapter());
+  }
+
+  // Open the game state box
+  if (!Hive.isBoxOpen('gameState')) {
+    await Hive.openBox<local.GameState>('gameState');
+  }
+
+  // Register Core Services
+  if (!GetIt.I.isRegistered<EventBus>()) {
+    GetIt.I.registerSingleton(EventBus());
+  }
+
+  if (!GetIt.I.isRegistered<SaveSystem>()) {
+    final saveSystem = LocalSaveSystem();
+    await saveSystem.init();
+    GetIt.I.registerSingleton<SaveSystem>(saveSystem);
+  }
+
+  if (!GetIt.I.isRegistered<GameManager>()) {
+    GetIt.I.registerSingleton(
+      GameManager(GetIt.I<EventBus>(), GetIt.I<SaveSystem>()),
+    );
+  }
+  await GetIt.I<GameManager>().initialize();
+
+  if (!GetIt.I.isRegistered<GoldManager>()) {
+    GetIt.I.registerSingleton(GoldManager());
+  }
+
+  // Initialize systems
+  if (!GetIt.I.isRegistered<CollectionManager>()) {
+    GetIt.I.registerSingleton(CollectionManager());
+  }
+
+  if (!GetIt.I.isRegistered<BattlePassManager>()) {
+    GetIt.I.registerSingleton(BattlePassManager());
+  }
+
+  if (!GetIt.I.isRegistered<DailyQuestManager>()) {
+    GetIt.I.registerSingleton(DailyQuestManager());
+  }
+
+  print('Cat Alchemy initialization complete. Launching app.');
+  runApp(const CatAlchemyApp());
 }

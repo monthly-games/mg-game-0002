@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'game_state.g.dart';
 
 /// Player progress and game state
-@HiveType(typeId: 0)
+@HiveType(typeId: 100)  // Changed from 0 to 100 to avoid conflict with mg_common_game
 class GameState extends HiveObject {
   @HiveField(0)
   int gold;

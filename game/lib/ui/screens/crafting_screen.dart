@@ -1,3 +1,4 @@
+import 'package:mg_common_game/core/ui/layout/mg_spacing.dart';
 import 'package:flutter/material.dart';
 import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:get_it/get_it.dart';
@@ -7,10 +8,12 @@ import 'package:mg_common_game/features/crafting/logic/recipe.dart';
 import 'package:mg_common_game/core/ui/layouts/game_scaffold.dart';
 import 'package:mg_common_game/core/economy/gold_manager.dart'; // Import
 import 'package:mg_common_game/core/ui/widgets/inventory_grid.dart'; // Ensure exported or use direct path
+import '../../l10n/localization.dart';
 import 'package:mg_common_game/core/ui/theme/app_colors.dart';
 import 'package:mg_common_game/core/audio/audio_manager.dart';
 import 'package:flame/game.dart';
-import '../../game/workshop_game.dart';
+import '../../game/workshop_game.dart';import 'package:mg_common_game/l10n/localization.dart';
+
 
 class CraftingScreen extends StatefulWidget {
   const CraftingScreen({super.key});
@@ -52,7 +55,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
             child: Stack(
               children: [
                 Container(
-                  margin: const EdgeInsets.all(16),
+                  margin: const EdgeInsets.all(MGSpacing.md),
                   decoration: BoxDecoration(
                     color: AppColors.background.withValues(alpha: 0.5),
                     borderRadius: BorderRadius.circular(16),
@@ -76,13 +79,13 @@ class _CraftingScreenState extends State<CraftingScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 16),
+          const SizedBox(height: MGSpacing.md),
 
           // 3. Bottom Area: Inventory
           Expanded(
             flex: 3,
             child: Container(
-              padding: const EdgeInsets.all(16),
+              padding: const EdgeInsets.all(MGSpacing.md),
               color: AppColors.surface,
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -95,7 +98,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
                       fontWeight: FontWeight.bold,
                     ),
                   ),
-                  const SizedBox(height: 8),
+                  const SizedBox(height: MGSpacing.xs),
                   Expanded(
                     child: StreamBuilder(
                       stream: inventory
@@ -142,10 +145,10 @@ class _CraftingScreenState extends State<CraftingScreen> {
           mainAxisSize: MainAxisSize.min,
           children: [
             const Icon(Icons.check_circle, color: MGColors.success, size: 48),
-            const SizedBox(height: 8),
+            const SizedBox(height: MGSpacing.xs),
             ElevatedButton(
               onPressed: _claimResult,
-              child: const Text('Collect!'),
+              child: Text(AppLocalizations.of(context).uiGeneralCollect),
             ),
           ],
         );
@@ -168,7 +171,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
                   color: MGColors.gem,
                 ),
               ),
-              SizedBox(width: 8),
+              SizedBox(width: MGSpacing.xs),
               Text(
                 'Brewing...',
                 style: TextStyle(color: MGColors.textHighEmphasis, fontSize: 12),
@@ -226,13 +229,12 @@ class _CraftingScreenState extends State<CraftingScreen> {
         mainAxisSize: MainAxisSize.min,
         children: [
           const Icon(Icons.monetization_on, color: MGColors.warning, size: 20),
-          const SizedBox(width: 8),
-          StreamBuilder<int>(
-            stream: goldManager.onGoldChanged,
-            initialData: goldManager.currentGold,
-            builder: (context, snapshot) {
+          const SizedBox(width: MGSpacing.xs),
+          AnimatedBuilder(
+            animation: goldManager,
+            builder: (context, child) {
               return Text(
-                '${snapshot.data ?? 0}',
+                '${goldManager.currentGold}',
                 style: const TextStyle(
                   color: MGColors.warning,
                   fontWeight: FontWeight.bold,

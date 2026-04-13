@@ -1,15 +1,16 @@
 import 'dart:math';
 import 'package:mg_common_game/mg_common_game.dart';
 import '../models/recipe.dart';
-import '../models/game_state.dart';
+import '../models/game_state.dart' as models;
 
 /// Manages crafting system for the game
 class CraftingGameManager {
   final CraftingManager _craftingManager = CraftingManager();
-  final GameState _gameState;
+  final models.GameState _gameState;
   final PrestigeManager _prestigeManager;
 
-  CraftingGameManager(this._gameState, this._prestigeManager) {
+  CraftingGameManager(models.GameState gameState, this._prestigeManager)
+      : _gameState = gameState {
     _craftingManager.clear();
 
     // Set initial queue size from game state

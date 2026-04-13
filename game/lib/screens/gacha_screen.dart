@@ -1,12 +1,12 @@
 // ============================================================
-// Gacha Screen — MG-0002 Cat Alchemy Workshop
+// Gacha Screen -- MG-0002 Cat Alchemy Workshop
 // Genre: Idle Clicker · Gacha System UI
 // ============================================================
-
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mg_common_game/core/ui/mg_ui.dart';
+import '../l10n/localization.dart';
 import 'package:mg_common_game/core/ui/widgets/gacha/gacha_pull_animation.dart';
 import 'package:mg_common_game/systems/gacha/gacha_manager.dart';
 import 'package:mg_common_game/systems/gacha/gacha_pool.dart';
@@ -170,7 +170,7 @@ class _GachaScreenState extends State<GachaScreen>
                 Padding(
                   padding: EdgeInsets.all(MGSpacing.lg),
                   child: MGButton(
-                    label: 'OK',
+                    label: AppLocalizations.of(context).uiGeneralDiwaliTokenCollection,
                     onPressed: _dismissResults,
                     size: MGButtonSize.large,
                     width: double.infinity,
@@ -512,7 +512,7 @@ class _GachaScreenState extends State<GachaScreen>
       children: [
         Expanded(
           child: GachaPullButton(
-            label: '1x Pull',
+            label: AppLocalizations.of(context).uiGeneral1xPull,
             cost: _kSinglePullCost,
             onPressed: _onSinglePull,
           ),
@@ -520,7 +520,7 @@ class _GachaScreenState extends State<GachaScreen>
         SizedBox(width: MGSpacing.md),
         Expanded(
           child: GachaPullButton(
-            label: '10x Pull',
+            label: AppLocalizations.of(context).uiGeneral10xPull,
             cost: _kMultiPullCost,
             onPressed: _onMultiPull,
           ),

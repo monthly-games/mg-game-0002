@@ -8,7 +8,7 @@ part of 'game_state.dart';
 
 class GameStateAdapter extends TypeAdapter<GameState> {
   @override
-  final int typeId = 0;
+  final int typeId = 100;
 
   @override
   GameState read(BinaryReader reader) {
@@ -28,10 +28,10 @@ class GameStateAdapter extends TypeAdapter<GameState> {
       catState: (fields[8] as Map?)?.cast<String, dynamic>(),
       craftingQueue: (fields[9] as List?)
           ?.map((dynamic e) => (e as Map).cast<String, dynamic>())
-          .toList(),
+          ?.toList(),
       activeOrders: (fields[10] as List?)
           ?.map((dynamic e) => (e as Map).cast<String, dynamic>())
-          .toList(),
+          ?.toList(),
       dailyInteractions: (fields[11] as Map?)?.cast<String, int>(),
       tutorialCompleted: fields[12] as bool,
     );
