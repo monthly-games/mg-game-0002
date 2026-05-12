@@ -6,7 +6,6 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:flutter/material.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mg_common_game/core/ui/mg_ui.dart';
-import '../l10n/localization.dart';
 import 'package:mg_common_game/core/ui/widgets/gacha/gacha_pull_animation.dart';
 import 'package:mg_common_game/systems/gacha/gacha_manager.dart';
 import 'package:mg_common_game/systems/gacha/gacha_pool.dart';
@@ -112,8 +111,7 @@ class _GachaScreenState extends State<GachaScreen>
         'pull_count': _kMultiPullCount,
         'currency_spent': _kMultiPullCost,
         'highest_rarity': GachaRarity.values[highestRarity].nameKr,
-        'pity_triggered_count':
-            results.where((r) => r.isPityTriggered).length,
+        'pity_triggered_count': results.where((r) => r.isPityTriggered).length,
       },
     );
   }
@@ -170,7 +168,7 @@ class _GachaScreenState extends State<GachaScreen>
                 Padding(
                   padding: EdgeInsets.all(MGSpacing.lg),
                   child: MGButton(
-                    label: AppLocalizations.of(context).uiGeneralDiwaliTokenCollection,
+                    label: 'Token Collection',
                     onPressed: _dismissResults,
                     size: MGButtonSize.large,
                     width: double.infinity,
@@ -193,10 +191,7 @@ class _GachaScreenState extends State<GachaScreen>
             Expanded(
               child: TabBarView(
                 controller: _tabController,
-                children: [
-                  _buildPullTab(),
-                  _buildHistoryTab(),
-                ],
+                children: [_buildPullTab(), _buildHistoryTab()],
               ),
             ),
           ],
@@ -240,9 +235,7 @@ class _GachaScreenState extends State<GachaScreen>
   Widget _buildTabBar() {
     return Container(
       decoration: BoxDecoration(
-        border: Border(
-          bottom: BorderSide(color: MGColors.border, width: 1),
-        ),
+        border: Border(bottom: BorderSide(color: MGColors.border, width: 1)),
       ),
       child: TabBar(
         controller: _tabController,
@@ -256,8 +249,10 @@ class _GachaScreenState extends State<GachaScreen>
               parameters: {
                 'pool_id': _selectedPoolId ?? 'none',
                 'total_pulls':
-                    _gachaManager.getPityState(_selectedPoolId ?? '')
-                        ?.totalPulls ?? 0,
+                    _gachaManager
+                        .getPityState(_selectedPoolId ?? '')
+                        ?.totalPulls ??
+                    0,
               },
             );
           }
@@ -344,8 +339,7 @@ class _GachaScreenState extends State<GachaScreen>
                       ? MGColors.textHighEmphasis
                       : MGColors.textMediumEmphasis,
                   fontSize: 14,
-                  fontWeight:
-                      isSelected ? FontWeight.bold : FontWeight.normal,
+                  fontWeight: isSelected ? FontWeight.bold : FontWeight.normal,
                 ),
               ),
             ),
@@ -364,9 +358,7 @@ class _GachaScreenState extends State<GachaScreen>
         children: [
           Text(
             pool.nameKr,
-            style: MGTextStyles.h2.copyWith(
-              color: MGColors.textHighEmphasis,
-            ),
+            style: MGTextStyles.h2.copyWith(color: MGColors.textHighEmphasis),
           ),
           if (pool.description != null) ...[
             SizedBox(height: MGSpacing.xs),
@@ -391,9 +383,7 @@ class _GachaScreenState extends State<GachaScreen>
                 ],
               ),
               borderRadius: BorderRadius.circular(12),
-              border: Border.all(
-                color: MGColors.gem.withValues(alpha: 0.2),
-              ),
+              border: Border.all(color: MGColors.gem.withValues(alpha: 0.2)),
             ),
             child: Center(
               child: Column(
@@ -420,9 +410,7 @@ class _GachaScreenState extends State<GachaScreen>
                 SizedBox(width: MGSpacing.xs),
                 Text(
                   _formatRemainingTime(pool.remainingSeconds!),
-                  style: MGTextStyles.caption.copyWith(
-                    color: MGColors.warning,
-                  ),
+                  style: MGTextStyles.caption.copyWith(color: MGColors.warning),
                 ),
               ],
             ),
@@ -440,9 +428,7 @@ class _GachaScreenState extends State<GachaScreen>
         children: [
           Text(
             'Drop Rates',
-            style: MGTextStyles.h3.copyWith(
-              color: MGColors.textHighEmphasis,
-            ),
+            style: MGTextStyles.h3.copyWith(color: MGColors.textHighEmphasis),
           ),
           SizedBox(height: MGSpacing.sm),
           ...GachaRarity.values.reversed.map((rarity) {
@@ -512,7 +498,7 @@ class _GachaScreenState extends State<GachaScreen>
       children: [
         Expanded(
           child: GachaPullButton(
-            label: AppLocalizations.of(context).uiGeneral1xPull,
+            label: 'Pull x1',
             cost: _kSinglePullCost,
             onPressed: _onSinglePull,
           ),
@@ -520,7 +506,7 @@ class _GachaScreenState extends State<GachaScreen>
         SizedBox(width: MGSpacing.md),
         Expanded(
           child: GachaPullButton(
-            label: AppLocalizations.of(context).uiGeneral10xPull,
+            label: 'Pull x10',
             cost: _kMultiPullCost,
             onPressed: _onMultiPull,
           ),

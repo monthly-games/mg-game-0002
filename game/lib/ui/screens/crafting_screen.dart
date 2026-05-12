@@ -8,12 +8,11 @@ import 'package:mg_common_game/features/crafting/logic/recipe.dart';
 import 'package:mg_common_game/core/ui/layouts/game_scaffold.dart';
 import 'package:mg_common_game/core/economy/gold_manager.dart'; // Import
 import 'package:mg_common_game/core/ui/widgets/inventory_grid.dart'; // Ensure exported or use direct path
-import '../../l10n/localization.dart';
 import 'package:mg_common_game/core/ui/theme/app_colors.dart';
 import 'package:mg_common_game/core/audio/audio_manager.dart';
 import 'package:flame/game.dart';
-import '../../game/workshop_game.dart';import 'package:mg_common_game/l10n/localization.dart';
-
+import '../../game/workshop_game.dart';
+import 'package:mg_common_game/l10n/app_localizations.dart';
 
 class CraftingScreen extends StatefulWidget {
   const CraftingScreen({super.key});
@@ -148,7 +147,7 @@ class _CraftingScreenState extends State<CraftingScreen> {
             const SizedBox(height: MGSpacing.xs),
             ElevatedButton(
               onPressed: _claimResult,
-              child: Text(AppLocalizations.of(context).uiGeneralCollect),
+              child: Text(AppLocalizations.of(context).dailyQuestsClaim),
             ),
           ],
         );
@@ -174,7 +173,10 @@ class _CraftingScreenState extends State<CraftingScreen> {
               SizedBox(width: MGSpacing.xs),
               Text(
                 'Brewing...',
-                style: TextStyle(color: MGColors.textHighEmphasis, fontSize: 12),
+                style: TextStyle(
+                  color: MGColors.textHighEmphasis,
+                  fontSize: 12,
+                ),
               ),
             ],
           ),
@@ -191,7 +193,11 @@ class _CraftingScreenState extends State<CraftingScreen> {
       child: ActionChip(
         label: Text(recipe.id),
         backgroundColor: canCraft ? MGColors.gem : MGColors.border,
-        labelStyle: TextStyle(color: canCraft ? MGColors.textHighEmphasis : MGColors.textHighEmphasis.withValues(alpha: 0.54)),
+        labelStyle: TextStyle(
+          color: canCraft
+              ? MGColors.textHighEmphasis
+              : MGColors.textHighEmphasis.withValues(alpha: 0.54),
+        ),
         onPressed: canCraft && currentJob == null
             ? () => _startCraft(recipe)
             : null,

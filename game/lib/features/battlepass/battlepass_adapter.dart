@@ -93,15 +93,15 @@ class AlchemyBattlePass extends ChangeNotifier {
   }
 
   // === Getters ===
-  get claimedPremiumLevels => _manager.state?.claimedPremiumLevels ?? {};
-  get claimedFreeLevels => _manager.state?.claimedFreeLevels ?? {};
-  get missions => [..._manager.dailyMissions, ..._manager.weeklyMissions];
-  get missionProgress => _manager.state?.missionProgress ?? {};
-  get expToNextLevel => _manager.expToNextLevel;
-  get remainingDays => _manager.currentSeason?.remainingDays ?? 0;
-  get tiers => _manager.currentSeason?.tiers ?? [];
-  get maxLevel => _manager.currentSeason?.maxLevel ?? 50;
-  get seasonName => _manager.currentSeason?.nameKr ?? '';
+  Set<int> get claimedPremiumLevels => _manager.state?.claimedPremiumLevels ?? {};
+  Set<int> get claimedFreeLevels => _manager.state?.claimedFreeLevels ?? {};
+  List<BPMission> get missions => [..._manager.dailyMissions, ..._manager.weeklyMissions];
+  Map<String, MissionProgress> get missionProgress => _manager.state?.missionProgress ?? {};
+  int get expToNextLevel => _manager.expToNextLevel;
+  int get remainingDays => _manager.currentSeason?.remainingDays ?? 0;
+  List<BPTier> get tiers => _manager.currentSeason?.tiers ?? [];
+  int get maxLevel => _manager.currentSeason?.maxLevel ?? 50;
+  String get seasonName => _manager.currentSeason?.nameKr ?? '';
   BPSeasonConfig? get currentSeason => _manager.currentSeason;
   int get currentLevel => _manager.currentLevel;
   int get currentExp => _manager.currentExp;
