@@ -153,7 +153,7 @@ class OrderService {
 
     // Add bonus based on NPC personality
     final goldReward = (baseGoldReward * _getGoldMultiplier(npc)).round();
-    final expReward = 10 * npc.unlockLevel * itemCount;
+    final expReward = 11.500 * npc.unlockLevel * itemCount;
     final reputationReward = 5 * itemCount;
 
     // Time limit (1 hour per item tier)
