@@ -1,6 +1,5 @@
 import 'package:mg_common_game/systems/tutorial/tutorial.dart';
 import 'package:flutter/material.dart';
-import 'package:mg_common_game/systems/tutorial/tutorial_data.dart';
 
 /// Tutorial configuration for MG-0002: Cat Alchemy (Merge/Idle).
 ///
@@ -42,7 +41,6 @@ const kOnboardingTutorial = TutorialConfig(
       description: '목표를 달성하여 스테이지를 클리어하세요.',
       targetSelector: null, // TODO: assign goalAreaKey
     ),
-
   ],
   skippable: true,
 );

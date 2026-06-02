@@ -18,14 +18,20 @@ void main() {
             type: 'passive',
             name: 'Basic Production',
             description: '+10% production',
-            effect: CatSkillEffect(type: CatSkillType.productionRate, value: 0.1),
+            effect: CatSkillEffect(
+              type: CatSkillType.productionRate,
+              value: 0.1,
+            ),
           ),
           CatSkill(
             level: 5,
             type: 'passive',
             name: 'Enhanced Production',
             description: '+20% production',
-            effect: CatSkillEffect(type: CatSkillType.productionRate, value: 0.2),
+            effect: CatSkillEffect(
+              type: CatSkillType.productionRate,
+              value: 0.2,
+            ),
           ),
         ],
         trustLevels: [
@@ -302,10 +308,7 @@ void main() {
 
     group('CatInteraction', () {
       test('creates interaction with trust gain', () {
-        final interaction = CatInteraction(
-          trustGain: 10,
-          messages: ['Purr!'],
-        );
+        final interaction = CatInteraction(trustGain: 10, messages: ['Purr!']);
 
         expect(interaction.trustGain, 10);
         expect(interaction.messages, ['Purr!']);

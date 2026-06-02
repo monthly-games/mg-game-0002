@@ -6,9 +6,9 @@ import 'package:flutter_test/flutter_test.dart';
 void main() {
   testWidgets('App builds without errors', (tester) async {
     // Placeholder: add actual screen widget tests
-    await tester.pumpWidget(const MaterialApp(
-      home: Scaffold(body: Text('Test placeholder')),
-    ));
+    await tester.pumpWidget(
+      const MaterialApp(home: Scaffold(body: Text('Test placeholder'))),
+    );
     expect(find.byType(MaterialApp), findsOneWidget);
   });
 }

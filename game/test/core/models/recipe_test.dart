@@ -26,19 +26,13 @@ void main() {
 
     group('canCraft', () {
       test('returns true when all ingredients available', () {
-        final inventory = {
-          'grass': 5,
-          'water_clear': 3,
-        };
+        final inventory = {'grass': 5, 'water_clear': 3};
 
         expect(recipe.canCraft(inventory), isTrue);
       });
 
       test('returns true when exact ingredients available', () {
-        final inventory = {
-          'grass': 2,
-          'water_clear': 1,
-        };
+        final inventory = {'grass': 2, 'water_clear': 1};
 
         expect(recipe.canCraft(inventory), isTrue);
       });
@@ -70,10 +64,7 @@ void main() {
 
     group('getMissingIngredients', () {
       test('returns empty map when all ingredients available', () {
-        final inventory = {
-          'grass': 5,
-          'water_clear': 3,
-        };
+        final inventory = {'grass': 5, 'water_clear': 3};
 
         final missing = recipe.getMissingIngredients(inventory);
 

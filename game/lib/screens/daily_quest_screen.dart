@@ -12,14 +12,13 @@
 // Template: Based on MG-0010 canonical template.
 // ============================================================import 'package:mg_common_game/l10n/localization.dart';
 
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:get_it/get_it.dart';
 import 'package:mg_common_game/core/ui/mg_ui.dart';
-import 'package:mg_common_game/systems/quests/daily_quest.dart';
+import 'package:mg_common_game/systems/quests/daily_quest_v2.dart';
 
 /// Daily Quest screen for MG-0002 Cat Alchemy.
 ///
@@ -33,21 +32,19 @@ class DailyQuestScreen extends StatefulWidget {
 }
 
 class _DailyQuestScreenState extends State<DailyQuestScreen> {
-  late final DailyQuestManager _questManager;
+  late final DailyQuestManagerV2 _questManager;
   late Timer _resetTimer;
   Duration _timeUntilReset = Duration.zero;
 
   @override
   void initState() {
     super.initState();
-    _questManager = GetIt.I<DailyQuestManager>();
+    _questManager = GetIt.I<DailyQuestManagerV2>();
     _questManager.addListener(_onQuestUpdate);
     _questManager.checkAndResetIfNeeded();
     _startResetTimer();
 
-    FirebaseAnalytics.instance.logEvent(
-      name: 'daily_quest_screen_viewed',
-    );
+    FirebaseAnalytics.instance.logEvent(name: 'daily_quest_screen_viewed');
   }
 
   @override
@@ -86,16 +83,13 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
     return '$hours:$minutes:$seconds';
   }
 
-  void _claimReward(DailyQuest quest) {
-    final claimed = _questManager.claimQuestReward(quest.id);
-    if (!claimed) return;
+  void _claimReward(DailyQuestV2 quest) {
+    final reward = _questManager.claimQuestReward(quest.id);
+    if (reward == null) return;
 
     FirebaseAnalytics.instance.logEvent(
       name: 'daily_quest_completed',
-      parameters: {
-        'quest_id': quest.id,
-        'reward_claimed': true,
-      },
+      parameters: {'quest_id': quest.id, 'reward_claimed': true},
     );
 
     FirebaseAnalytics.instance.logEvent(
@@ -103,16 +97,13 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
       parameters: {
         'quest_id': quest.id,
         'quest_title': quest.title,
-        'gold_reward': quest.goldReward,
-        'xp_reward': quest.xpReward,
+        'gold_reward': reward.gold,
+        'xp_reward': reward.xp,
       },
     );
 
-    if (_questManager.completedQuestCount ==
-        _questManager.totalQuestCount) {
-      FirebaseAnalytics.instance.logEvent(
-        name: 'daily_quest_all_completed',
-      );
+    if (_questManager.completedQuestCount == _questManager.totalQuestCount) {
+      FirebaseAnalytics.instance.logEvent(name: 'daily_quest_all_completed');
     }
   }
 
@@ -126,9 +117,7 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
       appBar: AppBar(
         title: Text(
           'Daily Quests',
-          style: MGTextStyles.h2.copyWith(
-            color: MGColors.textHighEmphasis,
-          ),
+          style: MGTextStyles.h2.copyWith(color: MGColors.textHighEmphasis),
         ),
         centerTitle: true,
         leading: IconButton(
@@ -155,9 +144,7 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
           MGSpacing.vMd,
           Text(
             'No quests available',
-            style: MGTextStyles.h3.copyWith(
-              color: MGColors.textDisabled,
-            ),
+            style: MGTextStyles.h3.copyWith(color: MGColors.textDisabled),
           ),
           MGSpacing.vXs,
           Text(
@@ -172,7 +159,7 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
   }
 
   Widget _buildQuestList(
-    List<DailyQuest> quests,
+    List<DailyQuestV2> quests,
     int completedCount,
     int totalCount,
   ) {
@@ -189,9 +176,7 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
               itemBuilder: (context, index) {
                 return Padding(
                   padding: EdgeInsets.only(
-                    bottom: index < quests.length - 1
-                        ? MGSpacing.sm
-                        : 0,
+                    bottom: index < quests.length - 1 ? MGSpacing.sm : 0,
                   ),
                   child: _buildQuestCard(quests[index]),
                 );
@@ -253,9 +238,7 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
                 MGSpacing.vXxs,
                 Text(
                   _formatDuration(_timeUntilReset),
-                  style: MGTextStyles.hud.copyWith(
-                    color: MGColors.gold,
-                  ),
+                  style: MGTextStyles.hud.copyWith(color: MGColors.gold),
                 ),
               ],
             ),
@@ -265,7 +248,7 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
     );
   }
 
-  Widget _buildQuestCard(DailyQuest quest) {
+  Widget _buildQuestCard(DailyQuestV2 quest) {
     final isClaimable = quest.isCompleted && !quest.isClaimedReward;
     final isClaimed = quest.isClaimedReward;
 
@@ -375,16 +358,18 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
         borderRadius: BorderRadius.circular(MGSpacing.xs),
       ),
       child: Icon(
-        isClaimed
-            ? Icons.check_circle_rounded
-            : MGIcons.navQuest,
+        isClaimed ? Icons.check_circle_rounded : MGIcons.navQuest,
         color: isClaimed ? MGColors.success : MGColors.primaryAction,
         size: MGIcons.listItemSize,
       ),
     );
   }
 
-  Widget _buildRewardBadge(DailyQuest quest) {
+  Widget _buildRewardBadge(DailyQuestV2 quest) {
+    final reward = quest.calculateRewards(
+      _questManager.currentStreakBonus.multiplier,
+    );
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.end,
       children: [
@@ -398,10 +383,8 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
             ),
             MGSpacing.hXxs,
             Text(
-              '${quest.goldReward}',
-              style: MGTextStyles.hudSmall.copyWith(
-                color: MGColors.gold,
-              ),
+              '${reward.gold}',
+              style: MGTextStyles.hudSmall.copyWith(color: MGColors.gold),
             ),
           ],
         ),
@@ -416,10 +399,8 @@ class _DailyQuestScreenState extends State<DailyQuestScreen> {
             ),
             MGSpacing.hXxs,
             Text(
-              '${quest.xpReward} XP',
-              style: MGTextStyles.hudSmall.copyWith(
-                color: MGColors.exp,
-              ),
+              '${reward.xp} XP',
+              style: MGTextStyles.hudSmall.copyWith(color: MGColors.exp),
             ),
           ],
         ),

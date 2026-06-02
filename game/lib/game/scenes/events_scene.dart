@@ -4,6 +4,10 @@ import 'package:mg_common_game/core/ui/theme/mg_colors.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../components/game_button.dart';
 import '../cat_alchemy_game.dart';
+import '../../core/managers/seasonal_event_manager.dart';
+import '../../core/models/seasonal_event.dart';
+import '../../game/data/seasonal_events_data.dart';
+import '../../providers/game_providers.dart';
 
 /// Events scene - limited-time events and special challenges
 class EventsScene extends Component with HasGameReference {
@@ -15,6 +19,9 @@ class EventsScene extends Component with HasGameReference {
   // UI Components
   late GameButton _backButton;
 
+  // Seasonal event manager
+  late SeasonalEventManager _eventManager;
+
   // Events data
   final List<GameEvent> _activeEvents = [];
   final List<GameEvent> _upcomingEvents = [];
@@ -25,111 +32,111 @@ class EventsScene extends Component with HasGameReference {
   @override
   Future<void> onLoad() async {
     await super.onLoad();
+
+    // Initialize seasonal event manager
+    final gameState = ref.read(gameStateProvider);
+    final allEvents = SeasonalEventsData.getAllEvents(DateTime.now().year);
+    _eventManager = SeasonalEventManager(
+      events: allEvents,
+      gameState: gameState,
+    );
+
     _initializeEvents();
     await _setupUI();
   }
 
   /// Initialize events data
   void _initializeEvents() {
-    // Active events
-    _activeEvents.addAll([
-      GameEvent(
-        id: 'event_spring_festival',
-        name: 'Spring Flower Festival',
-        icon: '🌸',
-        description: 'Collect rare spring flowers and craft special seasonal potions!',
-        startDate: DateTime.now().subtract(const Duration(days: 1)),
-        endDate: DateTime.now().add(const Duration(days: 6)),
-        status: EventStatus.active,
-        rewards: {
-          'gold': 5000,
-          'gems': 100,
-          'items': ['Spring Elixir', 'Flower Crown'],
-        },
-        progress: 35,
-        maxProgress: 100,
-        difficulty: 'Normal',
-        color: const Color(0xFFFF69B4), // Hot pink
-      ),
-      GameEvent(
-        id: 'event_double_gold',
-        name: 'Golden Week',
-        icon: '💰',
-        description: 'Earn 2x gold from all sales and orders!',
-        startDate: DateTime.now().subtract(const Duration(hours: 12)),
-        endDate: DateTime.now().add(const Duration(days: 2)),
-        status: EventStatus.active,
-        rewards: {
-          'gold': 10000,
-          'gems': 50,
-        },
-        progress: 60,
-        maxProgress: 100,
-        difficulty: 'Easy',
-        color: MGColors.gold, // Gold
-      ),
-    ]);
+    final now = DateTime.now();
 
-    // Upcoming events
-    _upcomingEvents.addAll([
-      GameEvent(
-        id: 'event_potion_master',
-        name: 'Potion Master Challenge',
-        icon: '⚗️',
-        description: 'Craft 50 legendary potions to prove your mastery!',
-        startDate: DateTime.now().add(const Duration(days: 3)),
-        endDate: DateTime.now().add(const Duration(days: 10)),
-        status: EventStatus.upcoming,
-        rewards: {
-          'gold': 20000,
-          'gems': 500,
-          'items': ['Master Alchemist Badge'],
-        },
-        progress: 0,
-        maxProgress: 50,
-        difficulty: 'Hard',
-        color: const Color(0xFF9370DB), // Purple
+    // Get active events
+    _activeEvents.clear();
+    _activeEvents.addAll(
+      _eventManager.getActiveEvents().map(
+        (event) => _toGameEvent(event, EventStatus.active),
       ),
-      GameEvent(
-        id: 'event_cat_party',
-        name: 'Cat Companion Festival',
-        icon: '🐱',
-        description: 'Play with your cat to earn special bonuses and exclusive items!',
-        startDate: DateTime.now().add(const Duration(days: 7)),
-        endDate: DateTime.now().add(const Duration(days: 14)),
-        status: EventStatus.upcoming,
-        rewards: {
-          'gold': 3000,
-          'gems': 150,
-          'items': ['Cat Toy', 'Premium Cat Food'],
-        },
-        progress: 0,
-        maxProgress: 100,
-        difficulty: 'Easy',
-        color: MGColors.warning, // Dark orange
-      ),
-    ]);
+    );
 
-    // Completed events
-    _completedEvents.addAll([
-      GameEvent(
-        id: 'event_grand_opening',
-        name: 'Grand Opening Celebration',
-        icon: '🎉',
-        description: 'Welcome bonus for new alchemists!',
-        startDate: DateTime.now().subtract(const Duration(days: 10)),
-        endDate: DateTime.now().subtract(const Duration(days: 3)),
-        status: EventStatus.completed,
-        rewards: {
-          'gold': 1000,
-          'gems': 50,
-        },
-        progress: 100,
-        maxProgress: 100,
-        difficulty: 'Easy',
-        color: MGColors.common, // Gray
+    // Get upcoming events
+    _upcomingEvents.clear();
+    _upcomingEvents.addAll(
+      _eventManager.getUpcomingEvents().map(
+        (event) => _toGameEvent(event, EventStatus.upcoming),
       ),
-    ]);
+    );
+
+    // Get completed events (events that have ended)
+    _completedEvents.clear();
+    for (final event in _eventManager.events) {
+      if (event.hasEnded(now)) {
+        _completedEvents.add(_toGameEvent(event, EventStatus.completed));
+      }
+    }
+  }
+
+  GameEvent _toGameEvent(SeasonalEvent event, EventStatus status) {
+    final milestones = event.rewards.milestones;
+    final firstReward = milestones.isEmpty
+        ? <String, Object>{}
+        : event.rewards.getMilestoneReward(milestones.first) ??
+              <String, Object>{};
+
+    return GameEvent(
+      id: event.id,
+      name: event.name,
+      icon: _iconForTheme(event.theme),
+      description: event.description,
+      startDate: event.startTime,
+      endDate: event.endTime,
+      status: status,
+      rewards: firstReward,
+      progress: _eventManager.getEventPoints(event.id),
+      maxProgress: event.rewards.maxEventPoints,
+      difficulty: _difficultyForTheme(event.theme),
+      color: _colorForTheme(event.theme),
+    );
+  }
+
+  String _iconForTheme(String theme) {
+    switch (theme) {
+      case 'spring':
+        return 'S';
+      case 'summer':
+        return 'F';
+      case 'autumn':
+        return 'H';
+      case 'winter':
+        return 'W';
+      default:
+        return '*';
+    }
+  }
+
+  String _difficultyForTheme(String theme) {
+    switch (theme) {
+      case 'special':
+        return 'Hard';
+      case 'winter':
+      case 'autumn':
+        return 'Normal';
+      default:
+        return 'Easy';
+    }
+  }
+
+  Color _colorForTheme(String theme) {
+    switch (theme) {
+      case 'spring':
+        return const Color(0xFFFF69B4);
+      case 'summer':
+        return const Color(0xFFFF8C00);
+      case 'autumn':
+        return const Color(0xFFB5651D);
+      case 'winter':
+        return const Color(0xFF1E90FF);
+      default:
+        return const Color(0xFF8A2BE2);
+    }
   }
 
   /// Setup UI components
@@ -194,10 +201,7 @@ class EventsScene extends Component with HasGameReference {
       textDirection: TextDirection.ltr,
     );
     titlePainter.layout();
-    titlePainter.paint(
-      canvas,
-      Offset(centerX - titlePainter.width / 2, 30),
-    );
+    titlePainter.paint(canvas, Offset(centerX - titlePainter.width / 2, 30));
 
     // Subtitle
     final subtitlePainter = TextPainter(
@@ -296,10 +300,7 @@ class EventsScene extends Component with HasGameReference {
 
     // Icon
     final iconPainter = TextPainter(
-      text: TextSpan(
-        text: event.icon,
-        style: const TextStyle(fontSize: 48),
-      ),
+      text: TextSpan(text: event.icon, style: const TextStyle(fontSize: 48)),
       textDirection: TextDirection.ltr,
     );
     iconPainter.layout();
@@ -324,10 +325,7 @@ class EventsScene extends Component with HasGameReference {
     final descPainter = TextPainter(
       text: TextSpan(
         text: event.description,
-        style: const TextStyle(
-          fontSize: 13,
-          color: Color(0xFF666666),
-        ),
+        style: const TextStyle(fontSize: 13, color: Color(0xFF666666)),
       ),
       textDirection: TextDirection.ltr,
     );
@@ -335,7 +333,11 @@ class EventsScene extends Component with HasGameReference {
     descPainter.paint(canvas, Offset(position.x + 90, position.y + 40));
 
     // Status badge
-    _drawStatusBadge(canvas, event, Offset(position.x + cardWidth - 100, position.y + 15));
+    _drawStatusBadge(
+      canvas,
+      event,
+      Offset(position.x + cardWidth - 100, position.y + 15),
+    );
 
     // Progress bar (for active events)
     if (event.status == EventStatus.active) {
@@ -441,7 +443,12 @@ class EventsScene extends Component with HasGameReference {
   }
 
   /// Draw progress bar
-  void _drawProgressBar(Canvas canvas, double progress, Offset position, double width) {
+  void _drawProgressBar(
+    Canvas canvas,
+    double progress,
+    Offset position,
+    double width,
+  ) {
     final height = 16.0;
 
     // Background
@@ -513,7 +520,8 @@ class EventsScene extends Component with HasGameReference {
     // Overlay
     canvas.drawRect(
       Rect.fromLTWH(0, 0, size.x, size.y),
-      Paint()..color = MGColors.backgroundDark.withValues(alpha: 0.5), // 50% black
+      Paint()
+        ..color = MGColors.backgroundDark.withValues(alpha: 0.5), // 50% black
     );
 
     // Detail panel
@@ -527,7 +535,10 @@ class EventsScene extends Component with HasGameReference {
       const Radius.circular(20),
     );
 
-    canvas.drawRRect(panelRect, Paint()..color = const Color(0xFFFFFFF0)); // Ivory
+    canvas.drawRRect(
+      panelRect,
+      Paint()..color = const Color(0xFFFFFFF0),
+    ); // Ivory
     canvas.drawRRect(
       panelRect,
       Paint()
@@ -538,10 +549,7 @@ class EventsScene extends Component with HasGameReference {
 
     // Icon
     final iconPainter = TextPainter(
-      text: TextSpan(
-        text: event.icon,
-        style: const TextStyle(fontSize: 80),
-      ),
+      text: TextSpan(text: event.icon, style: const TextStyle(fontSize: 80)),
       textDirection: TextDirection.ltr,
     );
     iconPainter.layout();
@@ -592,7 +600,11 @@ class EventsScene extends Component with HasGameReference {
     _drawRewardsSection(canvas, event, panelX, panelY + 240, panelWidth);
 
     // Difficulty badge
-    _drawDifficultyBadge(canvas, event.difficulty, Offset(panelX + 30, panelY + 370));
+    _drawDifficultyBadge(
+      canvas,
+      event.difficulty,
+      Offset(panelX + 30, panelY + 370),
+    );
 
     // Time info
     final timeText = _getTimeRemaining(event);
@@ -628,12 +640,21 @@ class EventsScene extends Component with HasGameReference {
     closePainter.layout();
     closePainter.paint(
       canvas,
-      Offset(panelX + panelWidth / 2 - closePainter.width / 2, panelY + panelHeight - 40),
+      Offset(
+        panelX + panelWidth / 2 - closePainter.width / 2,
+        panelY + panelHeight - 40,
+      ),
     );
   }
 
   /// Draw rewards section
-  void _drawRewardsSection(Canvas canvas, GameEvent event, double x, double y, double width) {
+  void _drawRewardsSection(
+    Canvas canvas,
+    GameEvent event,
+    double x,
+    double y,
+    double width,
+  ) {
     // Rewards header
     final headerPainter = TextPainter(
       text: const TextSpan(
@@ -654,12 +675,22 @@ class EventsScene extends Component with HasGameReference {
     final rewards = event.rewards;
 
     if (rewards.containsKey('gold')) {
-      _drawRewardItem(canvas, '💰', 'Gold: ${rewards['gold']}', Offset(x + 40, currentY));
+      _drawRewardItem(
+        canvas,
+        '💰',
+        'Gold: ${rewards['gold']}',
+        Offset(x + 40, currentY),
+      );
       currentY += 25;
     }
 
     if (rewards.containsKey('gems')) {
-      _drawRewardItem(canvas, '💎', 'Gems: ${rewards['gems']}', Offset(x + 40, currentY));
+      _drawRewardItem(
+        canvas,
+        '💎',
+        'Gems: ${rewards['gems']}',
+        Offset(x + 40, currentY),
+      );
       currentY += 25;
     }
 
@@ -673,12 +704,14 @@ class EventsScene extends Component with HasGameReference {
   }
 
   /// Draw single reward item
-  void _drawRewardItem(Canvas canvas, String icon, String text, Offset position) {
+  void _drawRewardItem(
+    Canvas canvas,
+    String icon,
+    String text,
+    Offset position,
+  ) {
     final iconPainter = TextPainter(
-      text: TextSpan(
-        text: icon,
-        style: const TextStyle(fontSize: 16),
-      ),
+      text: TextSpan(text: icon, style: const TextStyle(fontSize: 16)),
       textDirection: TextDirection.ltr,
     );
     iconPainter.layout();
@@ -687,10 +720,7 @@ class EventsScene extends Component with HasGameReference {
     final textPainter = TextPainter(
       text: TextSpan(
         text: text,
-        style: const TextStyle(
-          fontSize: 14,
-          color: MGColors.border,
-        ),
+        style: const TextStyle(fontSize: 14, color: MGColors.border),
       ),
       textDirection: TextDirection.ltr,
     );
@@ -759,11 +789,7 @@ class EventsScene extends Component with HasGameReference {
 }
 
 /// Event status enum
-enum EventStatus {
-  active,
-  upcoming,
-  completed,
-}
+enum EventStatus { active, upcoming, completed }
 
 /// Game event model
 class GameEvent {

@@ -564,6 +564,400 @@
         "exp": 300
       },
       "isLegendary": true
+    },
+    {
+      "id": "potion_regeneration",
+      "name": "재생 물약",
+      "tier": 3,
+      "category": "potion",
+      "icon": "🔄",
+      "description": "시간이 지남에 따라 체력을 지속적으로 회복합니다.",
+      "ingredients": [
+        {
+          "id": "herb_rare",
+          "amount": 3
+        },
+        {
+          "id": "water_spring",
+          "amount": 2
+        },
+        {
+          "id": "moonflower",
+          "amount": 1
+        }
+      ],
+      "craftTime": 600,
+      "result": {
+        "id": "potion_regeneration",
+        "amount": 1
+      },
+      "sellPrice": 900,
+      "discoveryBonus": {
+        "gold": 1200,
+        "exp": 55
+      }
+    },
+    {
+      "id": "potion_shield",
+      "name": "보호막 물약",
+      "tier": 3,
+      "category": "potion",
+      "icon": "🛡️",
+      "description": "강력한 보호막을 생성하여 위험으로부터 보호합니다.",
+      "ingredients": [
+        {
+          "id": "gemstone",
+          "amount": 2
+        },
+        {
+          "id": "oak",
+          "amount": 2
+        },
+        {
+          "id": "water_holy",
+          "amount": 1
+        }
+      ],
+      "craftTime": 540,
+      "result": {
+        "id": "potion_shield",
+        "amount": 1
+      },
+      "sellPrice": 850,
+      "discoveryBonus": {
+        "gold": 1100,
+        "exp": 50
+      }
+    },
+    {
+      "id": "bomb_poison",
+      "name": "독가스 폭탄",
+      "tier": 3,
+      "category": "bomb",
+      "icon": "☠️",
+      "description": "독가스를 퍼뜨려 범위 내 적에게 지속 피해를 줍니다.",
+      "ingredients": [
+        {
+          "id": "herb_rare",
+          "amount": 2
+        },
+        {
+          "id": "wildflower",
+          "amount": 3
+        },
+        {
+          "id": "water_spring",
+          "amount": 1
+        }
+      ],
+      "craftTime": 420,
+      "result": {
+        "id": "bomb_poison",
+        "amount": 1
+      },
+      "sellPrice": 650,
+      "discoveryBonus": {
+        "gold": 850,
+        "exp": 45
+      }
+    },
+    {
+      "id": "bomb_confusion",
+      "name": "혼란 폭탄",
+      "tier": 3,
+      "category": "bomb",
+      "icon": "😵",
+      "description": "적들의 혼란을 유발하여 서로 공격하게 만듭니다.",
+      "ingredients": [
+        {
+          "id": "moonflower",
+          "amount": 1
+        },
+        {
+          "id": "gemstone",
+          "amount": 1
+        },
+        {
+          "id": "water_holy",
+          "amount": 1
+        }
+      ],
+      "craftTime": 600,
+      "result": {
+        "id": "bomb_confusion",
+        "amount": 1
+      },
+      "sellPrice": 750,
+      "discoveryBonus": {
+        "gold": 950,
+        "exp": 48
+      }
+    },
+    {
+      "id": "scroll_teleport",
+      "name": "순간이동 주문서",
+      "tier": 3,
+      "category": "special",
+      "icon": "📜",
+      "description": "단거리 순간이동이 가능한 주문서입니다.",
+      "ingredients": [
+        {
+          "id": "stardust",
+          "amount": 2
+        },
+        {
+          "id": "moonflower",
+          "amount": 1
+        },
+        {
+          "id": "water_holy",
+          "amount": 2
+        }
+      ],
+      "craftTime": 720,
+      "result": {
+        "id": "scroll_teleport",
+        "amount": 1
+      },
+      "sellPrice": 1200,
+      "discoveryBonus": {
+        "gold": 1600,
+        "exp": 65
+      }
+    },
+    {
+      "id": "charm_protection",
+      "name": "보호의 부적",
+      "tier": 3,
+      "category": "special",
+      "icon": "🔮",
+      "description": "악한 영향으로부터 소유자를 보호하는 부적입니다.",
+      "ingredients": [
+        {
+          "id": "gemstone",
+          "amount": 2
+        },
+        {
+          "id": "herb_rare",
+          "amount": 2
+        },
+        {
+          "id": "water_holy",
+          "amount": 2
+        }
+      ],
+      "craftTime": 900,
+      "result": {
+        "id": "charm_protection",
+        "amount": 1
+      },
+      "sellPrice": 1100,
+      "discoveryBonus": {
+        "gold": 1400,
+        "exp": 60
+      }
+    },
+    {
+      "id": "elixir_mana",
+      "name": "마나의 영약",
+      "tier": 4,
+      "category": "potion",
+      "icon": "✨",
+      "description": "마나를 완전히 회복하고 일시적으로 마나 증폭 효과를 줍니다.",
+      "ingredients": [
+        {
+          "id": "stardust",
+          "amount": 2
+        },
+        {
+          "id": "gemstone",
+          "amount": 3
+        },
+        {
+          "id": "water_holy",
+          "amount": 2
+        }
+      ],
+      "craftTime": 2400,
+      "result": {
+        "id": "elixir_mana",
+        "amount": 1
+      },
+      "sellPrice": 4000,
+      "discoveryBonus": {
+        "gold": 6000,
+        "exp": 150
+      },
+      "isLegendary": true
+    },
+    {
+      "id": "stone_transmutation",
+      "name": "연금술의 돌",
+      "tier": 4,
+      "category": "special",
+      "icon": "🗿",
+      "description": "납을 금으로 바꿀 수 있는 전설의 연금술 돌입니다.",
+      "ingredients": [
+        {
+          "id": "phoenix_feather",
+          "amount": 1
+        },
+        {
+          "id": "void_essence",
+          "amount": 1
+        },
+        {
+          "id": "stardust",
+          "amount": 3
+        },
+        {
+          "id": "gemstone",
+          "amount": 5
+        }
+      ],
+      "craftTime": 7200,
+      "result": {
+        "id": "stone_transmutation",
+        "amount": 1
+      },
+      "sellPrice": 25000,
+      "discoveryBonus": {
+        "gold": 50000,
+        "exp": 500
+      },
+      "isLegendary": true
+    },
+    {
+      "id": "potion_antidote",
+      "name": "해독제",
+      "tier": 2,
+      "category": "potion",
+      "icon": "💉",
+      "description": "모든 독을 중화시키는 해독제입니다.",
+      "ingredients": [
+        {
+          "id": "herb_rare",
+          "amount": 2
+        },
+        {
+          "id": "water_spring",
+          "amount": 2
+        },
+        {
+          "id": "wildflower",
+          "amount": 1
+        }
+      ],
+      "craftTime": 180,
+      "result": {
+        "id": "potion_antidote",
+        "amount": 1
+      },
+      "sellPrice": 220,
+      "discoveryBonus": {
+        "gold": 350,
+        "exp": 28
+      }
+    },
+    {
+      "id": "bomb_lightning",
+      "name": "번개 폭탄",
+      "tier": 3,
+      "category": "bomb",
+      "icon": "⚡",
+      "description": "강력한 번개를 일으키는 폭탄입니다.",
+      "ingredients": [
+        {
+          "id": "stardust",
+          "amount": 1
+        },
+        {
+          "id": "gemstone",
+          "amount": 2
+        },
+        {
+          "id": "water_holy",
+          "amount": 1
+        }
+      ],
+      "craftTime": 480,
+      "result": {
+        "id": "bomb_lightning",
+        "amount": 1
+      },
+      "sellPrice": 800,
+      "discoveryBonus": {
+        "gold": 1000,
+        "exp": 52
+      }
+    },
+    {
+      "id": "charm_fire_resistance",
+      "name": "화염 저항 부적",
+      "tier": 2,
+      "category": "special",
+      "icon": "🔥",
+      "description": "불로부터 보호하는 부적입니다.",
+      "ingredients": [
+        {
+          "id": "oak",
+          "amount": 3
+        },
+        {
+          "id": "water_spring",
+          "amount": 2
+        },
+        {
+          "id": "ore",
+          "amount": 1
+        }
+      ],
+      "craftTime": 300,
+      "result": {
+        "id": "charm_fire_resistance",
+        "amount": 1
+      },
+      "sellPrice": 350,
+      "discoveryBonus": {
+        "gold": 500,
+        "exp": 32
+      }
+    },
+    {
+      "id": "elixir_love",
+      "name": "사랑의 영약",
+      "tier": 3,
+      "category": "potion",
+      "icon": "❤️",
+      "description": "사랑의 감정을 일으키는 신비로운 영약입니다.",
+      "ingredients": [
+        {
+          "id": "moonflower",
+          "amount": 2
+        },
+        {
+          "id": "wildflower",
+          "amount": 3
+        },
+        {
+          "id": "water_spring",
+          "amount": 2
+        },
+        {
+          "id": "gemstone",
+          "amount": 1
+        }
+      ],
+      "craftTime": 900,
+      "result": {
+        "id": "elixir_love",
+        "amount": 1
+      },
+      "sellPrice": 1500,
+      "discoveryBonus": {
+        "gold": 2000,
+        "exp": 70
+      }
     }
   ]
 }

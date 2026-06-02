@@ -157,7 +157,10 @@ void main() {
         manager.startCrafting(testRecipe);
         final json = manager.toJson();
 
-        final newManager = CraftingGameManager(GameState.initial(), PrestigeManager());
+        final newManager = CraftingGameManager(
+          GameState.initial(),
+          PrestigeManager(),
+        );
         newManager.fromJson(json);
 
         expect(newManager.queueSize, manager.queueSize);

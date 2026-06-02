@@ -185,7 +185,10 @@ void main() {
       test('estimates production for 1 hour', () {
         manager.initializeResources(testMaterials);
 
-        final estimate = manager.estimateProduction('grass', Duration(hours: 1));
+        final estimate = manager.estimateProduction(
+          'grass',
+          Duration(hours: 1),
+        );
 
         expect(estimate, 2); // 2 per hour
       });
@@ -193,7 +196,10 @@ void main() {
       test('estimates production for 8 hours', () {
         manager.initializeResources(testMaterials);
 
-        final estimate = manager.estimateProduction('grass', Duration(hours: 8));
+        final estimate = manager.estimateProduction(
+          'grass',
+          Duration(hours: 8),
+        );
 
         expect(estimate, 16); // 2 * 8
       });
@@ -201,7 +207,10 @@ void main() {
       test('estimates production for 30 minutes', () {
         manager.initializeResources(testMaterials);
 
-        final estimate = manager.estimateProduction('grass', Duration(minutes: 30));
+        final estimate = manager.estimateProduction(
+          'grass',
+          Duration(minutes: 30),
+        );
 
         expect(estimate, 1); // 2 * 0.5 = 1
       });
@@ -210,7 +219,10 @@ void main() {
         manager.initializeResources(testMaterials);
         manager.setProductionModifier('grass', 2.0);
 
-        final estimate = manager.estimateProduction('grass', Duration(hours: 1));
+        final estimate = manager.estimateProduction(
+          'grass',
+          Duration(hours: 1),
+        );
 
         expect(estimate, 4); // (2.0 * 2.0) * 1 hour
       });
@@ -219,7 +231,10 @@ void main() {
         manager.initializeResources(testMaterials);
         manager.setGlobalMultiplier(2.0);
 
-        final estimate = manager.estimateProduction('grass', Duration(hours: 1));
+        final estimate = manager.estimateProduction(
+          'grass',
+          Duration(hours: 1),
+        );
 
         expect(estimate, 4); // (2.0 * 2.0) * 1 hour
       });
@@ -227,7 +242,10 @@ void main() {
       test('returns 0 for non-existent material', () {
         manager.initializeResources(testMaterials);
 
-        final estimate = manager.estimateProduction('nonexistent', Duration(hours: 1));
+        final estimate = manager.estimateProduction(
+          'nonexistent',
+          Duration(hours: 1),
+        );
 
         expect(estimate, 0);
       });
@@ -412,7 +430,10 @@ void main() {
         // Expected: 2.0 * 1.5 * 2.0 = 6.0
         expect(manager.getProductionRate('grass'), 6.0);
 
-        final estimate = manager.estimateProduction('grass', Duration(hours: 1));
+        final estimate = manager.estimateProduction(
+          'grass',
+          Duration(hours: 1),
+        );
         expect(estimate, 6);
       });
 

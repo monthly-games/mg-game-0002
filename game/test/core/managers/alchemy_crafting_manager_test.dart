@@ -226,7 +226,9 @@ void main() {
         manager.startCrafting(testRecipe);
 
         // Simulate offline time
-        gameState.lastLoginTime = DateTime.now().subtract(Duration(seconds: 10));
+        gameState.lastLoginTime = DateTime.now().subtract(
+          Duration(seconds: 10),
+        );
 
         final results = manager.processOfflineCrafting(gameState.lastLoginTime);
 
@@ -237,7 +239,9 @@ void main() {
       test('adds offline rewards to inventory', () async {
         manager.startCrafting(testRecipe);
 
-        gameState.lastLoginTime = DateTime.now().subtract(Duration(seconds: 10));
+        gameState.lastLoginTime = DateTime.now().subtract(
+          Duration(seconds: 10),
+        );
 
         final initialAmount = gameState.getInventoryAmount('potion_health');
 
@@ -342,13 +346,18 @@ void main() {
         manager.startCrafting(testRecipe);
 
         final queue = manager.queue;
-        expect(() => queue.add(AlchemyCraftingJob(
-          id: 'test',
-          recipeId: 'test',
-          startTime: DateTime.now(),
-          craftDuration: Duration(seconds: 5),
-          baseResult: {'test': 1},
-        )), throwsUnsupportedError);
+        expect(
+          () => queue.add(
+            AlchemyCraftingJob(
+              id: 'test',
+              recipeId: 'test',
+              startTime: DateTime.now(),
+              craftDuration: Duration(seconds: 5),
+              baseResult: {'test': 1},
+            ),
+          ),
+          throwsUnsupportedError,
+        );
       });
 
       test('getCompletedJobs returns only completed', () async {

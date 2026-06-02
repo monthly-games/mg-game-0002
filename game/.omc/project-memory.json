@@ -1,0 +1,286 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779428207319,
+  "projectRoot": "D:\\mg-games\\repos\\mg-game-0002\\game",
+  "techStack": {
+    "languages": [
+      {
+        "name": "JavaScript/TypeScript",
+        "version": null,
+        "confidence": "high",
+        "markers": [
+          "package.json"
+        ]
+      }
+    ],
+    "frameworks": [
+      {
+        "name": "@playwright/test",
+        "version": "1.60.0",
+        "category": "testing"
+      }
+    ],
+    "packageManager": "npm",
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets",
+      "lib",
+      "test"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "android": {
+      "path": "android",
+      "purpose": null,
+      "fileCount": 12,
+      "lastAccessed": 1779428207289,
+      "keyFiles": [
+        "build.gradle.kts",
+        "cat_alchemy_android.iml",
+        "gradle.properties",
+        "gradlew",
+        "gradlew.bat"
+      ]
+    },
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 1,
+      "lastAccessed": 1779428207290,
+      "keyFiles": []
+    },
+    "build": {
+      "path": "build",
+      "purpose": "Build output",
+      "fileCount": 0,
+      "lastAccessed": 1779428207299,
+      "keyFiles": []
+    },
+    "coverage": {
+      "path": "coverage",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1779428207300,
+      "keyFiles": [
+        "lcov.info"
+      ]
+    },
+    "integration_test": {
+      "path": "integration_test",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1779428207300,
+      "keyFiles": [
+        "fun_e2e_test.dart",
+        "game_loop_e2e_test.dart",
+        "screenshot_capture_test.dart"
+      ]
+    },
+    "integration_test_backup": {
+      "path": "integration_test_backup",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1779428207300,
+      "keyFiles": []
+    },
+    "ios": {
+      "path": "ios",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1779428207301,
+      "keyFiles": []
+    },
+    "lib": {
+      "path": "lib",
+      "purpose": "Library code",
+      "fileCount": 8,
+      "lastAccessed": 1779428207301,
+      "keyFiles": [
+        "firebase_options.dart",
+        "main.dart",
+        "main.dart.bak",
+        "main.dart.bak_20260305_084311",
+        "main.dart.bak_20260309_170813"
+      ]
+    },
+    "linux": {
+      "path": "linux",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1779428207301,
+      "keyFiles": [
+        "CMakeLists.txt"
+      ]
+    },
+    "macos": {
+      "path": "macos",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1779428207302,
+      "keyFiles": []
+    },
+    "playwright-report": {
+      "path": "playwright-report",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1779428207302,
+      "keyFiles": [
+        "index.html"
+      ]
+    },
+    "test": {
+      "path": "test",
+      "purpose": "Test files",
+      "fileCount": 10,
+      "lastAccessed": 1779428207303,
+      "keyFiles": [
+        "core_mechanic_test.dart",
+        "data_integrity_test.dart",
+        "di_registration_test.dart",
+        "fun_e2e_test.dart",
+        "level_balancing_test.dart"
+      ]
+    },
+    "test-results": {
+      "path": "test-results",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1779428207303,
+      "keyFiles": [
+        "results.json"
+      ]
+    },
+    "test_backup": {
+      "path": "test_backup",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1779428207303,
+      "keyFiles": []
+    },
+    "tool": {
+      "path": "tool",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1779428207303,
+      "keyFiles": [
+        "extract_prompts.dart",
+        "generate_audio.dart",
+        "process_assets.dart"
+      ]
+    },
+    "web": {
+      "path": "web",
+      "purpose": null,
+      "fileCount": 3,
+      "lastAccessed": 1779428207304,
+      "keyFiles": [
+        "favicon.png",
+        "index.html",
+        "manifest.json"
+      ]
+    },
+    "windows": {
+      "path": "windows",
+      "purpose": null,
+      "fileCount": 2,
+      "lastAccessed": 1779428207304,
+      "keyFiles": [
+        "CMakeLists.txt"
+      ]
+    },
+    "android\\app": {
+      "path": "android\\app",
+      "purpose": "Application code",
+      "fileCount": 2,
+      "lastAccessed": 1779428207304,
+      "keyFiles": [
+        "build.gradle.kts",
+        "google-services.json"
+      ]
+    },
+    "assets\\data": {
+      "path": "assets\\data",
+      "purpose": "Data files",
+      "fileCount": 4,
+      "lastAccessed": 1779428207305,
+      "keyFiles": [
+        "cat_data.json",
+        "materials.json",
+        "npcs.json"
+      ]
+    },
+    "build\\app": {
+      "path": "build\\app",
+      "purpose": "Application code",
+      "fileCount": 1,
+      "lastAccessed": 1779428207305,
+      "keyFiles": [
+        "deeplink.json"
+      ]
+    },
+    "lib\\data": {
+      "path": "lib\\data",
+      "purpose": "Data files",
+      "fileCount": 0,
+      "lastAccessed": 1779428207306,
+      "keyFiles": []
+    },
+    "playwright-report\\data": {
+      "path": "playwright-report\\data",
+      "purpose": "Data files",
+      "fileCount": 26,
+      "lastAccessed": 1779428207307,
+      "keyFiles": [
+        "03fd7b0e75330c7d14f1e6f9957ef1e5948d9eab.md",
+        "0754cd75a214fa8cd5f13afce665963e2f18c018.md",
+        "0ad9d25fa42137fed96c94ffb93f1ebf04ad88de.md"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "lib\\main.dart",
+      "accessCount": 5,
+      "lastAccessed": 1779428903577,
+      "type": "file"
+    },
+    {
+      "path": "lib\\screens\\daily_quest_screen.dart",
+      "accessCount": 1,
+      "lastAccessed": 1779428214048,
+      "type": "file"
+    },
+    {
+      "path": "lib\\game\\cat_alchemy_game.dart",
+      "accessCount": 1,
+      "lastAccessed": 1779428214115,
+      "type": "file"
+    },
+    {
+      "path": "lib\\core\\managers\\alchemy_crafting_manager.dart",
+      "accessCount": 1,
+      "lastAccessed": 1779428214130,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

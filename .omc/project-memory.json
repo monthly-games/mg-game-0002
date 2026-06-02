@@ -1,0 +1,171 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1779423419799,
+  "projectRoot": "D:\\mg-games\\repos\\mg-game-0002",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [
+      "assets",
+      "docs"
+    ],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "analytics": {
+      "path": "analytics",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1779423419769,
+      "keyFiles": []
+    },
+    "assets": {
+      "path": "assets",
+      "purpose": "Static assets",
+      "fileCount": 0,
+      "lastAccessed": 1779423419771,
+      "keyFiles": []
+    },
+    "backend": {
+      "path": "backend",
+      "purpose": null,
+      "fileCount": 1,
+      "lastAccessed": 1779423419772,
+      "keyFiles": []
+    },
+    "config": {
+      "path": "config",
+      "purpose": "Configuration files",
+      "fileCount": 1,
+      "lastAccessed": 1779423419772,
+      "keyFiles": [
+        "game_manifest.json"
+      ]
+    },
+    "docs": {
+      "path": "docs",
+      "purpose": "Documentation",
+      "fileCount": 8,
+      "lastAccessed": 1779423419773,
+      "keyFiles": [
+        "bm_design.md",
+        "development_progress.md",
+        "fun_design.md",
+        "monetization_design.md",
+        "ops_design.md"
+      ]
+    },
+    "game": {
+      "path": "game",
+      "purpose": null,
+      "fileCount": 18,
+      "lastAccessed": 1779423419774,
+      "keyFiles": [
+        "analysis_options.yaml",
+        "build.log",
+        "cat_alchemy.iml",
+        "firebase.json",
+        "flutter_01.log"
+      ]
+    },
+    "libs": {
+      "path": "libs",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1779423419774,
+      "keyFiles": []
+    },
+    "marketing": {
+      "path": "marketing",
+      "purpose": null,
+      "fileCount": 0,
+      "lastAccessed": 1779423419774,
+      "keyFiles": []
+    },
+    "game\\assets": {
+      "path": "game\\assets",
+      "purpose": "Static assets",
+      "fileCount": 1,
+      "lastAccessed": 1779423419776,
+      "keyFiles": []
+    },
+    "game\\build": {
+      "path": "game\\build",
+      "purpose": "Build output",
+      "fileCount": 0,
+      "lastAccessed": 1779423419776,
+      "keyFiles": []
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "game\\integration_test\\game_loop_e2e_test.dart",
+      "accessCount": 3,
+      "lastAccessed": 1779424750909,
+      "type": "file"
+    },
+    {
+      "path": "game\\firebase.json",
+      "accessCount": 2,
+      "lastAccessed": 1779425026707,
+      "type": "file"
+    },
+    {
+      "path": "",
+      "accessCount": 1,
+      "lastAccessed": 1779423455671,
+      "type": "directory"
+    },
+    {
+      "path": "game\\pubspec.yaml",
+      "accessCount": 1,
+      "lastAccessed": 1779423462050,
+      "type": "file"
+    },
+    {
+      "path": "C:\\Users\\USER-5\\AppData\\Local\\Temp\\claude\\D--mg-games-repos-mg-game-0002\\952caf53-cfb8-4d48-8021-75ca9e57617d\\tasks\\b1u7lvbud.output",
+      "accessCount": 1,
+      "lastAccessed": 1779424602940,
+      "type": "file"
+    },
+    {
+      "path": "game\\lib\\main.dart",
+      "accessCount": 1,
+      "lastAccessed": 1779424713253,
+      "type": "file"
+    },
+    {
+      "path": "game\\e2e_web_test.spec.ts",
+      "accessCount": 1,
+      "lastAccessed": 1779425125447,
+      "type": "file"
+    },
+    {
+      "path": "game\\playwright.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1779425190086,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

@@ -197,7 +197,10 @@ void main() {
           gameState.catState['lastPetTime'] as int,
         );
 
-        expect(lastPetTime.isAfter(before.subtract(Duration(seconds: 1))), isTrue);
+        expect(
+          lastPetTime.isAfter(before.subtract(Duration(seconds: 1))),
+          isTrue,
+        );
         expect(lastPetTime.isBefore(after.add(Duration(seconds: 1))), isTrue);
       });
     });
@@ -257,8 +260,16 @@ void main() {
         gameState.updateLastLoginTime();
         final after = DateTime.now();
 
-        expect(gameState.lastLoginTime.isAfter(before.subtract(Duration(seconds: 1))), isTrue);
-        expect(gameState.lastLoginTime.isBefore(after.add(Duration(seconds: 1))), isTrue);
+        expect(
+          gameState.lastLoginTime.isAfter(
+            before.subtract(Duration(seconds: 1)),
+          ),
+          isTrue,
+        );
+        expect(
+          gameState.lastLoginTime.isBefore(after.add(Duration(seconds: 1))),
+          isTrue,
+        );
       });
 
       test('getOfflineHours calculates correct duration', () {
@@ -401,10 +412,7 @@ void main() {
       });
 
       test('custom constructor with null values uses defaults', () {
-        final custom = GameState(
-          gold: 1000,
-          gems: 200,
-        );
+        final custom = GameState(gold: 1000, gems: 200);
 
         expect(custom.workshopLevel, 1);
         expect(custom.reputation, 0);

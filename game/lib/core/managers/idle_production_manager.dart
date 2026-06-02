@@ -51,8 +51,10 @@ class IdleProductionManager {
   /// Calculate and apply offline production rewards
   Map<String, int> calculateOfflineProduction() {
     final offlineTime = DateTime.now().difference(_gameState.lastLoginTime);
-    final cappedHours =
-        (offlineTime.inSeconds / 3600.0).clamp(0.0, maxOfflineHours);
+    final cappedHours = (offlineTime.inSeconds / 3600.0).clamp(
+      0.0,
+      maxOfflineHours,
+    );
     final cappedDuration = Duration(seconds: (cappedHours * 3600).toInt());
 
     final rewards = <String, int>{};
@@ -104,7 +106,7 @@ class IdleProductionManager {
   double getProductionRate(String materialId) {
     final resource = _resources[materialId];
     if (resource == null) return 0.0;
-    return resource.getProductionRate(_globalModifier);
+    return resource.getProductionRate(_getTotalModifier(materialId));
   }
 
   /// Get estimated production for next duration
@@ -127,8 +129,15 @@ class IdleProductionManager {
   /// Serialize to JSON
   Map<String, dynamic> toJson() {
     return {
-      'resources':
-          _resources.map((key, value) => MapEntry(key, value.toJson())),
+      'resources': _resources.map(
+        (key, value) => MapEntry(key, {
+          ...value.toJson(),
+          'name': value.name,
+          'baseProductionRate': value.baseProductionRate,
+          'maxStorage': value.maxStorage,
+          'tier': value.tier,
+        }),
+      ),
       'globalModifier': _globalModifier,
       'productionModifiers': {
         for (final id in _resources.keys) id: _getProductionModifier(id),
@@ -146,14 +155,32 @@ class IdleProductionManager {
       final resourcesJson = json['resources'] as Map<String, dynamic>;
       for (final entry in resourcesJson.entries) {
         final resource = _resources[entry.key];
+        final stateJson = entry.value as Map<String, dynamic>;
+
         if (resource != null) {
-          final stateJson = entry.value as Map<String, dynamic>;
           resource.currentAmount = stateJson['currentAmount'] as int? ?? 0;
           resource.lastUpdateTime = DateTime.fromMillisecondsSinceEpoch(
             stateJson['lastUpdateTime'] as int? ??
                 DateTime.now().millisecondsSinceEpoch,
           );
           resource.isProducing = stateJson['isProducing'] as bool? ?? true;
+        } else if (stateJson.containsKey('baseProductionRate') &&
+            stateJson.containsKey('maxStorage') &&
+            stateJson.containsKey('tier')) {
+          _resources[entry.key] = IdleResource(
+            id: stateJson['id'] as String? ?? entry.key,
+            name: stateJson['name'] as String? ?? entry.key,
+            baseProductionRate: (stateJson['baseProductionRate'] as num)
+                .toDouble(),
+            maxStorage: stateJson['maxStorage'] as int,
+            tier: stateJson['tier'] as int,
+            currentAmount: stateJson['currentAmount'] as int? ?? 0,
+            lastUpdateTime: DateTime.fromMillisecondsSinceEpoch(
+              stateJson['lastUpdateTime'] as int? ??
+                  DateTime.now().millisecondsSinceEpoch,
+            ),
+            isProducing: stateJson['isProducing'] as bool? ?? true,
+          );
         }
       }
     }
@@ -161,8 +188,8 @@ class IdleProductionManager {
     final modifiersJson = json['productionModifiers'];
     if (modifiersJson is Map) {
       for (final entry in modifiersJson.entries) {
-        _resourceModifiers[entry.key as String] =
-            (entry.value as num).toDouble();
+        _resourceModifiers[entry.key as String] = (entry.value as num)
+            .toDouble();
       }
     }
   }
